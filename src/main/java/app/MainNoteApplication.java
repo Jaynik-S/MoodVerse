@@ -5,11 +5,12 @@ import use_case.note.NoteDataAccessInterface;
 
 /**
  * An application where we can view and add to a note stored by a user.
- * <p>
- * This is a minimal example of using the password-protected user API from lab 5,
+ *
+ * <p>This is a minimal example of using the password-protected user API from lab 5,
  * but demonstrating the endpoint allowing you to store an arbitrary JSON object.
  * This functionality could be used in any project where your team wants to persist
  * data which is then accessible across devices.</p>
+ *
  * <p>The code is intentionally somewhat incomplete to leave work to be done if your
  * team were to choose to work on a project which would require similar functionality.
  * For example, we have intentionally not created a full "Note" entity here, but
@@ -23,6 +24,7 @@ public class MainNoteApplication {
 
     /**
      * The main entry point of the application.
+     *
      * <p>
      * The program will show you the note currently saved in the system.
      * You are able to edit it and then save it to the system. You can refresh
@@ -30,7 +32,9 @@ public class MainNoteApplication {
      * uses the API from lab, so there is one database storing the note,
      * which means that if anyone updates the note, that is what you will
      * see when you refresh.
-     * </p> <p>
+     * </p>
+     *
+     * <p>
      * You can generalize the code to allow you to
      * specify which "user" to save the note for, which will allow your team
      * to store information specific to your team which is password-protected.

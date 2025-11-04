@@ -35,6 +35,7 @@ public class NoteAppBuilder {
     /**
      * Creates the objects for the Note Use Case and connects the NoteView to its
      * controller.
+     *
      * <p>This method must be called after addNoteView!</p>
      * @return this builder
      * @throws RuntimeException if this method is called before addNoteView

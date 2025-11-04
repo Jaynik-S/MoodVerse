@@ -16,9 +16,11 @@ import use_case.note.NoteDataAccessInterface;
 
 /**
  * The DAO for accessing notes stored in the database.
+ *
  * <p>This class demonstrates how your group can use the password-protected user
  * endpoints of the API used in lab 5 to store persistent data in your program.
  * </p>
+ *
  * <p>You can also refer to the lab 5 code for signing up a new user and other use cases.
  * </p>
  * See

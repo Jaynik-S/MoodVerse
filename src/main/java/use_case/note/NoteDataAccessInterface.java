@@ -10,6 +10,7 @@ public interface NoteDataAccessInterface {
 
     /**
      * Saves a note for a given user. This will replace any existing note.
+     *
      * <p>The password of the user must match that of the user saved in the system.</p>
      * @param user the user information associated with the note
      * @param note the note to be saved
