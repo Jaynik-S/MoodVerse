@@ -12,7 +12,9 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import io.github.cdimascio.dotenv.Dotenv;
-import java.util.ArrayList; // added
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 public class SpotifyMoodSearch {
     static Dotenv dotenv = Dotenv.load();
@@ -20,19 +22,25 @@ public class SpotifyMoodSearch {
     private static final String CLIENT_SECRET = dotenv.get("SPOTIFY_CLIENT_SECRET");
     private static String accessToken;
 
-    private static List<String> keywords = List.of(
-            "breakfast coffee ",
-            "happiness anxiety lonely motivation focus progress achievement argument friends family plans hope frustration reflection improvement",
-            "journal morning commute work school relationship stress exercise study dinner weekend rain gratitude"
+    private static String yearRange = "2006-2025";
+    private static int limit = 7;
+    private static final List<List<String>> KEYWORDS = List.of(
+            List.of("journal", "morning", "commute", "work", "school", "relationship", "stress",
+                    "exercise", "study", "dinner", "weekend", "rain", "gratitude"),
+            List.of("breakfast", "coffee", "alarm", "late", "deadline", "meeting",
+                    "lunch", "emails", "project", "groceries", "cleaning", "cooking",
+                    "relax", "sleep", "tired"),
+            List.of("happiness", "anxiety", "lonely", "motivation", "focus", "progress",
+                    "achievement", "argument", "friends", "family", "plans", "hope",
+                    "frustration", "reflection", "improvement")
     );
 
     public static void main(String[] args) throws IOException, InterruptedException {
         accessToken = getAccessToken();
-        String term = keywords.get(0);
-        String years = "2006-2025";
-        List<JSONObject> songs = getSongByMood(term, years, 10);
+        List<String> terms = KEYWORDS.get(2);
+        List<JSONObject> songs = getSongByMood(terms);
 
-        System.out.printf("%n🎧 Songs for '%s' (%s)%n%n", term, years);
+        System.out.printf("%n🎧 Songs for '%s' (%s)%n%n", terms, yearRange);
         for (JSONObject track : songs) {
             String songName = track.optString("name", "Unknown");
             String artistName = track.optJSONArray("artists") != null && track.getJSONArray("artists").length() > 0
@@ -90,41 +98,70 @@ public class SpotifyMoodSearch {
         return json.getString("access_token");
     }
 
-    // changed: now returns List<JSONObject> and no printing
-    private static List<JSONObject> getSongByMood(String keywords, String yearRange, int limit)
+    private static List<JSONObject> getSongByMood(List<String> keywords)
             throws IOException, InterruptedException {
-
-        if (limit <= 0) return List.of();
-
-        String q = String.format("(%s) year:%s", keywords, yearRange);
-        System.out.println(q);
-        String encoded = URLEncoder.encode(q, StandardCharsets.UTF_8);
-        String url = String.format("https://api.spotify.com/v1/search?q=%s&type=track&limit=%d", encoded, limit);
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Authorization", "Bearer " + accessToken)
-                .GET()
-                .build();
+        if (keywords == null || keywords.isEmpty() || limit <= 0) {
+            return List.of();
+        }
 
         HttpClient client = HttpClient.newHttpClient();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        List<JSONObject> collected = new ArrayList<>();
+        Set<String> seenIds = new LinkedHashSet<>();
 
-        if (response.statusCode() < 200 || response.statusCode() >= 300) {
-            throw new IOException("Spotify search failed: " + response.statusCode());
-        }
-
-        JSONObject json = new JSONObject(response.body());
-        JSONArray tracks = json.optJSONObject("tracks") != null
-                ? json.getJSONObject("tracks").optJSONArray("items")
-                : null;
-
-        List<JSONObject> results = new ArrayList<>();
-        if (tracks != null) {
-            for (int i = 0; i < tracks.length(); i++) {
-                results.add(tracks.getJSONObject(i));
+        List<String> queries = new ArrayList<>();
+        for (int i = 0; i < keywords.size(); i++) {
+            for (int j = i + 1; j < keywords.size(); j++) {
+                queries.add(keywords.get(i) + " " + keywords.get(j));
             }
         }
-        return results;
+        queries.add(String.join(" OR ", keywords));
+
+        String yearClause = (yearRange != null && !yearRange.isBlank())
+                ? " year:" + yearRange.trim()
+                : "";
+
+        for (String keywordStr : queries) {
+            if (collected.size() >= limit) break;
+
+            String q = "(" + keywordStr + ")" + yearClause;
+            System.out.println(q);
+            String encoded = URLEncoder.encode(q, StandardCharsets.UTF_8);
+            int perRequest = Math.min(50, limit - collected.size()); // Spotify limit is 50
+
+            String url = String.format(
+                    "https://api.spotify.com/v1/search?q=%s&type=track&limit=%d",
+                    encoded, perRequest);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Authorization", "Bearer " + accessToken)
+                    .header("Accept", "application/json")
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() < 200 || response.statusCode() >= 300) {
+                throw new IOException("Spotify search failed: " + response.statusCode());
+            }
+
+            JSONObject json = new JSONObject(response.body());
+            JSONObject tracksObj = json.optJSONObject("tracks");
+            JSONArray items = tracksObj != null ? tracksObj.optJSONArray("items") : null;
+            if (items == null) continue;
+
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject track = items.getJSONObject(i);
+                String id = track.optString("id", null);
+                if (id == null || id.isEmpty()) continue;
+
+                if (seenIds.add(id)) {
+                    collected.add(track);
+                    if (collected.size() >= limit) break;
+                }
+            }
+        }
+
+        return collected;
     }
 }

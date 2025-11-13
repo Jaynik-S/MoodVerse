@@ -22,7 +22,6 @@ public class MovieMoodSearch {
     private static final Dotenv dotenv = Dotenv.load();
     private static final String TMDB_API_KEY = dotenv.get("TMDB_API_KEY");
 
-    // Mirror the Python KEYWORDS structure
     private static final List<List<String>> KEYWORDS = List.of(
             List.of("journal", "morning", "commute", "work", "school", "relationship", "stress",
                     "exercise", "study", "dinner", "weekend", "rain", "gratitude"),
@@ -33,11 +32,11 @@ public class MovieMoodSearch {
                     "achievement", "argument", "friends", "family", "plans", "hope",
                     "frustration", "reflection", "improvement")
     );
+    private static int limit = 7;
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        // Use the first group, like the Python __main__
         List<String> ids = getKeywordIds(KEYWORDS.get(2));
-        List<JSONObject> movies = discoverMovies(ids, 15);
+        List<JSONObject> movies = discoverMovies(ids);
 
         for (JSONObject m : movies) {
             String title = m.optString("title", "—");
@@ -59,7 +58,6 @@ public class MovieMoodSearch {
         }
     }
 
-    // === keyword_ids() equivalent ===========================================
     private static List<String> getKeywordIds(List<String> terms) throws IOException, InterruptedException {
         List<String> ids = new ArrayList<>();
         HttpClient client = HttpClient.newHttpClient();
@@ -87,15 +85,13 @@ public class MovieMoodSearch {
         return ids;
     }
 
-    // === discover_movies() combined into a single method (inlines previous fetchMovies) ===
-    private static List<JSONObject> discoverMovies(List<String> ids, int n)
+    private static List<JSONObject> discoverMovies(List<String> ids)
             throws IOException, InterruptedException {
         if (ids == null || ids.isEmpty()) return List.of();
 
         HttpClient client = HttpClient.newHttpClient();
         Set<JSONObject> collected = new LinkedHashSet<>();
 
-        // Build queries: all AND pairs first, then a single OR across all
         List<String> queries = new ArrayList<>();
         for (int i = 0; i < ids.size(); i++) {
             for (int j = i + 1; j < ids.size(); j++) {
@@ -105,7 +101,7 @@ public class MovieMoodSearch {
         queries.add(String.join("|", ids));
 
         for (String keywordStr : queries) {
-            if (collected.size() >= n) break;
+            if (collected.size() >= limit) break;
             String encoded = URLEncoder.encode(keywordStr, StandardCharsets.UTF_8);
 
             String url = String.format(
@@ -126,10 +122,10 @@ public class MovieMoodSearch {
 
             for (int i = 0; i < results.length(); i++) {
                 collected.add(results.getJSONObject(i));
-                if (collected.size() >= n) break;
+                if (collected.size() >= limit) break;
             }
         }
 
-        return new ArrayList<>(collected).subList(0, Math.min(collected.size(), n));
+        return new ArrayList<>(collected).subList(0, Math.min(collected.size(), limit));
     }
 }
