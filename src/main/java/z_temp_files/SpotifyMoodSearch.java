@@ -11,38 +11,27 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-//import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class SpotifyMoodSearch {
-
-//    Dotenv dotenv = Dotenv.load();
-//    private static final String CLIENT_ID = dotenv.get("SPOTIFY_CLIENT_ID");
-//    private static final String CLIENT_SECRET = dotenv.get("SPOTIFY_CLIENT_SECRET");
-
-    private static final String CLIENT_ID = "637126d66b1a4cf186efd2774592c16a";
-    private static final String CLIENT_SECRET = "b8641bb30455417abebc76a5636cc61b";
-
+    static Dotenv dotenv = Dotenv.load();
+    private static final String CLIENT_ID = dotenv.get("SPOTIFY_CLIENT_ID");
+    private static final String CLIENT_SECRET = dotenv.get("SPOTIFY_CLIENT_SECRET");
     private static String accessToken;
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        accessToken = getAccessToken();
-
-//        List<String> moods = List.of(
-//                "beach vibes summer",
-//                "forest ambient nature",
-//                "energetic workout"
-//        );
-
-        List<String> moods = List.of(
+    private static List<String> keywords = List.of(
             "breakfast coffee alarm late deadline meeting lunch emails project groceries cleaning cooking relax sleep tired",
             "happiness anxiety lonely motivation focus progress achievement argument friends family plans hope frustration reflection improvement",
             "journal morning commute work school relationship stress exercise study dinner weekend rain gratitude"
-        );
+    );
 
-        for (String mood : moods) {
-            getSongsByMood(mood, "2006-2025", 10);
-        }
+    public static void main(String[] args) throws IOException, InterruptedException {
+        accessToken = getAccessToken();
+        getSongsByMood(keywords.get(0), "2006-2025", 10);
+
     }
+
+    //
 
     // Retrieve Spotify API token using Client Credentials Flow
     private static String getAccessToken() throws IOException, InterruptedException {
