@@ -36,7 +36,7 @@ public class MovieMoodSearch {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         // Use the first group, like the Python __main__
-        List<String> ids = getKeywordIds(KEYWORDS.get(0));
+        List<String> ids = getKeywordIds(KEYWORDS.get(2));
         List<JSONObject> movies = discoverMovies(ids, 15);
 
         for (JSONObject m : movies) {
@@ -87,62 +87,49 @@ public class MovieMoodSearch {
         return ids;
     }
 
-    // === discover_movies() equivalent =======================================
+    // === discover_movies() combined into a single method (inlines previous fetchMovies) ===
     private static List<JSONObject> discoverMovies(List<String> ids, int n)
             throws IOException, InterruptedException {
         if (ids == null || ids.isEmpty()) return List.of();
 
+        HttpClient client = HttpClient.newHttpClient();
         Set<JSONObject> collected = new LinkedHashSet<>();
 
-        // Try pairs (AND via comma), mirroring the Python combinations(ids, 2)
+        // Build queries: all AND pairs first, then a single OR across all
+        List<String> queries = new ArrayList<>();
         for (int i = 0; i < ids.size(); i++) {
             for (int j = i + 1; j < ids.size(); j++) {
-                String withKeywords = ids.get(i) + "," + ids.get(j); // "," = AND
-                for (JSONObject m : fetchMovies(withKeywords)) {
-                    collected.add(m);
-                    if (collected.size() >= n) break;
-                }
-                if (collected.size() >= n) break;
+                queries.add(ids.get(i) + "," + ids.get(j));
             }
-            if (collected.size() >= n) break;
         }
+        queries.add(String.join("|", ids));
 
-        // Fill remaining with OR if still under n ( "|" = OR )
-        if (collected.size() < n) {
-            String orJoined = String.join("|", ids);
-            for (JSONObject m : fetchMovies(orJoined)) {
-                collected.add(m);
+        for (String keywordStr : queries) {
+            if (collected.size() >= n) break;
+            String encoded = URLEncoder.encode(keywordStr, StandardCharsets.UTF_8);
+
+            String url = String.format(
+                    "https://api.themoviedb.org/3/discover/movie?api_key=%s&with_keywords=%s&include_adult=false&sort_by=vote_average.desc&vote_count.gte=350&language=en-US&page=1",
+                    TMDB_API_KEY,
+                    encoded
+            );
+
+            HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
+            HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
+
+            if (res.statusCode() < 200 || res.statusCode() >= 300) {
+                throw new IOException("TMDb discover failed: " + res.statusCode());
+            }
+
+            JSONArray results = new JSONObject(res.body()).optJSONArray("results");
+            if (results == null) continue;
+
+            for (int i = 0; i < results.length(); i++) {
+                collected.add(results.getJSONObject(i));
                 if (collected.size() >= n) break;
             }
         }
 
         return new ArrayList<>(collected).subList(0, Math.min(collected.size(), n));
-    }
-
-    // === Helper to call /discover/movie like Python fetch_movies() ===========
-    private static List<JSONObject> fetchMovies(String keywordStr) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-
-        // Keep parameters aligned with the Python script
-        String url = String.format(
-                "https://api.themoviedb.org/3/discover/movie?api_key=%s&with_keywords=%s&include_adult=false&sort_by=vote_average.desc&vote_count.gte=200&language=en-US&page=1",
-                TMDB_API_KEY,
-                // TMDb accepts comma or pipe; keep them literal (no encoding) for readability
-                keywordStr
-        );
-
-        HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
-        HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
-
-        if (res.statusCode() < 200 || res.statusCode() >= 300) {
-            throw new IOException("TMDb discover failed: " + res.statusCode());
-        }
-
-        JSONArray results = new JSONObject(res.body()).optJSONArray("results");
-        List<JSONObject> out = new ArrayList<>();
-        if (results != null) {
-            for (int i = 0; i < results.length(); i++) out.add(results.getJSONObject(i));
-        }
-        return out;
     }
 }
