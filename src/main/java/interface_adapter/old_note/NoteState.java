@@ -1,4 +1,4 @@
-package interface_adapter.note;
+package interface_adapter.old_note;
 
 /**
  * The State for a note.

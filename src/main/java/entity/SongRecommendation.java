@@ -1,4 +1,4 @@
-package z_temp_files.entities;
+package entity;
 
 public class SongRecommendation implements RecommendationItem {
     private int itemId;

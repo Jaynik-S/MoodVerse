@@ -1,4 +1,4 @@
-package z_temp_files.entities;
+package entity;
 
 import java.time.LocalDateTime;
 import java.util.List;

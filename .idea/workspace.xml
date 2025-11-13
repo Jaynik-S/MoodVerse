@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b559caf7-8a7c-48dd-9fdc-03aaa4b84f3c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/z_temp_files/MovieMoodSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/z_temp_files/MovieMoodSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/z_temp_files/SpotifyMoodSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/z_temp_files/SpotifyMoodSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/z_temp_files/entities/MovieRecommendation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/z_temp_files/entities/MovieRecommendation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -56,6 +59,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;#3 on RecommendAPI__Calls&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jay03/Jaynik/CS @ UofT/CSC207/IntelliJ/MoodVerse&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -65,6 +69,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jay03\Jaynik\CS @ UofT\CSC207\IntelliJ\MoodVerse" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.MovieMoodSearch">
     <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
@@ -84,7 +93,7 @@
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="z_temp_files.*" />
+          <option name="PATTERN" value="z_temp_files.entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -97,7 +106,7 @@
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="z_temp_files.*" />
+          <option name="PATTERN" value="z_temp_files.entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -145,7 +154,10 @@
       <workItem from="1762881371145" duration="1670000" />
       <workItem from="1762921882135" duration="7103000" />
       <workItem from="1762988449398" duration="19008000" />
-      <workItem from="1763057445598" duration="1003000" />
+      <workItem from="1763057445598" duration="1937000" />
+      <workItem from="1763059844901" duration="301000" />
+      <workItem from="1763060572909" duration="3849000" />
+      <workItem from="1763072088881" duration="47000" />
     </task>
     <servers />
   </component>

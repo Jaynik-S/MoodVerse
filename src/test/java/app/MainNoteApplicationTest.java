@@ -3,7 +3,7 @@ package app;
 import entity.User;
 import org.junit.Before;
 import org.junit.Test;
-import use_case.note.NoteDataAccessInterface;
+import use_case.old_note.NoteDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.*;

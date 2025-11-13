@@ -1,6 +1,6 @@
-package interface_adapter.note;
+package interface_adapter.old_note;
 
-import use_case.note.NoteInputBoundary;
+import use_case.old_note.NoteInputBoundary;
 
 /**
  * Controller for our Note related Use Cases.

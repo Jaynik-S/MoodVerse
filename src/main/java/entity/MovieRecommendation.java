@@ -1,4 +1,4 @@
-package z_temp_files.entities;
+package entity;
 
 public class MovieRecommendation implements RecommendationItem {
     private int itemId;
@@ -7,7 +7,6 @@ public class MovieRecommendation implements RecommendationItem {
 
     private String movieTitle;
     private float movieRating;
-    private float rating;
     private int voteCount;
     private String overview;
 
@@ -22,7 +21,6 @@ public class MovieRecommendation implements RecommendationItem {
 
     public String getMovieTitle() { return movieTitle; }
     public float getMovieRating() { return movieRating; }
-    public float getRating() { return rating; }
     public int getVoteCount() { return voteCount; }
     public String getOverview() { return overview; }
 }
