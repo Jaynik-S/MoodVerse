@@ -1,7 +1,7 @@
 package app;
 
 import data_access.DBNoteDataAccessObject;
-import use_case.old_note.NoteDataAccessInterface;
+import use_case.z_old_note.NoteDataAccessInterface;
 
 /**
  * An application where we can view and add to a note stored by a user.
