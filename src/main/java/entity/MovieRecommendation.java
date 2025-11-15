@@ -1,26 +1,25 @@
 package entity;
 
-public class MovieRecommendation implements RecommendationItem {
-    private int itemId;
-    private int releaseYear;
+public class MovieRecommendation {
+    private String releaseYear;
     private String imageUrl;
-
     private String movieTitle;
-    private float movieRating;
-    private int voteCount;
+    private String movieRating;
     private String overview;
 
-    @Override
-    public int getItemId() { return itemId; }
+    public MovieRecommendation(String releaseYear, String imageUrl,
+                             String movieTitle, String movieRating,
+                             String overview) {
+        this.releaseYear = releaseYear;
+        this.imageUrl = imageUrl;
+        this.movieTitle = movieTitle;
+        this.movieRating = movieRating;
+        this.overview = overview;
+    }
 
-    @Override
-    public int getReleaseYear() { return releaseYear; }
-
-    @Override
+    public String getReleaseYear() { return releaseYear; }
     public String getImageUrl() { return imageUrl; }
-
     public String getMovieTitle() { return movieTitle; }
-    public float getMovieRating() { return movieRating; }
-    public int getVoteCount() { return voteCount; }
+    public String getMovieRating() { return movieRating; }
     public String getOverview() { return overview; }
 }
