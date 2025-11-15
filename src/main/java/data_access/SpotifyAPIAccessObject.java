@@ -147,7 +147,7 @@ public class SpotifyAPIAccessObject {
         return new SongRecommendation(releaseYear, coverUrl, songName, artistName, popularity, externalUrl);
     }
 
-    public List<SongRecommendation> fetchSongRecommendations() {
+    public List<SongRecommendation> fetchSongRecommendations() throws IOException, InterruptedException {
         try {
             accessToken = getAccessToken();
             List<JSONObject> songs = getSongsByKeywords(terms);
@@ -156,14 +156,8 @@ public class SpotifyAPIAccessObject {
                 songList.add(JSONtoSongRecommendation(track));
             }
             return songList;
-        } catch (IOException e) {
-            System.err.println("I/O error fetching song recommendations: " + e.getMessage());
-            // TODO: Log the error properly
-            return List.of();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.err.println("Operation interrupted while fetching song recommendations.");
-            return List.of();
+        } catch (Exception e) {
+            throw e;
         }
     }
 }

@@ -4,6 +4,7 @@ import entity.MovieRecommendation;
 import entity.SongRecommendation;
 import use_case.get_recommendations.GetRecommendationsUserDataAccessInterface;
 
+import java.io.IOException;
 import java.util.List;
 
 public class RecommendationAPIAccessObject implements GetRecommendationsUserDataAccessInterface {
@@ -16,13 +17,13 @@ public class RecommendationAPIAccessObject implements GetRecommendationsUserData
     }
 
     @Override
-    public List<SongRecommendation> fetchSongRecommendations(List<String> keywords) {
+    public List<SongRecommendation> fetchSongRecommendations(List<String> keywords) throws IOException, InterruptedException {
         SpotifyAPIAccessObject spotifyAPI = new SpotifyAPIAccessObject(keywords);
         return spotifyAPI.fetchSongRecommendations();
     }
 
     @Override
-    public List<MovieRecommendation> fetchMovieRecommendations(List<String> keywords) {
+    public List<MovieRecommendation> fetchMovieRecommendations(List<String> keywords) throws IOException, InterruptedException {
         TMDbAPIAccessObject tmdbAPI = new TMDbAPIAccessObject(keywords);
         return tmdbAPI.fetchMovieRecommendations();
     }

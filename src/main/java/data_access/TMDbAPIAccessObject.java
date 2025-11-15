@@ -113,7 +113,7 @@ public class TMDbAPIAccessObject {
         return new MovieRecommendation(year, posterUrl, title, voteAvg, overview);
     }
     
-    public List<MovieRecommendation> fetchMovieRecommendations() {
+    public List<MovieRecommendation> fetchMovieRecommendations() throws IOException, InterruptedException {
         try {
             List<String> ids = getKeywordIds(terms);
             List<JSONObject> movies = discoverMovies(ids);
@@ -122,14 +122,8 @@ public class TMDbAPIAccessObject {
                 movieList.add(JSONtoMovieRecommendation(movie));
             }
             return movieList;
-        } catch (IOException e) {
-            System.err.println("I/O error fetching song recommendations: " + e.getMessage());
-            // TODO: Log the error properly
-            return List.of();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.err.println("Operation interrupted while fetching song recommendations.");
-            return List.of();
+        } catch (Exception e) {
+            throw e;
         }
     }
 }
