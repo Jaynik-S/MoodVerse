@@ -11,8 +11,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import use_case.note.DataAccessException;
-import use_case.note.NoteDataAccessInterface;
+import use_case.z_old_note.DataAccessException;
+import use_case.z_old_note.NoteDataAccessInterface;
 
 /**
  * The DAO for accessing notes stored in the database.

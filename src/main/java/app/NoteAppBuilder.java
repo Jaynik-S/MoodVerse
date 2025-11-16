@@ -3,12 +3,12 @@ package app;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import interface_adapter.note.NoteController;
-import interface_adapter.note.NotePresenter;
-import interface_adapter.note.NoteViewModel;
-import use_case.note.NoteDataAccessInterface;
-import use_case.note.NoteInteractor;
-import use_case.note.NoteOutputBoundary;
+import interface_adapter.z_old_note.NoteController;
+import interface_adapter.z_old_note.NotePresenter;
+import interface_adapter.z_old_note.NoteViewModel;
+import use_case.z_old_note.NoteDataAccessInterface;
+import use_case.z_old_note.NoteInteractor;
+import use_case.z_old_note.NoteOutputBoundary;
 import view.NoteView;
 
 /**
