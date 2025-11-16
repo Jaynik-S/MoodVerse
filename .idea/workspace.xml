@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="088dba7e-7f8a-40d0-a0f2-a71bd9c5716a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation/RecommendationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/RecommendationGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/FileUserDataAccessObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation/RecommendationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,21 +26,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "espacededavid"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;espacededavid&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Jaynik-S/MoodVerse.git",
-    "accountId": "1b26bbbc-acb0-47bc-981a-da670a0b054b"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Jaynik-S/MoodVerse.git&quot;,
+    &quot;accountId&quot;: &quot;1b26bbbc-acb0-47bc-981a-da670a0b054b&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="35L8LnFYpkrWQKzkk5iYc0ZukTk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -49,9 +49,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.MainNoteApplication.executor": "Run",
+    "Application.RecommendationGUI.executor": "Run",
+    "JUnit.RecommendationViewTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "david",
+    "git-widget-placeholder": "#1 on david",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/MoodVerse",
@@ -63,6 +65,28 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="RecommendationViewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="view" />
+      <option name="MAIN_CLASS_NAME" value="view.RecommendationViewTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.RecommendationViewTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -78,7 +102,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1762877937984</updated>
-      <workItem from="1762877941165" duration="4707000" />
+      <workItem from="1762877941165" duration="5245000" />
+      <workItem from="1763056684871" duration="397000" />
+      <workItem from="1763057406110" duration="15000" />
+      <workItem from="1763057640208" duration="3785000" />
+      <workItem from="1763165629101" duration="1187000" />
+      <workItem from="1763168105924" duration="3492000" />
+      <workItem from="1763319823144" duration="9477000" />
     </task>
     <servers />
   </component>

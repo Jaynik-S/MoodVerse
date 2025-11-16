@@ -16,8 +16,12 @@ import view.NoteView;
  * Builder for the Note Application.
  */
 public class NoteAppBuilder {
+    // TODO: change to fit recommendation page
     public static final int HEIGHT = 300;
+
+    // TODO: change to fit recommendation page
     public static final int WIDTH = 400;
+
     private NoteDataAccessInterface noteDAO;
     private NoteViewModel noteViewModel = new NoteViewModel();
     private NoteView noteView;

@@ -2,14 +2,15 @@ package interface_adapter.recommendation;
 
 import use_case.note.NoteInputBoundary;
 
+/**
+ * Controller for our Note related Use Cases.
+ */
 public class RecommendationController {
 
-    private final NoteInputBoundary noteInteractor;
-    
-    // todo: add input boundary for recommendation.
+    private final RecommendationInputBoundary recommendationInteractor;
 
-    public RecommendationController(NoteInputBoundary noteInteractor) {
-        this.noteInteractor = noteInteractor;
+    public RecommendationController(RecommendationInputBoundary recommendationInteractor) {
+        this.recommendationInteractor = recommendationInteractor;
     }
 
     /**
@@ -18,10 +19,10 @@ public class RecommendationController {
      */
     public void execute(String note) {
         if (note != null) {
-            noteInteractor.executeSave(note);
+            recommendationInteractor.executeSave(note);
         }
         else {
-            noteInteractor.executeRefresh();
+            recommendationInteractor.executeRefresh();
         }
     }
 }
