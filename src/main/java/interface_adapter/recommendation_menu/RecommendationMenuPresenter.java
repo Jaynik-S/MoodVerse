@@ -1,5 +1,7 @@
 package interface_adapter.recommendation_menu;
 
+import interface_adapter.ViewManagerModel;
+import interface_adapter.home_menu.HomeMenuViewModel;
 import use_case.get_recommendations.GetRecommendationsOutputBoundary;
 import use_case.get_recommendations.GetRecommendationsOutputData;
 
@@ -9,8 +11,14 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
 
     private final RecommendationMenuViewModel recommendationMenuViewModel;
 
-    public RecommendationMenuPresenter(RecommendationMenuViewModel recommendationMenuViewModel) {
+    private final HomeMenuViewModel homeMenuViewModel;
+
+    private final ViewManagerModel viewManagerModel;
+
+    public RecommendationMenuPresenter(RecommendationMenuViewModel recommendationMenuViewModel, HomeMenuViewModel homeMenuViewModel, ViewManagerModel viewManagerModel) {
         this.recommendationMenuViewModel = recommendationMenuViewModel;
+        this.homeMenuViewModel = homeMenuViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
 
@@ -28,7 +36,8 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
 
     @Override
     public void switchToRecommendationMenu() {
-        //todo
+        viewManagerModel.setState(homeMenuViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }
 
