@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/RecommendationAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/RecommendationAPIAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/AnalysisResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/AnalysisResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/SentimentLabel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/app/NLPAnalysisDataAccessObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/app/NLPAnalysisDataAccessObjectTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +28,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="35LAlJWeZ9DWRGGErMZ5jTTBpMZ" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -37,12 +43,16 @@
   "keyToString": {
     "Application.MainNoteApplication.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords.executor": "Run",
+    "JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords.executor": "Run",
+    "JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "arnav",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/arnavshah/Code/MoodVerse",
     "node.js.detected.package.eslint": "true",
@@ -50,13 +60,13 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment">
+  <component name="RunManager" selected="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords">
     <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
       <module name="note-application" />
@@ -66,6 +76,38 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="app" />
+      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
+      <option name="METHOD_NAME" value="testAnalyze_ExtractsKeywords" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="app" />
+      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
+      <option name="METHOD_NAME" value="testAnalyze_LimitsToTopTenKeywords" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,6 +141,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords" />
+        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords" />
         <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment" />
         <item itemvalue="Application.MainNoteApplication" />
       </list>
@@ -119,7 +163,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1762879128273</updated>
-      <workItem from="1762879129206" duration="4497000" />
+      <workItem from="1762879129206" duration="5193000" />
+      <workItem from="1763406065025" duration="5448000" />
     </task>
     <servers />
   </component>
