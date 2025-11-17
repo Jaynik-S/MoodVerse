@@ -12,6 +12,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import interface_adapter.home_menu.HomeMenuViewModel;
 import interface_adapter.recommendation_menu.RecommendationMenuState;
 import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
 import interface_adapter.recommendation.RecommendationState;
@@ -44,9 +45,12 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
     private final RecommendationMenuState recommendationState;
 
+    private final HomeMenuViewModel homeMenuViewModel;
+
     private final JButton backButton = new JButton("Back");
 
-    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController,  RecommendationMenuState recommendationState) {
+    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState, HomeMenuViewModel homeMenuViewModel) {
+        this.homeMenuViewModel = homeMenuViewModel;
 
         // Prevent the window from being resized smaller than a usable minimum
         this.setMinimumSize(new Dimension(WIDTH_RECOMMENDATION_MIN, HEIGHT_RECOMMENDATION_MIN));
@@ -67,8 +71,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         backButton.addActionListener(
                 evt -> {
                 if (evt.getSource().equals(backButton)) {
-                    // TODO: Event call for back button.
-                        recommendationViewModel.setState(recommendationViewModel.getState());
+                        recommendationViewModel.setState(homeMenuViewModel.getState());
                 }
             }
         );
@@ -112,9 +115,54 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         final JPanel rightList = new JPanel();
         rightList.setLayout(new BoxLayout(rightList, BoxLayout.Y_AXIS));
 
+        
+
         // add left and right panel to main area
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
+    }
+
+    private JPanel createMovieItem() {
+        final JPanel item = new JPanel(new BorderLayout(8, 8));
+        item.setBorder(BorderFactory.createTitledBorder("Movie #1"));
+
+        final JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+        cover.setHorizontalAlignment(JLabel.CENTER);
+        final JPanel coverWrap = new JPanel(new BorderLayout());
+        coverWrap.add(cover, BorderLayout.CENTER);
+        coverWrap.setPreferredSize(new Dimension(180, 180));
+        coverWrap.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(Color.GRAY),
+                    BorderFactory.createEmptyBorder(4, 4, 4, 4)));
+
+            JPanel details = new JPanel(new BorderLayout(6, 6));
+            JPanel topRow = new JPanel(new BorderLayout(6, 6));
+            JTextField titleField = new JTextField("Title");
+            titleField.setEditable(false);
+            JPanel smallBoxes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
+            JTextField yearField = new JTextField("year");
+            yearField.setPreferredSize(new Dimension(80, 40));
+            yearField.setHorizontalAlignment(JTextField.CENTER);
+            yearField.setEditable(false);
+            JTextField ratingField = new JTextField("rating");
+            ratingField.setPreferredSize(new Dimension(80, 40));
+            ratingField.setHorizontalAlignment(JTextField.CENTER);
+            ratingField.setEditable(false);
+            smallBoxes.add(yearField);
+            smallBoxes.add(ratingField);
+            topRow.add(titleField, BorderLayout.CENTER);
+            topRow.add(smallBoxes, BorderLayout.EAST);
+            JTextField descField = new JTextField("Description of the movie");
+            descField.setEditable(false);
+            descField.setPreferredSize(new Dimension(200, 100));
+            details.add(topRow, BorderLayout.NORTH);
+            details.add(descField, BorderLayout.CENTER);
+            item.add(coverWrap, BorderLayout.WEST);
+            item.add(details, BorderLayout.CENTER);
+            int itemHeight = 140;
+            item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
+            item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
+            item.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
     /**

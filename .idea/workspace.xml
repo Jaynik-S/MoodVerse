@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c141fa6d-ed9e-4a38-9e74-3108b702a5f8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,22 +40,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.RecommendationGUI.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#4 on recommendation",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/MoodVerse",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.RecommendationGUI.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#4 on recommendation&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MoodVerse&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -70,7 +72,8 @@
       <option name="presentableId" value="Default" />
       <updated>1763331918416</updated>
       <workItem from="1763331919681" duration="8528000" />
-      <workItem from="1763369175368" duration="1567000" />
+      <workItem from="1763369175368" duration="5776000" />
+      <workItem from="1763403599760" duration="3175000" />
     </task>
     <servers />
   </component>

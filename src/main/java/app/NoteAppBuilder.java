@@ -3,9 +3,17 @@ package app;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import interface_adapter.ViewManagerModel;
+import interface_adapter.home_menu.HomeMenuViewModel;
+import interface_adapter.recommendation_menu.RecommendationMenuPresenter;
+import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
 import interface_adapter.z_old_note.NoteController;
 import interface_adapter.z_old_note.NotePresenter;
 import interface_adapter.z_old_note.NoteViewModel;
+import use_case.get_recommendations.GetRecommendationsInputBoundary;
+import use_case.get_recommendations.GetRecommendationsInteractor;
+import use_case.get_recommendations.GetRecommendationsOutputBoundary;
+import use_case.get_recommendations.GetRecommendationsUserDataAccessInterface;
 import use_case.z_old_note.NoteDataAccessInterface;
 import use_case.z_old_note.NoteInteractor;
 import use_case.z_old_note.NoteOutputBoundary;
@@ -26,6 +34,10 @@ public class NoteAppBuilder {
     private NoteViewModel noteViewModel = new NoteViewModel();
     private NoteView noteView;
     private NoteInteractor noteInteractor;
+
+    private RecommendationMenuViewModel recommendationMenuViewModel;
+    private HomeMenuViewModel homeMenuViewModel;
+    private ViewManagerModel viewManagerModel;
 
     /**
      * Sets the NoteDAO to be used in this application.
@@ -58,6 +70,19 @@ public class NoteAppBuilder {
         return this;
     }
 
+    public NoteAppBuilder addGetRecommendationUseCase() {
+        final GetRecommendationsOutputBoundary recommendationsOutputBoundary = new RecommendationMenuPresenter(recommendationMenuViewModel,
+                homeMenuViewModel,
+                viewManagerModel);
+        final GetRecommendationsInputBoundary getRecommendationsInteractor = new GetRecommendationsInteractor(
+                userDataAccessInterface,
+                getRecommendationsOutputBoundary));
+
+        SignupController controller = new SignupController(userSignupInteractor);
+        signupView.setSignupController(controller);
+        return this;
+    }
+
     /**
      * Creates the NoteView and underlying NoteViewModel.
      * @return this builder
@@ -67,6 +92,8 @@ public class NoteAppBuilder {
         noteView = new NoteView(noteViewModel);
         return this;
     }
+
+
 
     /**
      * Builds the application.

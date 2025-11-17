@@ -18,6 +18,18 @@ public class RecommendationMenuState {
     private MovieRecommendation movieRecommendationThree;
     private MovieRecommendation movieRecommendationFour;
 
+    private String displayError;
+
+    public void setError(String displayError) {
+
+        this.displayError = displayError;
+    }
+
+
+    public String getError() {
+        return displayError;
+    }
+
     public void setSongRecommendation(List<SongRecommendation> songRecommendation) {
         this.songRecommendationOne = songRecommendation.get(0);
         this.songRecommendationTwo = songRecommendation.get(1);
@@ -68,4 +80,6 @@ public class RecommendationMenuState {
     public MovieRecommendation getMovieRecommendationFour() {
         return movieRecommendationFour;
     }
+
+
 }

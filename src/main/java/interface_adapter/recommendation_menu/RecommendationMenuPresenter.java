@@ -15,7 +15,9 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
 
     private final ViewManagerModel viewManagerModel;
 
-    public RecommendationMenuPresenter(RecommendationMenuViewModel recommendationMenuViewModel, HomeMenuViewModel homeMenuViewModel, ViewManagerModel viewManagerModel) {
+    public RecommendationMenuPresenter(RecommendationMenuViewModel recommendationMenuViewModel,
+                                       HomeMenuViewModel homeMenuViewModel,
+                                       ViewManagerModel viewManagerModel) {
         this.recommendationMenuViewModel = recommendationMenuViewModel;
         this.homeMenuViewModel = homeMenuViewModel;
         this.viewManagerModel = viewManagerModel;
@@ -27,11 +29,14 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
         final RecommendationMenuState recommendationMenuState = recommendationMenuViewModel.getState();
         recommendationMenuState.setSongRecommendation(outputData.getSongRecommendations());
         recommendationMenuState.setMovieRecommendation(outputData.getMovieRecommendations());
+        recommendationMenuViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        //todo
+        final RecommendationMenuState recommendationMenuState = recommendationMenuViewModel.getState();
+        recommendationMenuState.setError(error);
+        recommendationMenuViewModel.firePropertyChanged();
     }
 
     @Override
