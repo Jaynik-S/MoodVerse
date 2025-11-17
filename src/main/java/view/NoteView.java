@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import interface_adapter.note.NoteController;
-import interface_adapter.note.NoteState;
-import interface_adapter.note.NoteViewModel;
+import interface_adapter.z_old_note.NoteController;
+import interface_adapter.z_old_note.NoteState;
+import interface_adapter.z_old_note.NoteViewModel;
 
 /**
  * The View for when the user is viewing a note in the program.

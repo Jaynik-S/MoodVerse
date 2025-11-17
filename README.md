@@ -1,36 +1,26 @@
-# Note Application
+# MoodVerse
 
-This is a minimal example demonstrating usage of the
-password-protected user part of the API used in lab 5.
+MoodVerse is a simple desktop diary application that lets users write, save, load, and delete diary entries. It also uses natural language processing to analyze the mood of each diary entry and provides personalized **song** and **movie** recommendations based on that mood.
 
-You can find more information about the API endpoints in
-[the documentation](https://www.postman.com/cloudy-astronaut-813156/csc207-grade-apis-demo/documentation/fg3zkjm/5-password-protected-user).
+## What the Program Does
 
-If your team is considering an application for which it would be convenient to
-store data in something like a database, you may find that the API calls demonstrated
-here will be useful in your project, as this will allow you to store
-an arbitrary JSON object associated with a username and password.
+- **Create Diary Entries** – Write and store personal diary entries.
+- **Save Entries** – Manually save your writing to a chosen folder.
+- **Load Entries** – Reopen past entries to read or edit them.
+- **Delete Entries** – Remove entries you no longer want.
+- **Analyze Mood** – Use NLP to detect the emotional tone of your writing.
+- **Get Recommendations** – Receive music (Spotify) and movie (TMDb) suggestions that match your detected mood.
 
-In this application, a single note has a name (the "username" in terms of the API) and the note
-can be read by anyone who knows the name — but only edited by someone who
-knows the password for it.
+## Technologies & APIs
 
-You can see the documentation in the various files for more information.
+- **NLP:** Stanford CoreNLP
+- **Music Recommendations:** Spotify Web API
+- **Movie Recommendations:** TMDb API
 
-## Testing
+## Future Features (Not in MVP)
 
-The repo also includes an example of a use case interactor test, as well as
-an example of an end-to-end test which automates button clicks and inspects
-the contents of the actual views. This is something we discussed in the lectures
-about testing in CA but had not provided a code example of before. Note, one
-could also inspect the contents of the ViewModel objects instead when testing
-CA to make a similar test which would be less dependent on the details of the
-specific UI implementation.
+- User accounts (sign up, login, logout)
+- Public diary sharing
+- Browsing diaries shared by others
 
-## Project Starter Code
-
-Your team may choose to use this repo as starter code for your project. You could
-also use the lab 5 code — or start from an empty repo if your team prefers.
-
-If you choose to use one of the repositories we have provided, you can either make
-a fork of it or copy the subset of code you want into a completely new repository.
+---
