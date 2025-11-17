@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="">
+    <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="get list of keywords using stanford NLP (max 10)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/RecommendationAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/RecommendationAPIAccessObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/AnalysisResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/AnalysisResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/SentimentLabel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/app/NLPAnalysisDataAccessObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/app/NLPAnalysisDataAccessObjectTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,11 +158,24 @@
       <option name="presentableId" value="Default" />
       <updated>1762879128273</updated>
       <workItem from="1762879129206" duration="5193000" />
-      <workItem from="1763406065025" duration="5448000" />
+      <workItem from="1763406065025" duration="6612000" />
     </task>
+    <task id="LOCAL-00001" summary="get list of keywords using stanford NLP (max 10)">
+      <option name="closed" value="true" />
+      <created>1763414260916</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763414260916</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="get list of keywords using stanford NLP (max 10)" />
+    <option name="LAST_COMMIT_MESSAGE" value="get list of keywords using stanford NLP (max 10)" />
   </component>
 </project>
