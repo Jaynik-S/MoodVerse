@@ -12,9 +12,12 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import interface_adapter.recommendation.RecommendationController;
+import interface_adapter.recommendation_menu.RecommendationMenuState;
+import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
 import interface_adapter.recommendation.RecommendationState;
-import interface_adapter.recommendation.RecommendationViewModel;
+import interface_adapter.recommendation_menu.RecommendationMenuController;
+import interface_adapter.z_old_note.NoteController;
+import interface_adapter.z_old_note.NoteState;
 
 /**
  * The View for when the user is viewing a note in the program.
@@ -35,13 +38,15 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private static final int WIDTH_LEFT = 500;
     private static final int VERTICAL_SPACING = 6;
 
-    private final RecommendationController recommendationController;
+    private final RecommendationMenuController recommendationController;
 
-    private final RecommendationViewModel recommendationViewModel;
+    private final RecommendationMenuViewModel recommendationViewModel;
+
+    private final RecommendationMenuState recommendationState;
 
     private final JButton backButton = new JButton("Back");
 
-    public RecommendationView(RecommendationViewModel recommendationViewModel, RecommendationController recommendationController) {
+    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController,  RecommendationMenuState recommendationState) {
 
         // Prevent the window from being resized smaller than a usable minimum
         this.setMinimumSize(new Dimension(WIDTH_RECOMMENDATION_MIN, HEIGHT_RECOMMENDATION_MIN));
@@ -50,17 +55,20 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         this.recommendationController = recommendationController;
 
+        this.recommendationState = recommendationState;
+
         this.recommendationViewModel.addPropertyChangeListener(this);
 
         // Top panel with a left-aligned Back button
         final JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.add(backButton);
 
-        // TODO: Event call for back button.
+
         backButton.addActionListener(
                 evt -> {
                 if (evt.getSource().equals(backButton)) {
-                        // recommendationController.goBack();
+                    // TODO: Event call for back button.
+                        recommendationViewModel.setState(recommendationViewModel.getState());
                 }
             }
         );
@@ -75,27 +83,27 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         leftList.setLayout(new BoxLayout(leftList, BoxLayout.Y_AXIS));
 
         // First song panel
-        final JPanel itemOne = createSongItem("Song #1", "Song Name", "score", "Artist", "Year", "https://example.com/track...");
+        final JPanel itemOne = createSongItem("Song #1", recommendationState.getSongRecommendationOne().getSongName(), recommendationState.getSongRecommendationOne().getPopularityScore(), recommendationState.getSongRecommendationOne().getArtistName(), recommendationState.getSongRecommendationOne().getReleaseYear(), recommendationState.getSongRecommendationOne().getExternalUrl(), recommendationState.getSongRecommendationOne().getImageUrl());
         leftList.add(itemOne);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Second song panel
-        final JPanel itemTwo = createSongItem("Song #2", "Song Name", "score", "Artist", "Year", "https://example.com/track...");
+        final JPanel itemTwo = createSongItem("Song #2", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
         leftList.add(itemTwo);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Third song panel
-        final JPanel itemThree = createSongItem("Song #3", "Song Name", "score", "Artist", "Year", "https://example.com/track...");
+        final JPanel itemThree = createSongItem("Song #3", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
         leftList.add(itemThree);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Forth song panel
-        final JPanel itemFour = createSongItem("Song #4", "Song Name", "score", "Artist", "Year", "https://example.com/track...");
+        final JPanel itemFour = createSongItem("Song #4", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
         leftList.add(itemFour);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Fifth song panel
-        final JPanel itemFive = createSongItem("Song #5", "Song Name", "score", "Artist", "Year", "https://example.com/track...");
+        final JPanel itemFive = createSongItem("Song #5", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
         leftList.add(itemFive);
 
         // Right panel: Movies
@@ -112,7 +120,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     /**
      * Build a song item panel used in the recommendations list.
      */
-    private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url) {
+    private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) {
         final JPanel item = new JPanel(new BorderLayout(8, 8));
         item.setBorder(BorderFactory.createTitledBorder(title));
 
@@ -163,6 +171,24 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         item.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         return item;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final NoteState state = (NoteState) evt.getNewValue();
+        setFields(state);
+        if (state.getError() != null) {
+            JOptionPane.showMessageDialog(this, state.getError(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void setFields(NoteState state) {
+
     }
 
 }
