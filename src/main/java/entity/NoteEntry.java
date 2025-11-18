@@ -16,8 +16,8 @@ public class NoteEntry {
     private String primaryMood;
     private List<String> emotions;
 
-    private List<songRecommendation> spotifyTracks;
-    private List<movieRecommendation> movies;
+    private List<SongRecommendation> spotifyTracks;
+    private List<MovieRecommendation> movies;
 
     public NoteEntry(int entryId, String title, String text, String contentPreview, Instant createdAt,
                      Instant updatedAt, List<String> tags) {
@@ -96,16 +96,16 @@ public class NoteEntry {
         this.emotions = emotions;
     }
 
-    public List<songRecommendation> getSpotifyTracks() {
+    public List<SongRecommendation> getSpotifyTracks() {
         return spotifyTracks;
     }
-    public void setSpotifyTracks(List<songRecommendation> spotifyTracks) {
+    public void setSpotifyTracks(List<SongRecommendation> spotifyTracks) {
         this.spotifyTracks = spotifyTracks;
     }
-    public List<movieRecommendation> getMovies() {
+    public List<MovieRecommendation> getMovies() {
         return movies;
     }
-    public void setMovies(List<movieRecommendation> movies) {
+    public void setMovies(List<MovieRecommendation> movies) {
         this.movies = movies;
     }
 }
