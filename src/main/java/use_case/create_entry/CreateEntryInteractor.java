@@ -8,14 +8,17 @@ import java.util.List;
 
 public class CreateEntryInteractor implements CreateEntryInputBoundary {
     private final CreateEntryOutputBoundary presenter;
+    private final CreateEntryUserDataAccessInterface dataAccess;
 
-    public CreateEntryInteractor(CreateEntryOutputBoundary presenter) { this.presenter = presenter; }
+    public CreateEntryInteractor(CreateEntryOutputBoundary presenter, CreateEntryUserDataAccessInterface dataAccess) {
+        this.presenter = presenter;
+        this.dataAccess = dataAccess;
+    }
 
     @Override
     public void execute(CreateEntryInputData inputData) {
         String title = inputData.getTitle();
         String text = inputData.getText();
-        List<String> keywords = inputData.getKeywords();
 
         if (title == null || title.length() == 0) {
             presenter.prepareFailView("Title cannot be empty.");
@@ -43,16 +46,17 @@ public class CreateEntryInteractor implements CreateEntryInputBoundary {
         }
 
         DiaryEntry entry = new DiaryEntry();
-        entry.setTitle(title);
-        entry.setText(text);
+        entry.setTitle(inputData.getTitle());
+        entry.setText(inputData.getText());
         entry.updatedTime();
 
+        List<String> keywords = inputData.getKeywords();
         if (keywords == null) {
             entry.setKeyword(new ArrayList<String>());
         } else {
-            List<String> copy = new ArrayList<String>(keywords);
-            entry.setKeyword(copy);
+            entry.setKeyword(new ArrayList<String>(keywords));
         }
+        dataAccess.save(entry);
 
         String preview;
         if (text.length() <= 60) {
