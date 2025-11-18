@@ -13,5 +13,6 @@ public class GoBackPresenter implements GoBackOutputBoundary{
     @Override
     public void prepareSuccessView() {
         viewManagerModel.setState("Home");
+        viewManagerModel.firePropertyChanged();
     }
 }

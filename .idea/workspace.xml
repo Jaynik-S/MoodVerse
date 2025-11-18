@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="most of new document page">
+    <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="missed this">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/GoBackPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/GoBackPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" afterDir="false" />
     </list>
@@ -38,6 +38,9 @@
     &quot;accountId&quot;: &quot;509aca2b-5821-41f0-9d97-1a118c506a9d&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -193,7 +196,7 @@
       <updated>1762879128273</updated>
       <workItem from="1762879129206" duration="5193000" />
       <workItem from="1763406065025" duration="6612000" />
-      <workItem from="1763434699823" duration="5565000" />
+      <workItem from="1763434699823" duration="7059000" />
     </task>
     <task id="LOCAL-00001" summary="get list of keywords using stanford NLP (max 10)">
       <option name="closed" value="true" />
@@ -211,7 +214,23 @@
       <option name="project" value="LOCAL" />
       <updated>1763422078145</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="implemented back">
+      <option name="closed" value="true" />
+      <created>1763443422082</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1763443422082</updated>
+    </task>
+    <task id="LOCAL-00004" summary="missed this">
+      <option name="closed" value="true" />
+      <created>1763443623312</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763443623312</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +239,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="get list of keywords using stanford NLP (max 10)" />
     <MESSAGE value="most of new document page" />
-    <option name="LAST_COMMIT_MESSAGE" value="most of new document page" />
+    <MESSAGE value="implemented back" />
+    <MESSAGE value="missed this" />
+    <option name="LAST_COMMIT_MESSAGE" value="missed this" />
   </component>
 </project>

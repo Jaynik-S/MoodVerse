@@ -1,27 +1,27 @@
 package interface_adapter.new_document;
 
+import interface_adapter.ViewModel;
+import use_case.save_entry.SaveEntryOutputBoundary;
+import use_case.save_entry.SaveEntryOutputData;
+
+
 /**
  * The Presenter for the New Document Use Cases.
  */
-public class NewDocumentPresenter {
+public class NewDocumentPresenter implements SaveEntryOutputBoundary{
 
     private final NewDocumentViewModel newDocumentViewModel;
 
-    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel) {
+    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel){
         this.newDocumentViewModel = newDocumentViewModel;
     }
 
     /**
      * Prepares the success view for the Save Document Use Case.
-     * @param title the title of the saved document
-     * @param date the date of the saved document
-     * @param textBody the text body of the saved document
+     * @param outputData the output from a save
      */
-    public void prepareSaveSuccessView(String title, String date, String textBody) {
+    public void prepareSaveSuccessView(SaveEntryOutputData outputData) {
         final NewDocumentState state = newDocumentViewModel.getState();
-        state.setTitle(title);
-        state.setDate(date);
-        state.setTextBody(textBody);
         state.setError(null);
         newDocumentViewModel.firePropertyChanged();
     }
@@ -36,12 +36,4 @@ public class NewDocumentPresenter {
         newDocumentViewModel.firePropertyChanged();
     }
 
-    /**
-     * Prepares the success view for the Get Recommendations Use Case.
-     */
-    public void prepareRecommendationsSuccessView() {
-        final NewDocumentState state = newDocumentViewModel.getState();
-        state.setError(null);
-        newDocumentViewModel.firePropertyChanged();
-    }
 }
