@@ -37,15 +37,6 @@ public class NewDocumentPresenter {
     }
 
     /**
-     * Prepares the view when navigating back from the document.
-     */
-    public void prepareBackView() {
-        final NewDocumentState state = newDocumentViewModel.getState();
-        state.setError(null);
-        newDocumentViewModel.firePropertyChanged();
-    }
-
-    /**
      * Prepares the success view for the Get Recommendations Use Case.
      */
     public void prepareRecommendationsSuccessView() {

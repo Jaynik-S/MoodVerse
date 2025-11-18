@@ -2,13 +2,17 @@ package interface_adapter.new_document;
 
 import use_case.get_recommendations.GetRecommendationsInputBoundary;
 import use_case.get_recommendations.GetRecommendationsInputData;
+import use_case.go_back.GoBackInputBoundary;
 
 public class NewDocumentController {
 
     private final GetRecommendationsInputBoundary getRecommendationsInteractor;
+    private final GoBackInputBoundary goBackInteractor;
 
-    public NewDocumentController(GetRecommendationsInputBoundary getRecommendationsInteractor) {
+
+    public NewDocumentController(GetRecommendationsInputBoundary getRecommendationsInteractor, GoBackInputBoundary goBackInteractor) {
         this.getRecommendationsInteractor = getRecommendationsInteractor;
+        this.goBackInteractor = goBackInteractor;
     }
 
 
@@ -18,8 +22,7 @@ public class NewDocumentController {
     }
 
     public void executeBack() {
-        // TODO: Connect with Back Use Case Interactor
-        System.out.println("Back clicked");
+        goBackInteractor.execute();
     }
 
     public void executeGetRecommendations(String textBody) {
