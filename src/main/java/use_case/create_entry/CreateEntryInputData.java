@@ -2,9 +2,9 @@ package use_case.create_entry;
 import java.util.List;
 
 public class CreateEntryInputData {
-    private String title;
-    private String text;
-    private List<String> keywords;
+    private final String title;
+    private final String text;
+    private final List<String> keywords;
 
     public CreateEntryInputData(String title, String text, List<String> keywords) {
         this.title = title;
