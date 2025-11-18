@@ -3,11 +3,16 @@ package interface_adapter.home_menu;
 public class HomeMenuController {
 
     public HomeMenuController() {
-        //Base on 1.create_entry and 2.load_entry use case
+        //Base on 1.create_entry and 2.load_entry use casel
     }
 
     public void newEntry(){
       System.out.println("New Entry Clicked");
+    }
+
+    public void openEntry(int  entryId){
+        System.out.println("Edit Entry Clicked" + entryId);
+        //Todo: change base on use cases
     }
 }
 

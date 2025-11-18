@@ -8,6 +8,7 @@ public class HomeMenuState {
     private List<String> dates = new ArrayList<>();
     private List<String> tags = new ArrayList<>();
     private String errorMessage = "";
+    private List<Integer> entryIDs = new ArrayList<>(); //Used for jumping to corresponding document
 
 //    public HomeMenuState(List<String> titles, List<String> dates, List<String> moods, String errorMessage) {
 //        this.titles = titles;
@@ -46,5 +47,13 @@ public class HomeMenuState {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public List<Integer> getEntryIDs() {
+        return entryIDs;
+    }
+
+    public void setEntryIDs(List<Integer> entryIDs) {
+        this.entryIDs = entryIDs;
     }
 }
