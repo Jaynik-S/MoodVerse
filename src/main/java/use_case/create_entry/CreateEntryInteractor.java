@@ -1,5 +1,20 @@
 package use_case.create_entry;
 
-public class CreateEntryInteractor {
+import entity.DiaryEntry;
+
+
+public class CreateEntryInteractor implements CreateEntryInputBoundary {
+    private final CreateEntryOutputBoundary presenter;
+
+    public CreateEntryInteractor(CreateEntryOutputBoundary presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void execute() {
+        DiaryEntry entry = new DiaryEntry();
+
+        presenter.prepareSuccessView(entry);
+    }
 }
 
