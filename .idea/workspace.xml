@@ -6,14 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="741a40c7-cb32-4fcc-b05a-197f8d2889a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/TMDbAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/TMDbAPIAccessObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordInputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/VerifyPasswordDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/VerifyPasswordDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordOutputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordOutputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordUserDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/verify_password/VerifyPasswordUserDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/app/NLPAnalysisDataAccessObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/data_access/NLPAnalysisDataAccessObjectTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,10 +56,18 @@
     "Application.SpotifyAPIAccessObject.executor": "Run",
     "Application.TMDbAPIAccessObject.executor": "Run",
     "Application.TestVerifyPassword.executor": "Run",
+    "JUnit.EntityTest.executor": "Run",
+    "JUnit.NLPAnalysisDataAccessObjectTest.executor": "Run",
+    "JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTwentyKeywords.executor": "Run",
+    "JUnit.SpotifyAPIAccessObjectTest.executor": "Run",
+    "JUnit.SpotifyAPIAccessObjectTest.testFetchSongRecommendations_RealAPI_WhenCredentialsPresent.executor": "Run",
+    "JUnit.TMDbAPIAccessObjectTest.executor": "Run",
+    "JUnit.VerifyPasswordDataAccessObjectTest.executor": "Run",
+    "JUnit.data_access in note-application.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Password-Login",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -72,22 +78,28 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.TestVerifyPassword">
-    <configuration name="SpotifyAPIAccessObject" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data_access.SpotifyAPIAccessObject" />
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="data_access" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.EntityTest">
+    <configuration name="EntityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data_access.*" />
+          <option name="PATTERN" value="entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="entity" />
+      <option name="MAIN_CLASS_NAME" value="entity.EntityTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TMDbAPIAccessObject" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data_access.TMDbAPIAccessObject" />
+    <configuration name="SpotifyAPIAccessObjectTest.testFetchSongRecommendations_RealAPI_WhenCredentialsPresent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
@@ -95,12 +107,15 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.SpotifyAPIAccessObjectTest" />
+      <option name="METHOD_NAME" value="testFetchSongRecommendations_RealAPI_WhenCredentialsPresent" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestVerifyPassword" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data_access.TestVerifyPassword" />
+    <configuration name="TMDbAPIAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
@@ -108,15 +123,49 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.TMDbAPIAccessObjectTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VerifyPasswordDataAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="data_access.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.VerifyPasswordDataAccessObjectTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="data_access in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="data_access.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestVerifyPassword" />
-        <item itemvalue="Application.TMDbAPIAccessObject" />
-        <item itemvalue="Application.SpotifyAPIAccessObject" />
+        <item itemvalue="JUnit.EntityTest" />
+        <item itemvalue="JUnit.data_access in note-application" />
+        <item itemvalue="JUnit.SpotifyAPIAccessObjectTest.testFetchSongRecommendations_RealAPI_WhenCredentialsPresent" />
+        <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
+        <item itemvalue="JUnit.TMDbAPIAccessObjectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -140,6 +189,9 @@
       <workItem from="1763482527621" duration="745000" />
       <workItem from="1763483453848" duration="1172000" />
       <workItem from="1763484768695" duration="4483000" />
+      <workItem from="1763526625008" duration="29000" />
+      <workItem from="1763526761722" duration="704000" />
+      <workItem from="1763527480358" duration="1094000" />
     </task>
     <servers />
   </component>

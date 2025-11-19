@@ -1,6 +1,5 @@
-package app;
+package data_access;
 
-import data_access.NLPAnalysisDataAccessObject;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import entity.Keyword;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,11 +37,18 @@ public class NLPAnalysisDataAccessObjectTest {
     }
 
     @Test
-    public void testAnalyze_LimitsToTopTenKeywords() {
-        String text = "I'm so in love with programming";
+    public void testAnalyze_LimitsToTopTwentyKeywords() {
+        String text =
+        """
+        I spent almost the whole day at the beach today, and I swear I could live there forever.
+        The sun was warm but not too much, and the ocean breeze felt like a gentle reminder to slow down.
+        There was this moment right before sunset when the sky turned a perfect mix of gold and pink.
+        I had sand between my toes, salt on my skin, and a melting popsicle in my hand.
+        Everything just felt light, carefree, and full of joy.
+        """;
         var result = nlpDao.analyze(text);
 
-        assertTrue(result.keywords().size() <= 10);
+        assertTrue(result.keywords().size() <= 20);
         List<String> keywordStrings = result.keywords().stream().map(Keyword::text).toList();
         System.out.println(keywordStrings);
 //        assertEquals(10, result.keywords().size());
