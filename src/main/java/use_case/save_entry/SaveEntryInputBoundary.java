@@ -1,5 +1,7 @@
 package use_case.save_entry;
 
-public interface SaveEntryInputBoundary {
+import entity.DiaryEntry;
 
+public interface SaveEntryInputBoundary {
+    void execute(DiaryEntry entry);
 }
