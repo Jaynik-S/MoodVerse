@@ -24,7 +24,7 @@ public class VerifyPasswordInteractor implements VerifyPasswordInputBoundary {
 
     @Override
     public void switchToHomeMenu() {
-        userPresenter.switchToHomeMenu();
+        // userPresenter.switchToHomeMenu(); TODO: check flow later
     }
 
 }

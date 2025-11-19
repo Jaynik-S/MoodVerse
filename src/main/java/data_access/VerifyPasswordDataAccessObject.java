@@ -28,7 +28,7 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
         Files.write(envPath, lines);
     }
 
-    public String verifyPassword(String password) {
+    public String verifyPassword(String password) throws IOException {
         if (SYS_PASSWORD.equals(password)) {
             passwordStatus = "Correct Password";
 
