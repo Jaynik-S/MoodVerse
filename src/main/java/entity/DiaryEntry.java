@@ -24,8 +24,8 @@ public class DiaryEntry {
     public DiaryEntry() {
         this.entryId = idGenerator;
         idGenerator++;
-        this.title = "";
-        this.text = "";
+        this.title = "Untitled Document";
+        this.text = "Enter your text here...";
         this.createdAt = LocalDateTime.now();
         this.updatedAt = createdAt;
         this.saved = false;
