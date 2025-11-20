@@ -10,7 +10,7 @@ public class RecommendationMenuController {
         this.getRecommendationInteractor = getRecommendationInteractor;
     }
 
-    void execute(GetRecommendationsInputData inputData) {
+    public void execute(GetRecommendationsInputData inputData) {
         getRecommendationInteractor.execute(inputData);
     }
 

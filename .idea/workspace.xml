@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c141fa6d-ed9e-4a38-9e74-3108b702a5f8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/RecommendationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RecommendationGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" afterDir="false" />
     </list>
@@ -76,7 +74,7 @@
       <workItem from="1763403599760" duration="3488000" />
       <workItem from="1763423488010" duration="2594000" />
       <workItem from="1763482434173" duration="6662000" />
-      <workItem from="1763602384188" duration="3104000" />
+      <workItem from="1763602384188" duration="5154000" />
     </task>
     <servers />
   </component>

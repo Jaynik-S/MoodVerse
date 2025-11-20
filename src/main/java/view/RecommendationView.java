@@ -37,11 +37,13 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private static final int HEIGHT_SCORE = 40;
     private static final int WIDTH_SCORE = 80;
 
-    private static final int HEIGHT_SONG = 140;
+    private static final int HEIGHT_SONG = 120;
     private static final int WIDTH_SONG = 120;
     private static final int BORDER_SONG = 4;
     private static final int WIDTH_LEFT = 500;
     private static final int VERTICAL_SPACING = 6;
+    private static final int HEIGHT_MOVIE = 150;
+    private static final int WIDTH_MOVIE = 100;
 
     private final RecommendationMenuController recommendationController;
 
@@ -56,7 +58,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState, NewDocumentMenuViewModel newDocumentMenuViewModel) throws MalformedURLException {
         this.newDocumentMenuViewModel = newDocumentMenuViewModel;
 
-        this.setSize(1000, 700);
+        this.setSize(1000, 800);
 
         // Prevent the window from being resized smaller than a usable minimum
         this.setMinimumSize(new Dimension(WIDTH_RECOMMENDATION_MIN, HEIGHT_RECOMMENDATION_MIN));
@@ -92,7 +94,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         backButton.addActionListener(
                 evt -> {
                 if (evt.getSource().equals(backButton)) {
-                        recommendationViewModel.setState(newDocumentMenuViewModel.getState());
+                    recommendationController.execute();
+                    recommendationViewModel.setState(newDocumentMenuViewModel.getState());
                 }
             }
         );
@@ -161,16 +164,44 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         mainPanel.add(rightPanel);
     }
 
+    /**
+     * Load an image from a URL and scale it to the target size. Returns null on failure.
+     */
+    private ImageIcon loadAndScale(String imageUrl, int targetW, int targetH) {
+        if (imageUrl == null || imageUrl.isEmpty()) return null;
+        try {
+            final URL url = new URL(imageUrl);
+            final BufferedImage img = ImageIO.read(url);
+            if (img == null) return null;
+            final Image scaled = img.getScaledInstance(targetW, targetH, Image.SCALE_SMOOTH);
+            return new ImageIcon(scaled);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     private JPanel createMovieItem(String title, String movieName, String score, String year, String overview, String imageUrl) {
 
         final JPanel item = new JPanel(new BorderLayout(8, 8));
         item.setBorder(BorderFactory.createTitledBorder(title));
 
-        JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+        JLabel cover = new JLabel();
         cover.setHorizontalAlignment(JLabel.CENTER);
+        // try to load image from URL and scale to cover area (WIDTH_MOVIE x HEIGHT_MOVIE minus border)
+        ImageIcon movieIcon = loadAndScale(imageUrl, WIDTH_MOVIE - BORDER_SONG * 2, HEIGHT_MOVIE - BORDER_SONG * 2);
+        if (movieIcon != null) {
+            cover.setIcon(movieIcon);
+        } else {
+            cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+        }
+        cover.setPreferredSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
+        cover.setMinimumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
+        cover.setMaximumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         JPanel coverWrap = new JPanel(new BorderLayout());
         coverWrap.add(cover, BorderLayout.CENTER);
-        coverWrap.setPreferredSize(new Dimension(180, 180));
+        coverWrap.setMinimumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
+        coverWrap.setPreferredSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
+        coverWrap.setMaximumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         coverWrap.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
                 BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -194,14 +225,14 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         topRow.add(smallBoxes, BorderLayout.EAST);
         JTextField descField = new JTextField(overview);
         descField.setEditable(false);
-        descField.setPreferredSize(new Dimension(200, 100));
+        descField.setPreferredSize(new Dimension(200, 120));
 
         details.add(topRow, BorderLayout.NORTH);
         details.add(descField, BorderLayout.CENTER);
         item.add(coverWrap, BorderLayout.WEST);
         item.add(details, BorderLayout.CENTER);
 
-        int itemHeight = 140;
+        int itemHeight = HEIGHT_MOVIE;
 
         item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
         item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
@@ -220,11 +251,24 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         item.setBorder(BorderFactory.createTitledBorder(title));
 
 
-        final JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
+        final JLabel cover = new JLabel();
         cover.setHorizontalAlignment(JLabel.CENTER);
+        // try to load song image and scale to the cover area
+        ImageIcon songIcon = loadAndScale(imageUrl, WIDTH_SONG - BORDER_SONG * 2, HEIGHT_SONG - BORDER_SONG * 2);
+        if (songIcon != null) {
+            cover.setIcon(songIcon);
+        } else {
+            cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
+        }
+        // enforce fixed size for song covers
+        cover.setPreferredSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
+        cover.setMinimumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
+        cover.setMaximumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         final JPanel coverWrap = new JPanel(new BorderLayout());
         coverWrap.add(cover, BorderLayout.CENTER);
         coverWrap.setPreferredSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
+        coverWrap.setMinimumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
+        coverWrap.setMaximumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         coverWrap.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
                 BorderFactory.createEmptyBorder(BORDER_SONG, BORDER_SONG, BORDER_SONG, BORDER_SONG)));
@@ -284,7 +328,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         }
     }
     private void setFields(NoteState state) {
-
+        
     }
 
 }

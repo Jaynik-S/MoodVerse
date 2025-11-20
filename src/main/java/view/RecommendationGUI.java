@@ -6,8 +6,12 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,12 +24,23 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 public class RecommendationGUI {
+    // Helper: load an image from URL and scale to given size. Returns null on error.
+    private static ImageIcon loadAndScale(String imageUrl, int targetW, int targetH) {
+        try {
+            BufferedImage img = ImageIO.read(new URL(imageUrl));
+            if (img == null) return null;
+            Image scaled = img.getScaledInstance(targetW, targetH, Image.SCALE_SMOOTH);
+            return new ImageIcon(scaled);
+        } catch (IOException e) {
+            return null;
+        }
+    }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Recommendation View");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             // Default window size (w x h)
-            frame.setSize(1000, 700);
+            frame.setSize(1000, 800);
             // Prevent the window from being resized smaller than a usable minimum
             frame.setMinimumSize(new Dimension(800, 600));
             // Make the window non-resizable (fixed size)
@@ -50,13 +65,23 @@ public class RecommendationGUI {
                     item.setBorder(BorderFactory.createTitledBorder("Song #1"));
 
 
-                    // Cover placeholder (left)
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    // Cover placeholder (left) -> try loading real image and scale to 120x120
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
+                    cover.setPreferredSize(new Dimension(120, 120));
+                    cover.setMinimumSize(new Dimension(120, 120));
+                    cover.setMaximumSize(new Dimension(120, 120));
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setMaximumSize(new Dimension(120, 140));
-                    coverWrap.setPreferredSize(new Dimension(120, 140));
+                    coverWrap.setMinimumSize(new Dimension(120, 120));
+                    coverWrap.setPreferredSize(new Dimension(120, 120));
+                    coverWrap.setMaximumSize(new Dimension(120, 120));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -93,7 +118,7 @@ public class RecommendationGUI {
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
 
-                    int itemHeight = 140;
+                    int itemHeight = 120;
                     item.setMaximumSize(new Dimension(500, itemHeight));
                     item.setPreferredSize(new Dimension(500, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -104,11 +129,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Song #2"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    cover.setPreferredSize(new Dimension(120, 120));
+                    cover.setMinimumSize(new Dimension(120, 120));
+                    cover.setMaximumSize(new Dimension(120, 120));
+                    coverWrap.setMinimumSize(new Dimension(120, 120));
+                    coverWrap.setPreferredSize(new Dimension(120, 120));
+                    coverWrap.setMaximumSize(new Dimension(120, 120));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -144,7 +180,7 @@ public class RecommendationGUI {
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
 
-                    int itemHeight = 140;
+                    int itemHeight = 120;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -155,11 +191,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Song #3"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    cover.setPreferredSize(new Dimension(120, 120));
+                    cover.setMinimumSize(new Dimension(120, 120));
+                    cover.setMaximumSize(new Dimension(120, 120));
+                    coverWrap.setMinimumSize(new Dimension(120, 120));
+                    coverWrap.setPreferredSize(new Dimension(120, 120));
+                    coverWrap.setMaximumSize(new Dimension(120, 120));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -195,7 +242,7 @@ public class RecommendationGUI {
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
 
-                    int itemHeight = 140;
+                    int itemHeight = 120;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -206,11 +253,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Song #4"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    cover.setPreferredSize(new Dimension(120, 120));
+                    cover.setMinimumSize(new Dimension(120, 120));
+                    cover.setMaximumSize(new Dimension(120, 120));
+                    coverWrap.setMinimumSize(new Dimension(120, 120));
+                    coverWrap.setPreferredSize(new Dimension(120, 120));
+                    coverWrap.setMaximumSize(new Dimension(120, 120));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -246,7 +304,7 @@ public class RecommendationGUI {
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
 
-                    int itemHeight = 140;
+                    int itemHeight = 120;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -257,11 +315,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Song #5"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    cover.setPreferredSize(new Dimension(120, 120));
+                    cover.setMinimumSize(new Dimension(120, 120));
+                    cover.setMaximumSize(new Dimension(120, 120));
+                    coverWrap.setMinimumSize(new Dimension(120, 120));
+                    coverWrap.setPreferredSize(new Dimension(120, 120));
+                    coverWrap.setMaximumSize(new Dimension(120, 120));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -297,7 +366,7 @@ public class RecommendationGUI {
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
 
-                    int itemHeight = 140;
+                    int itemHeight = 120;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -315,11 +384,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Movie #1"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 100, 150);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
+                    cover.setPreferredSize(new Dimension(100, 150));
+                    cover.setMinimumSize(new Dimension(100, 150));
+                    cover.setMaximumSize(new Dimension(100, 150));
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    coverWrap.setPreferredSize(new Dimension(100, 150));
+                    coverWrap.setMinimumSize(new Dimension(100, 150));
+                    coverWrap.setMaximumSize(new Dimension(100, 150));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -348,7 +428,7 @@ public class RecommendationGUI {
                     details.add(descField, BorderLayout.CENTER);
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
-                    int itemHeight = 140;
+                    int itemHeight = 150;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -359,11 +439,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Movie #2"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 100, 150);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
+                    cover.setPreferredSize(new Dimension(100, 150));
+                    cover.setMinimumSize(new Dimension(100, 150));
+                    cover.setMaximumSize(new Dimension(100, 150));
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    coverWrap.setPreferredSize(new Dimension(100, 150));
+                    coverWrap.setMinimumSize(new Dimension(100, 150));
+                    coverWrap.setMaximumSize(new Dimension(100, 150));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -392,7 +483,7 @@ public class RecommendationGUI {
                     details.add(descField, BorderLayout.CENTER);
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
-                    int itemHeight = 140;
+                    int itemHeight = 150;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -403,11 +494,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Movie #3"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 100, 150);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
+                    cover.setPreferredSize(new Dimension(100, 150));
+                    cover.setMinimumSize(new Dimension(100, 150));
+                    cover.setMaximumSize(new Dimension(100, 150));
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    coverWrap.setPreferredSize(new Dimension(100, 150));
+                    coverWrap.setMinimumSize(new Dimension(100, 150));
+                    coverWrap.setMaximumSize(new Dimension(100, 150));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -436,7 +538,7 @@ public class RecommendationGUI {
                     details.add(descField, BorderLayout.CENTER);
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
-                    int itemHeight = 140;
+                    int itemHeight = 150;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -447,11 +549,22 @@ public class RecommendationGUI {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Movie #4"));
 
-                    JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
-                    cover.setHorizontalAlignment(JLabel.CENTER);
+                    JLabel cover = new JLabel();
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 100, 150);
+                    if (icon != null) {
+                        cover.setIcon(icon);
+                    } else {
+                        cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+                        cover.setHorizontalAlignment(JLabel.CENTER);
+                    }
+                    cover.setPreferredSize(new Dimension(100, 150));
+                    cover.setMinimumSize(new Dimension(100, 150));
+                    cover.setMaximumSize(new Dimension(100, 150));
                     JPanel coverWrap = new JPanel(new BorderLayout());
                     coverWrap.add(cover, BorderLayout.CENTER);
-                    coverWrap.setPreferredSize(new Dimension(180, 180));
+                    coverWrap.setPreferredSize(new Dimension(100, 150));
+                    coverWrap.setMinimumSize(new Dimension(100, 150));
+                    coverWrap.setMaximumSize(new Dimension(100, 150));
                     coverWrap.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.GRAY),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4)));
@@ -480,7 +593,7 @@ public class RecommendationGUI {
                     details.add(descField, BorderLayout.CENTER);
                     item.add(coverWrap, BorderLayout.WEST);
                     item.add(details, BorderLayout.CENTER);
-                    int itemHeight = 140;
+                    int itemHeight = 150;
                     item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
                     item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
                     item.setAlignmentX(Component.LEFT_ALIGNMENT);
