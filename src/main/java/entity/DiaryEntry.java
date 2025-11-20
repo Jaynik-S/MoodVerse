@@ -38,7 +38,25 @@ public class DiaryEntry {
     public String getTitle() { return title; }
     public String getText() { return text; }
     public List<String> getKeyword() { return keywords; }
-    public String getStoragePath() { return storagePath; }
+    public String getStoragePath() {
+        String safeTitle = title;
+        if (safeTitle == null || safeTitle.length() == 0) {
+            safeTitle = "untitled";
+        }
+        safeTitle = safeTitle.replaceAll("[\\\\/:*?\"<>|]", "_");
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(BASE_DIR);
+        builder.append("/");
+        builder.append(entryId);
+        builder.append(") ");
+        builder.append(safeTitle);
+        builder.append(".json");
+
+        storagePath = builder.toString();
+
+        return storagePath;
+    }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public List<SongRecommendation> getRecommendations() { return songRecommendations; }
