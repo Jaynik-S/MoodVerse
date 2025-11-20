@@ -8,7 +8,6 @@ import use_case.load_entry.LoadEntryOutputData;
 import use_case.save_entry.SaveEntryOutputBoundary;
 import use_case.save_entry.SaveEntryOutputData;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class NewDocumentPresenter implements
@@ -56,6 +55,8 @@ public class NewDocumentPresenter implements
 
         if (outputData.getDate() != null) {
             state.setDate(outputData.getDate().format(formatter));
+        } else {
+            state.setDate("");
         }
 
         state.setError(null);
