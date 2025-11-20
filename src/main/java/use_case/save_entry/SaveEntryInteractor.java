@@ -14,7 +14,10 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
     }
 
     @Override
-    public void execute(DiaryEntry entry) {
+    public void execute(SaveEntryInputData inputData) {
+
+        DiaryEntry entry = inputData.getEntry();
+        String entryPath = inputData.getEntryPath();
 
         if (entry == null) {
             presenter.prepareFailureView("Entry cannot be null.");
@@ -47,11 +50,15 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
             return;
         }
 
+        entry.setStoragePath(entryPath);
         entry.updatedTime();
 
         dataAccess.save(entry);
+        entry.setSaved(true);
 
-        presenter.prepareSuccessView(entry);
+        SaveEntryOutputData outputData = new SaveEntryOutputData(entry, entryPath, true);
+
+        presenter.prepareSuccessView(outputData);
     }
 }
 
