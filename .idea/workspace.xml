@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="get list of keywords using stanford NLP (max 10)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/DiaryEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/DiaryEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInteractor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +49,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "arnav",
+    "git-widget-placeholder": "saveEntry",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/arnavshah/Code/MoodVerse",
     "node.js.detected.package.eslint": "true",
