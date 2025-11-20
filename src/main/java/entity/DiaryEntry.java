@@ -24,21 +24,45 @@ public class DiaryEntry {
     public DiaryEntry() {
         this.entryId = idGenerator;
         idGenerator++;
-        this.title = "";
-        this.text = "";
+        this.title = "Untitled Document";
+        this.text = "Enter your text here...";
         this.createdAt = LocalDateTime.now();
         this.updatedAt = createdAt;
         this.saved = false;
-
     }
-    // MIGHT NEED TO OVERRIDE CONSTRUCTOR LATER (FOR LOAD METHOD)
 
+    public DiaryEntry(String title, LocalDateTime date, String textBody) {
+        this.entryId = idGenerator;
+        idGenerator++;
+        this.title = title;
+        this.createdAt = date;
+        this.updatedAt = LocalDateTime.now();
+        this.text = textBody;
+    }
 
     public int getEntryId() { return entryId; }
     public String getTitle() { return title; }
     public String getText() { return text; }
     public List<String> getKeyword() { return keywords; }
-    public String getStoragePath() { return storagePath; }
+    public String getStoragePath() {
+        String safeTitle = title;
+        if (safeTitle == null || safeTitle.length() == 0) {
+            safeTitle = "untitled";
+        }
+        safeTitle = safeTitle.replaceAll("[\\\\/:*?\"<>|]", "_");
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(BASE_DIR);
+        builder.append("/");
+        builder.append(entryId);
+        builder.append(") ");
+        builder.append(safeTitle);
+        builder.append(".json");
+
+        storagePath = builder.toString();
+
+        return storagePath;
+    }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public List<SongRecommendation> getRecommendations() { return songRecommendations; }
@@ -55,7 +79,7 @@ public class DiaryEntry {
     }
     public void updatedTime() { this.updatedAt = LocalDateTime.now(); }
 
-
-    // TODO: METHODS (SAVE TO JSON, LOAD JSON, ETC)
+    public boolean isSaved() { return saved; }
+    public void setSaved(boolean saved) { this.saved = saved; }
 
 }

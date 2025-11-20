@@ -160,4 +160,24 @@ public class SpotifyAPIAccessObject {
             throw e;
         }
     }
+
+//    public static void main(String[] args) {
+//        List<String> terms = List.of("adventure", "friendship", "heroism");
+//        SpotifyAPIAccessObject spotifyDAO = new SpotifyAPIAccessObject(terms);
+//        try {
+//            List<SongRecommendation> recommendations = spotifyDAO.fetchSongRecommendations();
+//            for (SongRecommendation rec : recommendations) {
+//                System.out.println(rec.getSongName());
+//                System.out.println(rec.getArtistName());
+//                System.out.println(rec.getReleaseYear());
+//                System.out.println(rec.getReleaseYear());
+//                System.out.println(rec.getImageUrl());
+//                System.out.println(rec.getExternalUrl());
+//                System.out.println();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 }

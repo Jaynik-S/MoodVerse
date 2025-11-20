@@ -23,6 +23,7 @@ import java.util.Map;
  */
 public final class NLPAnalysisDataAccessObject {
     private final StanfordCoreNLP pipeline;
+    private static int limit = 20;
 
     public NLPAnalysisDataAccessObject(StanfordCoreNLP pipeline) {
         this.pipeline = pipeline;
@@ -78,7 +79,7 @@ public final class NLPAnalysisDataAccessObject {
                 .sorted(Comparator.<Map.Entry<String, Integer>>comparingInt(Map.Entry::getValue)
                         .reversed()
                         .thenComparing(Map.Entry::getKey))
-                .limit(10)
+                .limit(limit)
                 .map(entry -> new Keyword(entry.getKey(),
                         total == 0 ? 0.0 : entry.getValue() / (double) total))
                 .toList();
