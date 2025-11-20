@@ -1,30 +1,44 @@
 package interface_adapter.new_document;
 
-import interface_adapter.ViewModel;
+import interface_adapter.ViewManagerModel;
+import use_case.create_entry.CreateEntryOutputBoundary;
+import use_case.create_entry.CreateEntryOutputData;
+import use_case.load_entry.LoadEntryOutputBoundary;
+import use_case.load_entry.LoadEntryOutputData;
 import use_case.save_entry.SaveEntryOutputBoundary;
 import use_case.save_entry.SaveEntryOutputData;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-/**
- * The Presenter for the New Document Use Cases.
- */
-public class NewDocumentPresenter implements SaveEntryOutputBoundary{
+public class NewDocumentPresenter implements
+        SaveEntryOutputBoundary,
+        LoadEntryOutputBoundary,
+        CreateEntryOutputBoundary{
 
     private final NewDocumentViewModel newDocumentViewModel;
+    private final ViewManagerModel viewManagerModel;
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel){
         this.newDocumentViewModel = newDocumentViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
-    /**
-     * Prepares the success view for the Save Document Use Case.
-     * @param outputData the output from a save
-     */
-    public void prepareSaveSuccessView(SaveEntryOutputData outputData) {
+    @Override
+    public void prepareSuccessView(SaveEntryOutputData outputData) {
         final NewDocumentState state = newDocumentViewModel.getState();
-        state.setError(null);
+        state.setSuccessMessage("Document saved successfully");
+
+        if (outputData.getDate() != null){
+            state.
+        }
         newDocumentViewModel.firePropertyChanged();
     }
+
+    @Override
+    public void prepareSuccessView
 
     /**
      * Prepares the failure view for the New Document related Use Cases.

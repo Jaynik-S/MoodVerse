@@ -7,12 +7,12 @@ public class NewDocumentState {
     private String title = "";
     private String date = "";
     private String textBody = "";
-    private String error;
+    private String error = null;
+    private String successMessage = null;
 
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -20,7 +20,6 @@ public class NewDocumentState {
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
@@ -28,7 +27,6 @@ public class NewDocumentState {
     public String getTextBody() {
         return textBody;
     }
-
     public void setTextBody(String textBody) {
         this.textBody = textBody;
     }
@@ -36,8 +34,10 @@ public class NewDocumentState {
     public String getError() {
         return error;
     }
-
     public void setError(String error) {
         this.error = error;
     }
+
+    public String getSuccessMessage() {return successMessage; }
+    public void setSuccessMessage(String successMessage) {this.successMessage = successMessage; }
 }
