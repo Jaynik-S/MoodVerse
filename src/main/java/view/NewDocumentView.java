@@ -68,6 +68,8 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         dateInputField.setFont(new Font("SansSerif", Font.PLAIN, 14));
         dateInputField.setPreferredSize(new Dimension(150, 30));
 
+        dateInputField.setEditable(false); //Can't type
+        dateInputField.setFocusable(false); //Can't select
         titleDatePanel.add(titleInputField, BorderLayout.CENTER);
         titleDatePanel.add(dateInputField, BorderLayout.EAST);
 
