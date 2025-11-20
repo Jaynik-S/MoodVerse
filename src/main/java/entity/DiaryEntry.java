@@ -29,10 +29,16 @@ public class DiaryEntry {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = createdAt;
         this.saved = false;
-
     }
-    // MIGHT NEED TO OVERRIDE CONSTRUCTOR LATER (FOR LOAD METHOD)
 
+    public DiaryEntry(String title, LocalDateTime date, String textBody) {
+        this.entryId = idGenerator;
+        idGenerator++;
+        this.title = title;
+        this.createdAt = date;
+        this.updatedAt = LocalDateTime.now();
+        this.text = textBody;
+    }
 
     public int getEntryId() { return entryId; }
     public String getTitle() { return title; }
@@ -75,8 +81,5 @@ public class DiaryEntry {
 
     public boolean isSaved() { return saved; }
     public void setSaved(boolean saved) { this.saved = saved; }
-
-
-    // TODO: METHODS (SAVE TO JSON, LOAD JSON, ETC)
 
 }
