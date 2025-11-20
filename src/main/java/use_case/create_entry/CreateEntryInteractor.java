@@ -1,6 +1,7 @@
 package use_case.create_entry;
 
 import entity.DiaryEntry;
+import use_case.load_entry.LoadEntryOutputData;
 
 
 public class CreateEntryInteractor implements CreateEntryInputBoundary {
@@ -13,8 +14,14 @@ public class CreateEntryInteractor implements CreateEntryInputBoundary {
     @Override
     public void execute() {
         DiaryEntry entry = new DiaryEntry();
+        CreateEntryOutputData outputData = new CreateEntryOutputData(
+                entry.getTitle(),
+                entry.getText(),
+                entry.getCreatedAt(),
+                true
+        );
 
-        presenter.prepareSuccessView(entry);
+        presenter.prepareSuccessView(outputData);
     }
 }
 

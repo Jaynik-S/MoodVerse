@@ -23,7 +23,7 @@ public class DeleteEntryInteractor implements DeleteEntryInputBoundary {
         boolean exists;
         try {
             exists = dataAccess.existsByPath(entryPath);
-        } catch (IOException e) {
+        } catch (Exception e) {
             String message = "Failed to check entry existence: " + e.getMessage();
             presenter.prepareFailureView(message);
             return;
@@ -35,12 +35,12 @@ public class DeleteEntryInteractor implements DeleteEntryInputBoundary {
         }
         try {
             dataAccess.deleteByPath(entryPath);
-        } catch (IOException e) {
+        } catch (Exception e) {
             String message = "Failed to delete entry: " + e.getMessage();
             presenter.prepareFailureView(message);
             return;
         }
-        DeleteEntryOutputData outputData = new DeleteEntryOutputData(entryPath, true);
+        DeleteEntryOutputData outputData = new DeleteEntryOutputData(true);
 
         presenter.prepareSuccessView(outputData);
     }

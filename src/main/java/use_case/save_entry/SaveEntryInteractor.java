@@ -65,7 +65,11 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
             return;
         }
 
-        SaveEntryOutputData outputData = new SaveEntryOutputData(entry, true);
+        SaveEntryOutputData outputData = new SaveEntryOutputData(
+                entry.getTitle(),
+                entry.getText(),
+                entry.getCreatedAt(),
+                true);
 
         presenter.prepareSuccessView(outputData);
     }
