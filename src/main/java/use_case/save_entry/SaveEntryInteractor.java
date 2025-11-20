@@ -1,14 +1,14 @@
 package use_case.save_entry;
 
 import entity.DiaryEntry;
-import use_case.diary.DiaryEntryDataAccessInterface;
+import use_case.save_entry.SaveEntryUserDataAccessInterface;
 
 public class SaveEntryInteractor implements SaveEntryInputBoundary {
 
     private final SaveEntryOutputBoundary presenter;
-    private final DiaryEntryDataAccessInterface dataAccess;
+    private final SaveEntryUserDataAccessInterface dataAccess;
 
-    public SaveEntryInteractor(SaveEntryOutputBoundary presenter, DiaryEntryDataAccessInterface dataAccess) {
+    public SaveEntryInteractor(SaveEntryOutputBoundary presenter, SaveEntryUserDataAccessInterface dataAccess) {
         this.presenter = presenter;
         this.dataAccess = dataAccess;
     }
