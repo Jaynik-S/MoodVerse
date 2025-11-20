@@ -54,6 +54,7 @@ public class DiaryEntry {
         this.MovieRecommendations = movieRecommendations;
     }
     public void updatedTime() { this.updatedAt = LocalDateTime.now(); }
+    public void setStoragePath(String storagePath) { this.storagePath = storagePath; }
 
 
     // TODO: METHODS (SAVE TO JSON, LOAD JSON, ETC)
