@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="get list of keywords using stanford NLP (max 10)">
+    <list default="true" id="741a40c7-cb32-4fcc-b05a-197f8d2889a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/DiaryEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/DiaryEntry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInputData.java" afterDir="false" />
@@ -25,10 +25,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Jaynik-S&quot;
+  }
 }</component>
-  <component name="ProjectId" id="35LAlJWeZ9DWRGGErMZ5jTTBpMZ" />
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Jaynik-S/MoodVerse.git&quot;,
+    &quot;accountId&quot;: &quot;ccca2fde-80c6-4bca-93c3-de150a9a11ba&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="35djTNp7t9gmbudJnqFVRRMDuWy" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -62,86 +74,95 @@
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords">
-    <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="data_access" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.EntityTest">
+    <configuration name="EntityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.*" />
+          <option name="PATTERN" value="entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="entity" />
+      <option name="MAIN_CLASS_NAME" value="entity.EntityTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SpotifyAPIAccessObjectTest.testFetchSongRecommendations_RealAPI_WhenCredentialsPresent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.*" />
+          <option name="PATTERN" value="data_access.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="app" />
-      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
-      <option name="METHOD_NAME" value="testAnalyze_ExtractsKeywords" />
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.SpotifyAPIAccessObjectTest" />
+      <option name="METHOD_NAME" value="testFetchSongRecommendations_RealAPI_WhenCredentialsPresent" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TMDbAPIAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.*" />
+          <option name="PATTERN" value="data_access.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="app" />
-      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
-      <option name="METHOD_NAME" value="testAnalyze_LimitsToTopTenKeywords" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.TMDbAPIAccessObjectTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="VerifyPasswordDataAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.*" />
+          <option name="PATTERN" value="data_access.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="app" />
-      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
-      <option name="METHOD_NAME" value="testAnalyze_PositiveText_ReturnsPositiveSentiment" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.VerifyPasswordDataAccessObjectTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="MoodVerse" />
+    <configuration name="data_access in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="data_access.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="MoodVerse" />
-      <option name="filePath" />
-      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords" />
-        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords" />
-        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment" />
-        <item itemvalue="Application.MainNoteApplication" />
+        <item itemvalue="JUnit.EntityTest" />
+        <item itemvalue="JUnit.data_access in note-application" />
+        <item itemvalue="JUnit.SpotifyAPIAccessObjectTest.testFetchSongRecommendations_RealAPI_WhenCredentialsPresent" />
+        <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
+        <item itemvalue="JUnit.TMDbAPIAccessObjectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -155,30 +176,24 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="" />
-      <created>1762879128273</created>
+      <changelist id="741a40c7-cb32-4fcc-b05a-197f8d2889a9" name="Changes" comment="" />
+      <created>1763446852357</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1762879128273</updated>
-      <workItem from="1762879129206" duration="5193000" />
-      <workItem from="1763406065025" duration="6612000" />
+      <updated>1763446852357</updated>
+      <workItem from="1763446854450" duration="303000" />
+      <workItem from="1763482218823" duration="37000" />
+      <workItem from="1763482527621" duration="745000" />
+      <workItem from="1763483453848" duration="1172000" />
+      <workItem from="1763484768695" duration="4483000" />
+      <workItem from="1763526625008" duration="29000" />
+      <workItem from="1763526761722" duration="704000" />
+      <workItem from="1763527480358" duration="1289000" />
+      <workItem from="1763597535112" duration="3450000" />
     </task>
-    <task id="LOCAL-00001" summary="get list of keywords using stanford NLP (max 10)">
-      <option name="closed" value="true" />
-      <created>1763414260916</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1763414260916</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="get list of keywords using stanford NLP (max 10)" />
-    <option name="LAST_COMMIT_MESSAGE" value="get list of keywords using stanford NLP (max 10)" />
   </component>
 </project>
