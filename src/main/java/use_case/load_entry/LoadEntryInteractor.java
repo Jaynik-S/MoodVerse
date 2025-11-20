@@ -1,6 +1,7 @@
 package use_case.load_entry;
 
 import entity.DiaryEntry;
+import java.io.IOException;
 
 public class LoadEntryInteractor implements LoadEntryInputBoundary{
     private final LoadEntryOutputBoundary presenter;
@@ -12,7 +13,7 @@ public class LoadEntryInteractor implements LoadEntryInputBoundary{
     }
 
     @Override
-    public void execute(LoadEntryInputData inputData) {
+    public void execute(LoadEntryInputData inputData) throws IOException {
         String entryPath = inputData.getEntryPath();
 
         if (entryPath == null || entryPath.length() == 0) {
