@@ -21,9 +21,51 @@ public class NewDocumentPresenter implements
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel){
+    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel, ViewManagerModel viewManagerModel){
         this.newDocumentViewModel = newDocumentViewModel;
         this.viewManagerModel = viewManagerModel;
+    }
+
+    @Override
+    public void prepareSuccessView(CreateEntryOutputData outputData) {
+        final NewDocumentState state = newDocumentViewModel.getState();
+        state.setTitle(outputData.getTitle());
+        state.setTextBody(outputData.getText());
+
+        if (outputData.getDate() != null) {
+            state.setDate(outputData.getDate().format(formatter));
+        } else {
+            state.setDate("");
+        }
+
+        state.setError(null);
+        state.setSuccessMessage(null);
+
+        newDocumentViewModel.setState(state);
+        newDocumentViewModel.firePropertyChanged();
+
+        viewManagerModel.setState(newDocumentViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareSuccessView(LoadEntryOutputData outputData) {
+        final NewDocumentState state = newDocumentViewModel.getState();
+        state.setTitle(outputData.getTitle());
+        state.setTextBody(outputData.getText());
+
+        if (outputData.getDate() != null) {
+            state.setDate(outputData.getDate().format(formatter));
+        }
+
+        state.setError(null);
+        state.setSuccessMessage(null);
+
+        newDocumentViewModel.setState(state);
+        newDocumentViewModel.firePropertyChanged();
+
+        viewManagerModel.setState(newDocumentViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -42,14 +84,6 @@ public class NewDocumentPresenter implements
     }
 
     @Override
-    public void prepareSuccessView(LoadEntryOutputBoundary outputData){
-
-    }
-
-    /**
-     * Prepares the failure view for the New Document related Use Cases.
-     * @param errorMessage the explanation of the failure
-     */
     public void prepareFailView(String errorMessage) {
         final NewDocumentState state = newDocumentViewModel.getState();
         state.setError(errorMessage);
