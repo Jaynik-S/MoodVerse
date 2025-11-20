@@ -72,7 +72,6 @@ public class DiaryEntry {
         this.MovieRecommendations = movieRecommendations;
     }
     public void updatedTime() { this.updatedAt = LocalDateTime.now(); }
-    public void setStoragePath(String storagePath) { this.storagePath = storagePath; }
 
     public boolean isSaved() { return saved; }
     public void setSaved(boolean saved) { this.saved = saved; }
