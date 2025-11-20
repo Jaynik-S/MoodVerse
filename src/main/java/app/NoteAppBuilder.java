@@ -57,7 +57,7 @@ public class NoteAppBuilder {
      * Creates the NoteView and underlying NoteViewModel.
      * @return this builder
      */
-    public NoteAppBuilder addNewDocumentView() {
+    public NoteAppBuilder addNoteView() {
         noteViewModel = new NoteViewModel();
         noteView = new NoteView(noteViewModel);
         return this;
