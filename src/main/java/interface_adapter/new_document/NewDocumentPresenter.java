@@ -32,13 +32,19 @@ public class NewDocumentPresenter implements
         state.setSuccessMessage("Document saved successfully");
 
         if (outputData.getDate() != null){
-            state.
+            state.setDate(outputData.getDate().format(formatter));
         }
+
+        state.setError(null);
+
+        newDocumentViewModel.setState(state);
         newDocumentViewModel.firePropertyChanged();
     }
 
     @Override
-    public void prepareSuccessView
+    public void prepareSuccessView(LoadEntryOutputBoundary outputData){
+
+    }
 
     /**
      * Prepares the failure view for the New Document related Use Cases.
