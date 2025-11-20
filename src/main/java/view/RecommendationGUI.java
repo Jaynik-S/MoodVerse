@@ -6,10 +6,12 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -46,6 +48,7 @@ public class RecommendationGUI {
                 {
                     JPanel item = new JPanel(new BorderLayout(8, 8));
                     item.setBorder(BorderFactory.createTitledBorder("Song #1"));
+
 
                     // Cover placeholder (left)
                     JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");

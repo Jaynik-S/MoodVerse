@@ -30,12 +30,15 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
         recommendationMenuState.setSongRecommendation(outputData.getSongRecommendations());
         recommendationMenuState.setMovieRecommendation(outputData.getMovieRecommendations());
         recommendationMenuViewModel.firePropertyChanged();
+        recommendationMenuViewModel.setSongRecommendation(outputData.getSongRecommendations());
+        recommendationMenuViewModel.setMovieRecommendation(outputData.getMovieRecommendations());
     }
 
     @Override
     public void prepareFailView(String error) {
         final RecommendationMenuState recommendationMenuState = recommendationMenuViewModel.getState();
         recommendationMenuState.setError(error);
+        recommendationMenuViewModel.setError(error);
         recommendationMenuViewModel.firePropertyChanged();
     }
 

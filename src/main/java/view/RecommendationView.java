@@ -7,11 +7,15 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import entity.MovieRecommendation;
+import entity.SongRecommendation;
 import interface_adapter.home_menu.HomeMenuViewModel;
 import interface_adapter.recommendation_menu.RecommendationMenuState;
 import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
@@ -45,12 +49,14 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
     private final RecommendationMenuState recommendationState;
 
-    private final HomeMenuViewModel homeMenuViewModel;
+    private final NewDocumentMenuViewModel newDocumentMenuViewModel;
 
     private final JButton backButton = new JButton("Back");
 
-    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState, HomeMenuViewModel homeMenuViewModel) {
-        this.homeMenuViewModel = homeMenuViewModel;
+    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState, NewDocumentMenuViewModel newDocumentMenuViewModel) throws MalformedURLException {
+        this.newDocumentMenuViewModel = newDocumentMenuViewModel;
+
+        this.setSize(1000, 700);
 
         // Prevent the window from being resized smaller than a usable minimum
         this.setMinimumSize(new Dimension(WIDTH_RECOMMENDATION_MIN, HEIGHT_RECOMMENDATION_MIN));
@@ -63,6 +69,21 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         this.recommendationViewModel.addPropertyChangeListener(this);
 
+        final List<SongRecommendation> songRecommendations = recommendationViewModel.getSongRecommendations();
+
+        final SongRecommendation songOne = songRecommendations.get(0);
+        final SongRecommendation songTwo = songRecommendations.get(1);
+        final SongRecommendation songThree = songRecommendations.get(2);
+        final SongRecommendation songFour = songRecommendations.get(3);
+        final SongRecommendation songFive = songRecommendations.get(4);
+
+        final List<MovieRecommendation> movieRecommendations =  recommendationViewModel.getMovieRecommendations();
+
+        final MovieRecommendation movieOne = movieRecommendations.get(0);
+        final MovieRecommendation movieTwo = movieRecommendations.get(1);
+        final MovieRecommendation movieThree = movieRecommendations.get(2);
+        final MovieRecommendation movieFour = movieRecommendations.get(3);
+
         // Top panel with a left-aligned Back button
         final JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.add(backButton);
@@ -71,7 +92,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         backButton.addActionListener(
                 evt -> {
                 if (evt.getSource().equals(backButton)) {
-                        recommendationViewModel.setState(homeMenuViewModel.getState());
+                        recommendationViewModel.setState(newDocumentMenuViewModel.getState());
                 }
             }
         );
@@ -86,28 +107,28 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         leftList.setLayout(new BoxLayout(leftList, BoxLayout.Y_AXIS));
 
         // First song panel
-        final JPanel itemOne = createSongItem("Song #1", recommendationState.getSongRecommendationOne().getSongName(), recommendationState.getSongRecommendationOne().getPopularityScore(), recommendationState.getSongRecommendationOne().getArtistName(), recommendationState.getSongRecommendationOne().getReleaseYear(), recommendationState.getSongRecommendationOne().getExternalUrl(), recommendationState.getSongRecommendationOne().getImageUrl());
-        leftList.add(itemOne);
+        final JPanel leftOne = createSongItem("Song #1", songOne.getSongName(), songOne.getPopularityScore(), songOne.getArtistName(), songOne.getReleaseYear(), songOne.getExternalUrl(), songOne.getImageUrl());
+        leftList.add(leftOne);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Second song panel
-        final JPanel itemTwo = createSongItem("Song #2", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
-        leftList.add(itemTwo);
+        final JPanel leftTwo = createSongItem("Song #2", songTwo.getSongName(), songTwo.getPopularityScore(), songTwo.getArtistName(), songTwo.getReleaseYear(), songTwo.getExternalUrl(), songTwo.getImageUrl());
+        leftList.add(leftTwo);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Third song panel
-        final JPanel itemThree = createSongItem("Song #3", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
-        leftList.add(itemThree);
+        final JPanel leftThree = createSongItem("Song #3", songThree.getSongName(), songThree.getPopularityScore(), songThree.getArtistName(), songThree.getReleaseYear(), songThree.getExternalUrl(), songThree.getImageUrl());
+        leftList.add(leftThree);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Forth song panel
-        final JPanel itemFour = createSongItem("Song #4", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
-        leftList.add(itemFour);
+        final JPanel leftFour = createSongItem("Song #4", songFour.getSongName(), songFour.getPopularityScore(), songFour.getArtistName(), songFour.getReleaseYear(), songFour.getExternalUrl(), songFour.getImageUrl());
+        leftList.add(leftFour);
         leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
 
         // Fifth song panel
-        final JPanel itemFive = createSongItem("Song #5", "Song Name", "score", "Artist", "Year", "https://example.com/track...", "");
-        leftList.add(itemFive);
+        final JPanel leftFive = createSongItem("Song #5", songFive.getSongName(), songFive.getPopularityScore(), songFive.getArtistName(), songFive.getReleaseYear(), songFive.getExternalUrl(), songFive.getImageUrl());
+        leftList.add(leftFive);
 
         // Right panel: Movies
         final JPanel rightPanel = new JPanel(new BorderLayout());
@@ -115,62 +136,89 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         final JPanel rightList = new JPanel();
         rightList.setLayout(new BoxLayout(rightList, BoxLayout.Y_AXIS));
 
-        
+        // First movie panel
+        final JPanel rightOne = createMovieItem("Movie #1", movieOne.getMovieTitle(), movieOne.getMovieRating(), movieOne.getReleaseYear(), movieOne.getOverview(), movieOne.getImageUrl());
+        rightList.add(rightOne);
+        rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+
+        // Second movie panel
+        final JPanel rightTwo = createMovieItem("Movie #2", movieTwo.getMovieTitle(), movieTwo.getMovieRating(), movieTwo.getReleaseYear(), movieTwo.getOverview(), movieTwo.getImageUrl());
+        rightList.add(rightTwo);
+        rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+
+        // Third movie panel
+        final JPanel rightThree = createMovieItem("Movie #3", movieThree.getMovieTitle(), movieThree.getMovieRating(), movieThree.getReleaseYear(), movieThree.getOverview(), movieThree.getImageUrl());
+        rightList.add(rightThree);
+        rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+
+        // Fourth movie panel
+        final JPanel rightFour = createMovieItem("Movie #4", movieFour.getMovieTitle(), movieFour.getMovieRating(), movieFour.getReleaseYear(), movieFour.getOverview(), movieFour.getImageUrl());
+        rightList.add(rightFour);
+
 
         // add left and right panel to main area
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
     }
 
-    private JPanel createMovieItem() {
-        final JPanel item = new JPanel(new BorderLayout(8, 8));
-        item.setBorder(BorderFactory.createTitledBorder("Movie #1"));
+    private JPanel createMovieItem(String title, String movieName, String score, String year, String overview, String imageUrl) {
 
-        final JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
+        final JPanel item = new JPanel(new BorderLayout(8, 8));
+        item.setBorder(BorderFactory.createTitledBorder(title));
+
+        JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(847x1271)</div></html>");
         cover.setHorizontalAlignment(JLabel.CENTER);
-        final JPanel coverWrap = new JPanel(new BorderLayout());
+        JPanel coverWrap = new JPanel(new BorderLayout());
         coverWrap.add(cover, BorderLayout.CENTER);
         coverWrap.setPreferredSize(new Dimension(180, 180));
         coverWrap.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(Color.GRAY),
-                    BorderFactory.createEmptyBorder(4, 4, 4, 4)));
+                BorderFactory.createLineBorder(Color.GRAY),
+                BorderFactory.createEmptyBorder(4, 4, 4, 4)));
 
-            JPanel details = new JPanel(new BorderLayout(6, 6));
-            JPanel topRow = new JPanel(new BorderLayout(6, 6));
-            JTextField titleField = new JTextField("Title");
-            titleField.setEditable(false);
-            JPanel smallBoxes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
-            JTextField yearField = new JTextField("year");
-            yearField.setPreferredSize(new Dimension(80, 40));
-            yearField.setHorizontalAlignment(JTextField.CENTER);
-            yearField.setEditable(false);
-            JTextField ratingField = new JTextField("rating");
-            ratingField.setPreferredSize(new Dimension(80, 40));
-            ratingField.setHorizontalAlignment(JTextField.CENTER);
-            ratingField.setEditable(false);
-            smallBoxes.add(yearField);
-            smallBoxes.add(ratingField);
-            topRow.add(titleField, BorderLayout.CENTER);
-            topRow.add(smallBoxes, BorderLayout.EAST);
-            JTextField descField = new JTextField("Description of the movie");
-            descField.setEditable(false);
-            descField.setPreferredSize(new Dimension(200, 100));
-            details.add(topRow, BorderLayout.NORTH);
-            details.add(descField, BorderLayout.CENTER);
-            item.add(coverWrap, BorderLayout.WEST);
-            item.add(details, BorderLayout.CENTER);
-            int itemHeight = 140;
-            item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
-            item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
-            item.setAlignmentX(Component.LEFT_ALIGNMENT);
+        final JPanel details = new JPanel(new BorderLayout(6, 6));
+        final JPanel topRow = new JPanel(new BorderLayout(6, 6));
+        JTextField titleField = new JTextField(movieName);
+        titleField.setEditable(false);
+        JPanel smallBoxes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
+        JTextField yearField = new JTextField(year);
+        yearField.setPreferredSize(new Dimension(80, 40));
+        yearField.setHorizontalAlignment(JTextField.CENTER);
+        yearField.setEditable(false);
+        JTextField ratingField = new JTextField(score);
+        ratingField.setPreferredSize(new Dimension(80, 40));
+        ratingField.setHorizontalAlignment(JTextField.CENTER);
+        ratingField.setEditable(false);
+        smallBoxes.add(yearField);
+        smallBoxes.add(ratingField);
+        topRow.add(titleField, BorderLayout.CENTER);
+        topRow.add(smallBoxes, BorderLayout.EAST);
+        JTextField descField = new JTextField(overview);
+        descField.setEditable(false);
+        descField.setPreferredSize(new Dimension(200, 100));
+
+        details.add(topRow, BorderLayout.NORTH);
+        details.add(descField, BorderLayout.CENTER);
+        item.add(coverWrap, BorderLayout.WEST);
+        item.add(details, BorderLayout.CENTER);
+
+        int itemHeight = 140;
+
+        item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
+        item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
+        item.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+
+        return item;
     }
 
-    /**
-     * Build a song item panel used in the recommendations list.
-     */
-    private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) {
+
+        /**
+         * Build a song item panel used in the recommendations list.
+         */
+    private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) throws MalformedURLException {
         final JPanel item = new JPanel(new BorderLayout(8, 8));
         item.setBorder(BorderFactory.createTitledBorder(title));
+
 
         final JLabel cover = new JLabel("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
         cover.setHorizontalAlignment(JLabel.CENTER);
