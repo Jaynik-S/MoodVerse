@@ -1,7 +1,6 @@
 package use_case.save_entry;
 
 import entity.DiaryEntry;
-import use_case.save_entry.SaveEntryUserDataAccessInterface;
 
 public class SaveEntryInteractor implements SaveEntryInputBoundary {
 
@@ -17,7 +16,6 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
     public void execute(SaveEntryInputData inputData) {
 
         DiaryEntry entry = inputData.getEntry();
-        String entryPath = inputData.getEntryPath();
 
         if (entry == null) {
             presenter.prepareFailureView("Entry cannot be null.");
@@ -50,13 +48,19 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
             return;
         }
 
-        entry.setStoragePath(entryPath);
+        String storagePath = entry.getStoragePath();
+
+        if (storagePath == null || storagePath.length() == 0) {
+            presenter.prepareFailureView("Could not determine storage path for entry.");
+            return;
+        }
+
         entry.updatedTime();
 
         dataAccess.save(entry);
         entry.setSaved(true);
 
-        SaveEntryOutputData outputData = new SaveEntryOutputData(entry, entryPath, true);
+        SaveEntryOutputData outputData = new SaveEntryOutputData(entry, true);
 
         presenter.prepareSuccessView(outputData);
     }
