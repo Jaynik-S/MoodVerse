@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface LoadEntryUserDataAccessInterface {
     boolean existsByPath(String entryPath);
-
     DiaryEntry getByPath(String entryPath) throws IOException;
-    List<DiaryEntry> getAll() throws IOException;
 }

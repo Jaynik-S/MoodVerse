@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface VerifyPasswordUserDataAccessInterface {
     String verifyPassword(String password) throws IOException;
-    List<List<String>> getAll() throws IOException;
+    List<Object> getAll() throws IOException;
 }

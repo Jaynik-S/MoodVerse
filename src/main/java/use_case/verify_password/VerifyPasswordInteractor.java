@@ -17,7 +17,7 @@ public class VerifyPasswordInteractor implements VerifyPasswordInputBoundary {
         String password = inputData.getPassword();
         try {
             String passwordStatus = userDataAccess.verifyPassword(password);
-            List<List<String>> allEntries = userDataAccess.getAll();
+            List<Object> allEntries = userDataAccess.getAll();
             VerifyPasswordOutputData outputData = new VerifyPasswordOutputData(passwordStatus, allEntries);
             userPresenter.prepareSuccessView(outputData);
         } catch (Exception e) {

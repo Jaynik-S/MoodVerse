@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="missed this">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/GoBackPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/GoBackPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/VerifyPasswordDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/VerifyPasswordDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/DiaryEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/DiaryEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/entity/EntityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/entity/EntityTest.java" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +35,17 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
+<<<<<<< Updated upstream
     &quot;assignee&quot;: &quot;majinbagel&quot;
+=======
+    &quot;assignee&quot;: &quot;Jaynik-S&quot;
+>>>>>>> Stashed changes
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Jaynik-S/MoodVerse.git&quot;,
+<<<<<<< Updated upstream
     &quot;accountId&quot;: &quot;509aca2b-5821-41f0-9d97-1a118c506a9d&quot;
   }
 }</component>
@@ -45,6 +56,15 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="35LAlJWeZ9DWRGGErMZ5jTTBpMZ" />
+=======
+    &quot;accountId&quot;: &quot;ccca2fde-80c6-4bca-93c3-de150a9a11ba&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="35kpunnOikM7xU10pV5YJmy2kdx" />
+>>>>>>> Stashed changes
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -52,6 +72,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.MainNoteApplication.executor": "Run",
@@ -178,17 +199,42 @@
         <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment" />
       </list>
     </recent_temporary>
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="use_case.create_entry" />
+    </key>
+>>>>>>> Stashed changes
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+<<<<<<< Updated upstream
         <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
         <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+=======
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+>>>>>>> Stashed changes
       </set>
     </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< Updated upstream
       <changelist id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="" />
       <created>1762879128273</created>
       <option name="number" value="Default" />
@@ -231,11 +277,22 @@
       <updated>1763443623312</updated>
     </task>
     <option name="localTasksCounter" value="5" />
+=======
+      <changelist id="bf43c561-57ec-46a4-a4bd-a083af5cc526" name="Changes" comment="" />
+      <created>1763664149201</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763664149201</updated>
+      <workItem from="1763664157666" duration="5451000" />
+      <workItem from="1763735597123" duration="834000" />
+    </task>
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< Updated upstream
   <component name="VcsManagerConfiguration">
     <MESSAGE value="get list of keywords using stanford NLP (max 10)" />
     <MESSAGE value="most of new document page" />
@@ -243,4 +300,6 @@
     <MESSAGE value="missed this" />
     <option name="LAST_COMMIT_MESSAGE" value="missed this" />
   </component>
+=======
+>>>>>>> Stashed changes
 </project>
