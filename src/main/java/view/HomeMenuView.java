@@ -23,7 +23,7 @@ public class HomeMenuView extends JPanel {
         this.controller = controller;
         this.viewModel = viewModel;
         this.setLayout(new BorderLayout());
-        this.setSize(new Dimension(1000, 700));
+        this.setSize(new Dimension(1000, 800));
 
         // Title and New Entry button
 
