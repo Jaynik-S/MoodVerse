@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import entity.MovieRecommendation;
+import entity.SongRecommendation;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -126,5 +127,22 @@ public class TMDbAPIAccessObject {
             throw e;
         }
     }
+
+//    public static void main(String[] args) {
+//        List<String> terms = List.of("adventure", "friendship", "heroism");
+//        TMDbAPIAccessObject DAO = new TMDbAPIAccessObject(terms);
+//        try {
+//            List<MovieRecommendation> recommendations = DAO.fetchMovieRecommendations();
+//            for (MovieRecommendation rec : recommendations) {
+//                System.out.println(rec.getMovieTitle());
+//                System.out.println(rec.getReleaseYear());
+//                System.out.println(rec.getMovieRating());
+//                System.out.println(rec.getImageUrl());
+//                System.out.println();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
 
