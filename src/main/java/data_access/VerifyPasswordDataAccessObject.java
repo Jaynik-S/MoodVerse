@@ -7,7 +7,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public abstract class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAccessInterface {
+public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAccessInterface {
     public String passwordStatus;
     private static Dotenv dotenv = Dotenv.load();
     private static String SYS_PASSWORD = dotenv.get("PASSWORD");

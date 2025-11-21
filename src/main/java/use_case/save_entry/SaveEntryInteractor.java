@@ -15,7 +15,7 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
     @Override
     public void execute(SaveEntryInputData inputData) {
 
-        DiaryEntry entry = new DiaryEntry(inputData.getTitle(), inputData.getDate(), inputData.getTextBody());
+        DiaryEntry entry = new DiaryEntry(inputData.getTitle(), inputData.getTextBody(), inputData.getDate());
 
         if (entry == null) {
             presenter.prepareFailView("Entry cannot be null.");

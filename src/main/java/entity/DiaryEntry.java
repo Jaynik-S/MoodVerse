@@ -29,7 +29,7 @@ public class DiaryEntry {
         this.updatedAt = createdAt;
     }
 
-    public DiaryEntry(String title, LocalDateTime date, String textBody) {
+    public DiaryEntry(String title, String textBody, LocalDateTime date) {
         this.entryId = idGenerator;
         idGenerator++;
         this.title = title;

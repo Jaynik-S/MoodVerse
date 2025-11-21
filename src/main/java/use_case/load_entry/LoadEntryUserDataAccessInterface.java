@@ -6,6 +6,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface LoadEntryUserDataAccessInterface {
-    boolean existsByPath(String entryPath);
     DiaryEntry getByPath(String entryPath) throws IOException;
 }

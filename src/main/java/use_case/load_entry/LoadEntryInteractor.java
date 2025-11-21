@@ -19,13 +19,7 @@ public class LoadEntryInteractor implements LoadEntryInputBoundary{
             presenter.prepareFailView("Entry path cannot be empty.");
             return;
         }
-        if (!dataAccess.existsByPath(entryPath)) {
-            String message = "No diary entry found at path: " + entryPath;
-            presenter.prepareFailView(message);
-            return;
-        }
         DiaryEntry entry;
-
         try {
             entry = dataAccess.getByPath(entryPath);
         } catch (Exception e) {

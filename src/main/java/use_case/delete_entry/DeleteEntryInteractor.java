@@ -18,19 +18,6 @@ public class DeleteEntryInteractor implements DeleteEntryInputBoundary {
             presenter.prepareFailView("Entry path cannot be empty.");
             return;
         }
-        boolean exists;
-        try {
-            exists = dataAccess.existsByPath(entryPath);
-        } catch (Exception e) {
-            String message = "Failed to check entry existence: " + e.getMessage();
-            presenter.prepareFailView(message);
-            return;
-        }
-        if (!exists) {
-            String message = "No diary entry found at path: " + entryPath;
-            presenter.prepareFailView(message);
-            return;
-        }
         try {
             dataAccess.deleteByPath(entryPath);
         } catch (Exception e) {

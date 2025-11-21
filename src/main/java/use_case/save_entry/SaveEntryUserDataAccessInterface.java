@@ -5,6 +5,6 @@ import entity.DiaryEntry;
 import java.io.IOException;
 
 public interface SaveEntryUserDataAccessInterface {
-    void save(DiaryEntry entry) throws IOException, InterruptedException;
+    boolean save(DiaryEntry entry) throws IOException, InterruptedException;
 }
 
