@@ -2,6 +2,12 @@ package view;
 import interface_adapter.home_menu.HomeMenuController;
 import interface_adapter.home_menu.HomeMenuState;
 import interface_adapter.home_menu.HomeMenuViewModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableCellEditor;
+import javax.swing.AbstractCellEditor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -32,7 +38,6 @@ public class HomeMenuView extends JPanel {
 
         JButton newEntryButton = new JButton("New Entry");
         newEntryButton.addActionListener(e -> {
-            // TODO: change based on use case interactor
             controller.newEntry();
         });
 
@@ -49,20 +54,23 @@ public class HomeMenuView extends JPanel {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Table
-        String[] columnNames = {"Titles", "Date", "Tags"};
+        String[] columnNames = {"Titles", "Date", "Tags", "Delete"};
 //        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         // Made the table row can be highlighted but can not edit
         model = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return column == 3;
             }
         };
 
 
         table = new JTable(model);
-//        table.setEnabled(false);
+
+        table.getColumn("Delete").setCellRenderer(new DeleteButtonRenderer());
+        table.getColumn("Delete").setCellEditor(new DeleteButtonEditor(controller, viewModel));
+
 
         this.add(new JScrollPane(table), BorderLayout.CENTER);
 
@@ -91,14 +99,15 @@ public class HomeMenuView extends JPanel {
                 int row = table.rowAtPoint(e.getPoint());
                 int col = table.columnAtPoint(e.getPoint());
 
-                // Only triggered by clicking the "title"
-                if (row >= 0 && col == 0) {
-                    HomeMenuState state = viewModel.getState();
+                HomeMenuState state = viewModel.getState();
 
-                    java.util.List<Integer> ids = state.getEntryIDs();
-                    if (row < ids.size()) {
-                        int entryId = ids.get(row);
-                        controller.openEntry(entryId);
+                // Open Entry
+                if (row >= 0 && col == 0) {
+
+                    java.util.List<String> paths = state.getStoragePaths();
+                    if (row < paths.size()) {
+                        String storagePath = paths.get(row);
+                        controller.openEntry(storagePath);
                     }
                 }
             }
@@ -111,7 +120,13 @@ public class HomeMenuView extends JPanel {
         state.setTitles(List.of("Beach Day", "Winter Night"));
         state.setDates(List.of("9/10/25", "7/11/25"));
         state.setTags(List.of("happy, sunny", "None"));
-        state.setEntryIDs(List.of(1, 2));
+//        state.setEntryIDs(List.of(1, 2));
+
+        state.setStoragePaths(List.of(
+                "data/entries/entry1.json",
+                "data/entries/entry2.json"
+        ));
+
         viewModel.setState(state);
     }
 
@@ -126,7 +141,70 @@ public class HomeMenuView extends JPanel {
 
         int n = titles.size();
         for (int i = 0; i < n; i++) {
-            model.addRow(new Object[]{titles.get(i), dates.get(i), tags.get(i)});
+            model.addRow(new Object[]{titles.get(i), dates.get(i), tags.get(i), "Delete"});
         }
     }
 }
+
+// Delete Bottom
+class DeleteButtonRenderer extends JButton implements TableCellRenderer {
+
+    public DeleteButtonRenderer() {
+        setOpaque(true);
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(
+            JTable table, Object value,
+            boolean isSelected, boolean hasFocus,
+            int row, int column) {
+        setText("Delete");
+        return this;
+    }
+}
+
+class DeleteButtonEditor extends AbstractCellEditor
+        implements TableCellEditor, ActionListener {
+
+    private final JButton button = new JButton("Delete");
+    private int currentRow;
+    private JTable table;
+
+    private final HomeMenuController controller;
+    private final HomeMenuViewModel viewModel;
+
+    public DeleteButtonEditor(HomeMenuController controller, HomeMenuViewModel viewModel) {
+        this.controller = controller;
+        this.viewModel = viewModel;
+        button.addActionListener(this);
+    }
+
+    @Override
+    public Component getTableCellEditorComponent(
+            JTable table, Object value,
+            boolean isSelected, int row, int column) {
+        this.table = table;
+        this.currentRow = row;
+        return button;
+    }
+
+    @Override
+    public Object getCellEditorValue() {
+        return "Delete";
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        int modelRow = table.convertRowIndexToModel(currentRow);
+
+        HomeMenuState state = viewModel.getState();
+        java.util.List<String> paths = state.getStoragePaths();
+        if (modelRow < paths.size()) {
+            String storagePath = paths.get(modelRow);
+            controller.deleteEntry(storagePath);
+        }
+
+        fireEditingStopped();
+    }
+}
+
