@@ -8,7 +8,6 @@ import use_case.load_entry.LoadEntryUserDataAccessInterface;
 import use_case.save_entry.SaveEntryUserDataAccessInterface;
 import use_case.verify_password.RenderEntriesUserDataInterface;
 
-import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +23,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
         SaveEntryUserDataAccessInterface, RenderEntriesUserDataInterface {
 
     @Override
-    public DiaryEntry getByPath(String entryPath) throws IOException {
+    public DiaryEntry getByPath(String entryPath) throws Exception {
         try {
             Map<String, Object> data = parseEntry(entryPath);
             return new DiaryEntry(
@@ -53,7 +52,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
     }
 
     @Override
-    public boolean save(DiaryEntry entry) throws IOException, InterruptedException {
+    public boolean save(DiaryEntry entry) throws Exception {
         try {
             JSONObject json = new JSONObject();
             json.put("title", entry.getTitle());
@@ -72,7 +71,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
     }
 
     @Override
-    public List<Map<String, Object>> getAll() throws IOException {
+    public List<Map<String, Object>> getAll() throws Exception {
         List<Map<String, Object>> allEntries = new ArrayList<>();
         String BASE_DIR = DiaryEntry.BASE_DIR;
 
@@ -95,7 +94,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
         return Files.exists(path);
     }
 
-    private Map<String, Object> parseEntry(String entryPath) throws IOException {
+    private Map<String, Object> parseEntry(String entryPath) throws Exception {
         if (!existsByPath(entryPath)) { return null;  }
         try {
             String content = Files.readString(Paths.get(entryPath));

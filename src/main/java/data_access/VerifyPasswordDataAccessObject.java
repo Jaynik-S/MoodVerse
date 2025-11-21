@@ -12,7 +12,7 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
     private static Dotenv dotenv = Dotenv.load();
     private static String SYS_PASSWORD = dotenv.get("PASSWORD");
 
-    public static void writeEnvValue(String key, String value) throws IOException {
+    public static void writeEnvValue(String key, String value) throws Exception {
         Path envPath = Paths.get(".env");
         List<String> lines = Files.readAllLines(envPath);
         boolean keyFound = false;
@@ -28,7 +28,7 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
         Files.write(envPath, lines);
     }
 
-    public String verifyPassword(String password) throws IOException {
+    public String verifyPassword(String password) throws Exception {
         if (SYS_PASSWORD.equals(password)) {
             passwordStatus = "Correct Password";
 

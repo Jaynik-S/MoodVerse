@@ -1,6 +1,5 @@
 package data_access;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -32,7 +31,7 @@ public class SpotifyAPIAccessObject {
     }
 
     // Retrieve Spotify API token using Client Credentials Flow
-    private static String getAccessToken() throws IOException, InterruptedException {
+    private static String getAccessToken() throws Exception {
         final String AUTH_URL = "https://accounts.spotify.com/api/token";
         final String BODY = "grant_type=client_credentials";
 
@@ -52,7 +51,7 @@ public class SpotifyAPIAccessObject {
     }
 
     private List<JSONObject> getSongsByKeywords(List<String> keywords)
-            throws IOException, InterruptedException {
+            throws Exception {
         if (keywords == null || keywords.isEmpty() || limit <= 0) {
             return List.of();
         }
@@ -95,7 +94,7 @@ public class SpotifyAPIAccessObject {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() < 200 || response.statusCode() >= 300) {
-                throw new IOException("Spotify search failed: " + response.statusCode());
+                throw new Exception("Spotify search failed: " + response.statusCode());
             }
 
             JSONObject json = new JSONObject(response.body());
@@ -147,7 +146,7 @@ public class SpotifyAPIAccessObject {
         return new SongRecommendation(releaseYear, coverUrl, songName, artistName, popularity, externalUrl);
     }
 
-    public List<SongRecommendation> fetchSongRecommendations() throws IOException, InterruptedException {
+    public List<SongRecommendation> fetchSongRecommendations() throws Exception {
         try {
             accessToken = getAccessToken();
             List<JSONObject> songs = getSongsByKeywords(terms);

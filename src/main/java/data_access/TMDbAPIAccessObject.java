@@ -1,6 +1,5 @@
 package data_access;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -29,7 +28,7 @@ public class TMDbAPIAccessObject {
         this.terms = terms;
     }
     
-    private static List<String> getKeywordIds(List<String> terms) throws IOException, InterruptedException {
+    private static List<String> getKeywordIds(List<String> terms) throws Exception {
         List<String> ids = new ArrayList<>();
         HttpClient client = HttpClient.newHttpClient();
 
@@ -50,14 +49,14 @@ public class TMDbAPIAccessObject {
                     ids.add(id);
                 }
             } else {
-                throw new IOException("TMDb keyword search failed: " + res.statusCode());
+                throw new Exception("TMDb keyword search failed: " + res.statusCode());
             }
         }
         return ids;
     }
 
     private static List<JSONObject> discoverMovies(List<String> ids)
-            throws IOException, InterruptedException {
+            throws Exception {
         if (ids == null || ids.isEmpty()) return List.of();
 
         HttpClient client = HttpClient.newHttpClient();
@@ -85,7 +84,7 @@ public class TMDbAPIAccessObject {
             HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
 
             if (res.statusCode() < 200 || res.statusCode() >= 300) {
-                throw new IOException("TMDb discover failed: " + res.statusCode());
+                throw new Exception("TMDb discover failed: " + res.statusCode());
             }
 
             JSONArray results = new JSONObject(res.body()).optJSONArray("results");
@@ -114,7 +113,7 @@ public class TMDbAPIAccessObject {
         return new MovieRecommendation(year, posterUrl, title, voteAvg, overview);
     }
     
-    public List<MovieRecommendation> fetchMovieRecommendations() throws IOException, InterruptedException {
+    public List<MovieRecommendation> fetchMovieRecommendations() throws Exception {
         try {
             List<String> ids = getKeywordIds(terms);
             List<JSONObject> movies = discoverMovies(ids);
