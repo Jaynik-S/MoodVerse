@@ -16,12 +16,12 @@ public class LoadEntryInteractor implements LoadEntryInputBoundary{
         String entryPath = inputData.getEntryPath();
 
         if (entryPath == null || entryPath.length() == 0) {
-            presenter.prepareFailureView("Entry path cannot be empty.");
+            presenter.prepareFailView("Entry path cannot be empty.");
             return;
         }
         if (!dataAccess.existsByPath(entryPath)) {
             String message = "No diary entry found at path: " + entryPath;
-            presenter.prepareFailureView(message);
+            presenter.prepareFailView(message);
             return;
         }
         DiaryEntry entry;
@@ -30,12 +30,12 @@ public class LoadEntryInteractor implements LoadEntryInputBoundary{
             entry = dataAccess.getByPath(entryPath);
         } catch (Exception e) {
             String message = "Failed to load entry: " + e.getMessage();
-            presenter.prepareFailureView(message);
+            presenter.prepareFailView(message);
             return;
         }
         if (entry == null) {
             String message = "Failed to load entry from path: " + entryPath;
-            presenter.prepareFailureView(message);
+            presenter.prepareFailView(message);
             return;
         }
 

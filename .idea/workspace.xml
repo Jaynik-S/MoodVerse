@@ -4,29 +4,243 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf43c561-57ec-46a4-a4bd-a083af5cc526" name="Changes" comment="">
+    <list default="true" id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="missed this">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/GoBackPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/GoBackPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/new_document/NewDocumentPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;majinbagel&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Jaynik-S/MoodVerse.git&quot;,
+    &quot;accountId&quot;: &quot;509aca2b-5821-41f0-9d97-1a118c506a9d&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="35LAlJWeZ9DWRGGErMZ5jTTBpMZ" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "main",
+    "Application.MainNoteApplication.executor": "Run",
+    "Application.NewDocumentPreview.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords.executor": "Run",
+    "JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords.executor": "Run",
+    "JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "NewDocument",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/arnavshah/Code/MoodVerse",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager" selected="Application.NewDocumentPreview">
+    <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NewDocumentPreview" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.NewDocumentPreview" />
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="app" />
+      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
+      <option name="METHOD_NAME" value="testAnalyze_ExtractsKeywords" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="app" />
+      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
+      <option name="METHOD_NAME" value="testAnalyze_LimitsToTopTenKeywords" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="app" />
+      <option name="MAIN_CLASS_NAME" value="app.NLPAnalysisDataAccessObjectTest" />
+      <option name="METHOD_NAME" value="testAnalyze_PositiveText_ReturnsPositiveSentiment" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="MoodVerse" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="MoodVerse" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.NewDocumentPreview" />
+        <item itemvalue="Application.MainNoteApplication" />
+        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_LimitsToTopTenKeywords" />
+        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_ExtractsKeywords" />
+        <item itemvalue="JUnit.NLPAnalysisDataAccessObjectTest.testAnalyze_PositiveText_ReturnsPositiveSentiment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ad0cad4-add2-4579-9325-e83ea4237396" name="Changes" comment="" />
+      <created>1762879128273</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762879128273</updated>
+      <workItem from="1762879129206" duration="5193000" />
+      <workItem from="1763406065025" duration="6612000" />
+      <workItem from="1763434699823" duration="7059000" />
+    </task>
+    <task id="LOCAL-00001" summary="get list of keywords using stanford NLP (max 10)">
+      <option name="closed" value="true" />
+      <created>1763414260916</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763414260916</updated>
+    </task>
+    <task id="LOCAL-00002" summary="most of new document page">
+      <option name="closed" value="true" />
+      <created>1763422078144</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763422078145</updated>
+    </task>
+    <task id="LOCAL-00003" summary="implemented back">
+      <option name="closed" value="true" />
+      <created>1763443422082</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1763443422082</updated>
+    </task>
+    <task id="LOCAL-00004" summary="missed this">
+      <option name="closed" value="true" />
+      <created>1763443623312</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763443623312</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="get list of keywords using stanford NLP (max 10)" />
+    <MESSAGE value="most of new document page" />
+    <MESSAGE value="implemented back" />
+    <MESSAGE value="missed this" />
+    <option name="LAST_COMMIT_MESSAGE" value="missed this" />
   </component>
 </project>
