@@ -67,7 +67,7 @@ public class RecommendationGUI {
 
                     // Cover placeholder (left) -> try loading real image and scale to 120x120
                     JLabel cover = new JLabel();
-                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    ImageIcon icon = loadAndScale("https://i.scdn.co/image/ab67616d0000b2739fc26020e0f961c076f09145", 120, 120);
                     if (icon != null) {
                         cover.setIcon(icon);
                     } else {
@@ -130,7 +130,7 @@ public class RecommendationGUI {
                     item.setBorder(BorderFactory.createTitledBorder("Song #2"));
 
                     JLabel cover = new JLabel();
-                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    ImageIcon icon = loadAndScale("https://i.scdn.co/image/ab67616d0000b2739fc26020e0f961c076f09145", 120, 120);
                     if (icon != null) {
                         cover.setIcon(icon);
                     } else {
@@ -192,7 +192,7 @@ public class RecommendationGUI {
                     item.setBorder(BorderFactory.createTitledBorder("Song #3"));
 
                     JLabel cover = new JLabel();
-                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    ImageIcon icon = loadAndScale("https://i.scdn.co/image/ab67616d0000b2739fc26020e0f961c076f09145", 120, 120);
                     if (icon != null) {
                         cover.setIcon(icon);
                     } else {
@@ -254,7 +254,7 @@ public class RecommendationGUI {
                     item.setBorder(BorderFactory.createTitledBorder("Song #4"));
 
                     JLabel cover = new JLabel();
-                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    ImageIcon icon = loadAndScale("https://i.scdn.co/image/ab67616d0000b2739fc26020e0f961c076f09145", 120, 120);
                     if (icon != null) {
                         cover.setIcon(icon);
                     } else {
@@ -316,7 +316,7 @@ public class RecommendationGUI {
                     item.setBorder(BorderFactory.createTitledBorder("Song #5"));
 
                     JLabel cover = new JLabel();
-                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 120, 120);
+                    ImageIcon icon = loadAndScale("https://i.scdn.co/image/ab67616dDD0000b2739fc26020e0f961c076f09145", 120, 120);
                     if (icon != null) {
                         cover.setIcon(icon);
                     } else {
@@ -495,7 +495,7 @@ public class RecommendationGUI {
                     item.setBorder(BorderFactory.createTitledBorder("Movie #3"));
 
                     JLabel cover = new JLabel();
-                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qweKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 100, 150);
+                    ImageIcon icon = loadAndScale("https://image.tmdb.org/t/p/original/qwDeKCtPdnIP2uGp1PgWZyCV7gzj.jpg", 100, 150);
                     if (icon != null) {
                         cover.setIcon(icon);
                     } else {

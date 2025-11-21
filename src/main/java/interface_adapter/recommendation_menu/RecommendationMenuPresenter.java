@@ -11,15 +11,15 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
 
     private final RecommendationMenuViewModel recommendationMenuViewModel;
 
-    private final HomeMenuViewModel homeMenuViewModel;
+    private final NewDocumentMenuViewModel newDocumentMenuViewModel;
 
     private final ViewManagerModel viewManagerModel;
 
     public RecommendationMenuPresenter(RecommendationMenuViewModel recommendationMenuViewModel,
-                                       HomeMenuViewModel homeMenuViewModel,
+                                       NewDocumentMenuViewModel newDocumentMenuViewModel,
                                        ViewManagerModel viewManagerModel) {
         this.recommendationMenuViewModel = recommendationMenuViewModel;
-        this.homeMenuViewModel = homeMenuViewModel;
+        this.newDocumentMenuViewModel = newDocumentMenuViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -44,7 +44,7 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
 
     @Override
     public void switchToRecommendationMenu() {
-        viewManagerModel.setState(homeMenuViewModel.getViewName());
+        viewManagerModel.setState(newDocumentMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }

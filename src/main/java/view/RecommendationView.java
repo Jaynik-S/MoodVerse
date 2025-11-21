@@ -94,7 +94,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         backButton.addActionListener(
                 evt -> {
                 if (evt.getSource().equals(backButton)) {
-                    recommendationController.execute();
+                    recommendationController.executeBack();
                     recommendationViewModel.setState(newDocumentMenuViewModel.getState());
                 }
             }
@@ -320,14 +320,14 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final NoteState state = (NoteState) evt.getNewValue();
+        final RecommendationMenuState state = (RecommendationMenuState) evt.getNewValue();
         setFields(state);
         if (state.getError() != null) {
             JOptionPane.showMessageDialog(this, state.getError(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    private void setFields(NoteState state) {
+    private void setFields(RecommendationMenuState recommendationMenuState) {
         
     }
 
