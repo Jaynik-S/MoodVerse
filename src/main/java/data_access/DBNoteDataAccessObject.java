@@ -5,30 +5,14 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import entity.User;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import use_case.z_old_note.DataAccessException;
-import use_case.z_old_note.NoteDataAccessInterface;
 
 /**
- * The DAO for accessing notes stored in the database.
- *
- * <p>This class demonstrates how your group can use the password-protected user
- * endpoints of the API used in lab 5 to store persistent data in your program.
- * </p>
- *
- * <p>You can also refer to the lab 5 code for signing up a new user and other use cases.
- * </p>
- * See
- * <a href=
- * "https://www.postman.com/cloudy-astronaut-813156/
- * csc207-grade-apis-demo/documentation/fg3zkjm/5-password-protected-user">
- *     the documentation</a>
- * of the API for more details.
+
  */
 public class DBNoteDataAccessObject implements NoteDataAccessInterface {
     private static final int SUCCESS_CODE = 200;
