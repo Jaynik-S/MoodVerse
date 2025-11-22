@@ -109,4 +109,14 @@
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="get list of keywords using stanford NLP (max 10)" />
+    <MESSAGE value="most of new document page" />
+    <MESSAGE value="implemented back" />
+    <MESSAGE value="missed this" />
+    <option name="LAST_COMMIT_MESSAGE" value="missed this" />
+  </component>
 </project>

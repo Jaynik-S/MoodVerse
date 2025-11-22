@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class VerifyPasswordDataAccessObjectTest {
 
-    private Path createTempEnvFile(List<String> lines) throws IOException {
+    private Path createTempEnvFile(List<String> lines) throws Exception {
         Path temp = Paths.get(".env-test");
         Files.write(temp, lines);
         return temp;
     }
 
     @Test
-    public void testWriteEnvValue_NewKeyAppended() throws IOException {
+    public void testWriteEnvValue_NewKeyAppended() throws Exception {
         Path envPath = Paths.get(".env");
         Files.write(envPath, List.of("EXISTING=1"));
 
@@ -31,7 +31,7 @@ public class VerifyPasswordDataAccessObjectTest {
     }
 
     @Test
-    public void testWriteEnvValue_ExistingKeyUpdated() throws IOException {
+    public void testWriteEnvValue_ExistingKeyUpdated() throws Exception {
         Path envPath = Paths.get(".env");
         Files.write(envPath, List.of("PASSWORD=old", "OTHER=2"));
 

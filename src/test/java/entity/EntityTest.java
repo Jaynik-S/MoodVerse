@@ -62,11 +62,11 @@ public class EntityTest {
 
         entry.setTitle("My Day");
         entry.setText("This is a long enough diary entry text to pass validation length.");
-        entry.setKeyword(List.of("happy", "sunny"));
+        entry.setKeywords(List.of("happy", "sunny"));
 
         assertEquals("My Day", entry.getTitle());
         assertEquals("This is a long enough diary entry text to pass validation length.", entry.getText());
-        assertEquals(List.of("happy", "sunny"), entry.getKeyword());
+        assertEquals(List.of("happy", "sunny"), entry.getKeywords());
 
         LocalDateTime created = entry.getCreatedAt();
         LocalDateTime updated1 = entry.getUpdatedAt();
