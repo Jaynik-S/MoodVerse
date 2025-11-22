@@ -22,6 +22,10 @@ public class RecommendationMenuController {
     public void executeBack() {
         backInteractor.execute();
     }
+
+//    public void executeGoBack() {
+//        goBackInteractor.execute(); // todo: new method
+//    }
     /**
      * Executes the "switchToRecommendationMenu" Use Case.
      */
