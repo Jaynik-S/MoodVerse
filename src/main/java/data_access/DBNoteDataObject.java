@@ -33,7 +33,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
             );
 
         } catch (Exception e) {
-            throw e;
+            throw new Exception("Failed to load diary entry from path: ", e);
         }
     }
 
@@ -85,7 +85,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
                 }
             }
         } catch (Exception e) {
-            throw e;
+            throw new Exception("Failed to load diary entries from path: ", e);
         }
 
         return allEntries;
@@ -127,7 +127,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
             return result;
 
         } catch (Exception e) {
-            throw e;
+            throw new Exception("Failed to parse diary entry from path: ", e);
         }
     }
 

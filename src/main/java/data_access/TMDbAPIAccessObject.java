@@ -123,7 +123,7 @@ public class TMDbAPIAccessObject {
             }
             return movieList;
         } catch (Exception e) {
-            throw e;
+            throw new Exception("Failed to fetch movie recommendations: ", e);
         }
     }
 

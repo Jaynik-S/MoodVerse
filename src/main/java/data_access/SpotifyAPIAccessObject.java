@@ -156,7 +156,7 @@ public class SpotifyAPIAccessObject {
             }
             return songList;
         } catch (Exception e) {
-            throw e;
+            throw new Exception("Failed to fetch song recommendations: ", e);
         }
     }
 

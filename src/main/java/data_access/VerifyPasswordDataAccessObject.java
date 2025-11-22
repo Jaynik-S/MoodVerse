@@ -37,7 +37,7 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
                 writeEnvValue("PASSWORD", password);
                 passwordStatus = "Created new password.";
             } catch (Exception e) {
-                throw e;
+                throw new Exception("Failed to set new password: ", e);
             }
 
         } else {  passwordStatus = "Incorrect Password";  }
