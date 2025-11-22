@@ -41,8 +41,8 @@ public class HomeMenuState {
         return keywords;
     }
 
-    public void setKeywords(List<String> moods) {
-        this.keywords = moods;
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
     }
 
     public String getErrorMessage() {
