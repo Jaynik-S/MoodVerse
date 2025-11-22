@@ -1,25 +1,17 @@
 package interface_adapter.recommendation_menu;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.home_menu.HomeMenuViewModel;
 import use_case.get_recommendations.GetRecommendationsOutputBoundary;
 import use_case.get_recommendations.GetRecommendationsOutputData;
-
-import java.util.ArrayList;
 
 public class RecommendationMenuPresenter implements GetRecommendationsOutputBoundary {
 
     private final RecommendationMenuViewModel recommendationMenuViewModel;
-
-    private final NewDocumentMenuViewModel newDocumentMenuViewModel;
-
     private final ViewManagerModel viewManagerModel;
 
     public RecommendationMenuPresenter(RecommendationMenuViewModel recommendationMenuViewModel,
-                                       NewDocumentMenuViewModel newDocumentMenuViewModel,
                                        ViewManagerModel viewManagerModel) {
         this.recommendationMenuViewModel = recommendationMenuViewModel;
-        this.newDocumentMenuViewModel = newDocumentMenuViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
