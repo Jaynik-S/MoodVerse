@@ -44,4 +44,3 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
         return passwordStatus;
     }
 }
-
