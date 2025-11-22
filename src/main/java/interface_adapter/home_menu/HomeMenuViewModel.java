@@ -1,10 +1,12 @@
 package interface_adapter.home_menu;
 
-public class HomeMenuViewModel {
+import interface_adapter.ViewModel;
+import interface_adapter.recommendation_menu.RecommendationMenuState;
 
-
-
-    public String getViewName() { // TODO: implement for lockscreen presenter
-        return "";
+public class HomeMenuViewModel extends ViewModel<RecommendationMenuState> {
+    public HomeMenuViewModel() {
+//        super("home_menu");
+//        // todo: finish the interface adapter for home menu
+//        setState(new HomeMenuState());
     }
 }
