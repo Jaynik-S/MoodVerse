@@ -60,8 +60,10 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
             json.put("keywords", entry.getKeywords());
             json.put("created_date", entry.getCreatedAt());
             json.put("updated_date", entry.getUpdatedAt());
+            String storagePath = entry.getStoragePath();
+            json.put("storage_path", storagePath);
 
-            Path path = Paths.get(entry.getStoragePath());
+            Path path = Paths.get(storagePath);
             Files.writeString(path, json.toString(4));
             return true;
 
@@ -105,6 +107,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
             JSONArray keywordArray = json.getJSONArray("keywords");
             String createdDateStr = json.getString("created_date");
             String updatedDataStr = json.getString("updated_date");
+            String storagePath = json.getString("storage_path");
 
             List<String> keywords =
                     keywordArray.toList().stream()
@@ -119,6 +122,7 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
             result.put("keywords", keywords);
             result.put("createdDate", createdDate);
             result.put("updatedDate", updatedDate);
+            result.put("storagePath", storagePath);
 
             return result;
 
