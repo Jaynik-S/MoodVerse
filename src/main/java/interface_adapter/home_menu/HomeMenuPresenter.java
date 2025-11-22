@@ -10,15 +10,17 @@ public class HomeMenuPresenter{
     }
 
     public void presentEntries(List<String> titles,
-                               List<String> dates,
-                               List<String> tags,
+                               List<String> createdDates,
+                               List<String> updatedDates,
+                               List<String> keywords,
                                List<String> storagePaths) {
 
         HomeMenuState state = viewModel.getState();
 
         state.setTitles(titles);
-        state.setDates(dates);
-        state.setTags(tags);
+        state.setCreatedDates(createdDates);
+        state.setUpdatedDates(updatedDates);
+        state.setKeywords(keywords);
         state.setStoragePaths(storagePaths);
 
         state.setErrorMessage("");

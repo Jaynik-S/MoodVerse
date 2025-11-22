@@ -54,7 +54,7 @@ public class HomeMenuView extends JPanel {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Table
-        String[] columnNames = {"Titles", "Date", "Tags", "Delete"};
+        String[] columnNames = {"Titles", "Date", "Keywords", "Delete"};
 //        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         // Made the table row can be highlighted but can not edit
@@ -118,8 +118,9 @@ public class HomeMenuView extends JPanel {
     private void initDummyData() {
         HomeMenuState state = viewModel.getState();
         state.setTitles(List.of("Beach Day", "Winter Night"));
-        state.setDates(List.of("9/10/25", "7/11/25"));
-        state.setTags(List.of("happy, sunny", "None"));
+        state.setCreatedDates(List.of("2025-09-09", "2025-07-10"));
+        state.setUpdatedDates(List.of("2025-09-10", "2025-07-11"));
+        state.setKeywords(List.of("happy, sunny", "None"));
 //        state.setEntryIDs(List.of(1, 2));
 
         state.setStoragePaths(List.of(
@@ -136,12 +137,14 @@ public class HomeMenuView extends JPanel {
         model.setRowCount(0);
 
         List<String> titles = state.getTitles();
-        List<String> dates = state.getDates();
-        List<String> tags = state.getTags();
+        List<String> updatedDates = state.getUpdatedDates();
+        List<String> keywords = state.getKeywords();
 
         int n = titles.size();
         for (int i = 0; i < n; i++) {
-            model.addRow(new Object[]{titles.get(i), dates.get(i), tags.get(i), "Delete"});
+            String dateToShow = i < updatedDates.size() ? updatedDates.get(i) : "";
+            String keywordsToShow = i < keywords.size() ? keywords.get(i) : "";
+            model.addRow(new Object[]{titles.get(i), dateToShow, keywordsToShow, "Delete"});
         }
     }
 }

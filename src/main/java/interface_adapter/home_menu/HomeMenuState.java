@@ -5,19 +5,13 @@ import java.util.List;
 
 public class HomeMenuState {
     private List<String> titles = new ArrayList<>();
-    private List<String> dates = new ArrayList<>();
-    private List<String> tags = new ArrayList<>();
+    private List<String> createdDates = new ArrayList<>();
+    private List<String> updatedDates = new ArrayList<>();
+    private List<String> keywords = new ArrayList<>();
     private String errorMessage = "";
-    private List<Integer> entryIDs = new ArrayList<>(); //Old ID Used for jumping to corresponding document
 
     private List<String> storagePaths = new ArrayList<>();
 
-//    public HomeMenuState(List<String> titles, List<String> dates, List<String> moods, String errorMessage) {
-//        this.titles = titles;
-//        this.dates = dates;
-//        this.moods = moods;
-//        this.errorMessage = errorMessage;
-//    }
 
     public List<String> getTitles() {
         return titles;
@@ -27,20 +21,28 @@ public class HomeMenuState {
         this.titles = titles;
     }
 
-    public List<String> getDates() {
-        return dates;
+    public List<String> getCreatedDates() {
+        return createdDates;
     }
 
-    public void setDates(List<String> dates) {
-        this.dates = dates;
+    public void setCreatedDates(List<String> createdDates) {
+        this.createdDates = createdDates;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public List<String> getUpdatedDates() {
+        return updatedDates;
     }
 
-    public void setTags(List<String> moods) {
-        this.tags = moods;
+    public void setUpdatedDates(List<String> updatedDates) {
+        this.updatedDates = updatedDates;
+    }
+
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(List<String> moods) {
+        this.keywords = moods;
     }
 
     public String getErrorMessage() {
@@ -51,13 +53,6 @@ public class HomeMenuState {
         this.errorMessage = errorMessage;
     }
 
-    public List<Integer> getEntryIDs() {
-        return entryIDs;
-    }
-
-    public void setEntryIDs(List<Integer> entryIDs) {
-        this.entryIDs = entryIDs;
-    }
 
     public List<String> getStoragePaths() {
         return storagePaths;
