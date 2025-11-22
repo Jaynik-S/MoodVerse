@@ -1,28 +1,21 @@
 package view;
 
+import entity.MovieRecommendation;
+import entity.SongRecommendation;
+import interface_adapter.recommendation_menu.RecommendationMenuController;
+import interface_adapter.recommendation_menu.RecommendationMenuState;
+import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.util.List;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import entity.MovieRecommendation;
-import entity.SongRecommendation;
-import interface_adapter.home_menu.HomeMenuViewModel;
-import interface_adapter.recommendation_menu.RecommendationMenuState;
-import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
-import interface_adapter.recommendation.RecommendationState;
-import interface_adapter.recommendation_menu.RecommendationMenuController;
-import interface_adapter.z_old_note.NoteController;
-import interface_adapter.z_old_note.NoteState;
 
 /**
  * The View for when the user is viewing a note in the program.
@@ -51,13 +44,10 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
     private final RecommendationMenuState recommendationState;
 
-    private final NewDocumentMenuViewModel newDocumentMenuViewModel;
-
     private final JButton backButton = new JButton("Back");
     private JPanel leftList;
     private JPanel rightList;
-    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState, NewDocumentMenuViewModel newDocumentMenuViewModel) throws MalformedURLException {
-        this.newDocumentMenuViewModel = newDocumentMenuViewModel;
+    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState) throws MalformedURLException {
 
         this.setSize(1000, 800);
 
@@ -84,7 +74,6 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
                 evt -> {
                 if (evt.getSource().equals(backButton)) {
                     recommendationController.executeBack();
-                    recommendationViewModel.setState(newDocumentMenuViewModel.getState());
                 }
             }
         );
