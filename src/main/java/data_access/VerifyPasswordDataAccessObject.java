@@ -7,12 +7,12 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public abstract class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAccessInterface {
+public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAccessInterface {
     public String passwordStatus;
     private static Dotenv dotenv = Dotenv.load();
     private static String SYS_PASSWORD = dotenv.get("PASSWORD");
 
-    public static void writeEnvValue(String key, String value) throws IOException {
+    public static void writeEnvValue(String key, String value) throws Exception {
         Path envPath = Paths.get(".env");
         List<String> lines = Files.readAllLines(envPath);
         boolean keyFound = false;
@@ -28,7 +28,7 @@ public abstract class VerifyPasswordDataAccessObject implements VerifyPasswordUs
         Files.write(envPath, lines);
     }
 
-    public String verifyPassword(String password) throws IOException {
+    public String verifyPassword(String password) throws Exception {
         if (SYS_PASSWORD.equals(password)) {
             passwordStatus = "Correct Password";
 
@@ -37,7 +37,7 @@ public abstract class VerifyPasswordDataAccessObject implements VerifyPasswordUs
                 writeEnvValue("PASSWORD", password);
                 passwordStatus = "Created new password.";
             } catch (Exception e) {
-                throw e;
+                throw new Exception("Failed to set new password: ", e);
             }
 
         } else {  passwordStatus = "Incorrect Password";  }
