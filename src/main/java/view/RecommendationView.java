@@ -54,7 +54,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private final NewDocumentMenuViewModel newDocumentMenuViewModel;
 
     private final JButton backButton = new JButton("Back");
-
+    private JPanel leftList;
+    private JPanel rightList;
     public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState, NewDocumentMenuViewModel newDocumentMenuViewModel) throws MalformedURLException {
         this.newDocumentMenuViewModel = newDocumentMenuViewModel;
 
@@ -71,20 +72,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         this.recommendationViewModel.addPropertyChangeListener(this);
 
-        final List<SongRecommendation> songRecommendations = recommendationViewModel.getSongRecommendations();
-
-        final SongRecommendation songOne = songRecommendations.get(0);
-        final SongRecommendation songTwo = songRecommendations.get(1);
-        final SongRecommendation songThree = songRecommendations.get(2);
-        final SongRecommendation songFour = songRecommendations.get(3);
-        final SongRecommendation songFive = songRecommendations.get(4);
-
-        final List<MovieRecommendation> movieRecommendations =  recommendationViewModel.getMovieRecommendations();
-
-        final MovieRecommendation movieOne = movieRecommendations.get(0);
-        final MovieRecommendation movieTwo = movieRecommendations.get(1);
-        final MovieRecommendation movieThree = movieRecommendations.get(2);
-        final MovieRecommendation movieFour = movieRecommendations.get(3);
+        // Do not access recommendation lists here — they are empty until the use-case runs.
+        // Create empty containers and populate them when `propertyChange` fires.
 
         // Top panel with a left-aligned Back button
         final JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -106,62 +95,28 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         // Left panel: Songs
         final JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.setBorder(BorderFactory.createTitledBorder("Songs"));
-        final JPanel leftList = new JPanel();
+        leftList = new JPanel();
         leftList.setLayout(new BoxLayout(leftList, BoxLayout.Y_AXIS));
 
-        // First song panel
-        final JPanel leftOne = createSongItem("Song #1", songOne.getSongName(), songOne.getPopularityScore(), songOne.getArtistName(), songOne.getReleaseYear(), songOne.getExternalUrl(), songOne.getImageUrl());
-        leftList.add(leftOne);
-        leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
-
-        // Second song panel
-        final JPanel leftTwo = createSongItem("Song #2", songTwo.getSongName(), songTwo.getPopularityScore(), songTwo.getArtistName(), songTwo.getReleaseYear(), songTwo.getExternalUrl(), songTwo.getImageUrl());
-        leftList.add(leftTwo);
-        leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
-
-        // Third song panel
-        final JPanel leftThree = createSongItem("Song #3", songThree.getSongName(), songThree.getPopularityScore(), songThree.getArtistName(), songThree.getReleaseYear(), songThree.getExternalUrl(), songThree.getImageUrl());
-        leftList.add(leftThree);
-        leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
-
-        // Forth song panel
-        final JPanel leftFour = createSongItem("Song #4", songFour.getSongName(), songFour.getPopularityScore(), songFour.getArtistName(), songFour.getReleaseYear(), songFour.getExternalUrl(), songFour.getImageUrl());
-        leftList.add(leftFour);
-        leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
-
-        // Fifth song panel
-        final JPanel leftFive = createSongItem("Song #5", songFive.getSongName(), songFive.getPopularityScore(), songFive.getArtistName(), songFive.getReleaseYear(), songFive.getExternalUrl(), songFive.getImageUrl());
-        leftList.add(leftFive);
+        // initially empty — populated by `setFields` when recommendations arrive
 
         // Right panel: Movies
         final JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBorder(BorderFactory.createTitledBorder("Movies"));
-        final JPanel rightList = new JPanel();
+        rightList = new JPanel();
         rightList.setLayout(new BoxLayout(rightList, BoxLayout.Y_AXIS));
 
-        // First movie panel
-        final JPanel rightOne = createMovieItem("Movie #1", movieOne.getMovieTitle(), movieOne.getMovieRating(), movieOne.getReleaseYear(), movieOne.getOverview(), movieOne.getImageUrl());
-        rightList.add(rightOne);
-        rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
-
-        // Second movie panel
-        final JPanel rightTwo = createMovieItem("Movie #2", movieTwo.getMovieTitle(), movieTwo.getMovieRating(), movieTwo.getReleaseYear(), movieTwo.getOverview(), movieTwo.getImageUrl());
-        rightList.add(rightTwo);
-        rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
-
-        // Third movie panel
-        final JPanel rightThree = createMovieItem("Movie #3", movieThree.getMovieTitle(), movieThree.getMovieRating(), movieThree.getReleaseYear(), movieThree.getOverview(), movieThree.getImageUrl());
-        rightList.add(rightThree);
-        rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
-
-        // Fourth movie panel
-        final JPanel rightFour = createMovieItem("Movie #4", movieFour.getMovieTitle(), movieFour.getMovieRating(), movieFour.getReleaseYear(), movieFour.getOverview(), movieFour.getImageUrl());
-        rightList.add(rightFour);
+        // initially empty — populated by `setFields` when recommendations arrive
 
 
         // add left and right panel to main area
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
+
+        // Attach panels to this view
+        this.setLayout(new BorderLayout());
+        this.add(topPanel, BorderLayout.NORTH);
+        this.add(mainPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -328,7 +283,73 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         }
     }
     private void setFields(RecommendationMenuState recommendationMenuState) {
-        
+        SwingUtilities.invokeLater(() -> {
+            leftList.removeAll();
+            rightList.removeAll();
+
+            // Populate songs (safely, skip any null entries)
+            try {
+                SongRecommendation s1 = recommendationMenuState.getSongRecommendationOne();
+                if (s1 != null) {
+                    leftList.add(createSongItem("Song #1", s1.getSongName(), s1.getPopularityScore(), s1.getArtistName(), s1.getReleaseYear(), s1.getExternalUrl(), s1.getImageUrl()));
+                    leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+                }
+                SongRecommendation s2 = recommendationMenuState.getSongRecommendationTwo();
+                if (s2 != null) {
+                    leftList.add(createSongItem("Song #2", s2.getSongName(), s2.getPopularityScore(), s2.getArtistName(), s2.getReleaseYear(), s2.getExternalUrl(), s2.getImageUrl()));
+                    leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+                }
+                SongRecommendation s3 = recommendationMenuState.getSongRecommendationThree();
+                if (s3 != null) {
+                    leftList.add(createSongItem("Song #3", s3.getSongName(), s3.getPopularityScore(), s3.getArtistName(), s3.getReleaseYear(), s3.getExternalUrl(), s3.getImageUrl()));
+                    leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+                }
+                SongRecommendation s4 = recommendationMenuState.getSongRecommendationFour();
+                if (s4 != null) {
+                    leftList.add(createSongItem("Song #4", s4.getSongName(), s4.getPopularityScore(), s4.getArtistName(), s4.getReleaseYear(), s4.getExternalUrl(), s4.getImageUrl()));
+                    leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+                }
+                SongRecommendation s5 = recommendationMenuState.getSongRecommendationFive();
+                if (s5 != null) {
+                    leftList.add(createSongItem("Song #5", s5.getSongName(), s5.getPopularityScore(), s5.getArtistName(), s5.getReleaseYear(), s5.getExternalUrl(), s5.getImageUrl()));
+                }
+            } catch (Exception e) {
+                // If creating song items fails, show a simple fallback label
+                leftList.removeAll();
+                leftList.add(new JLabel("Unable to load songs"));
+            }
+
+            // Populate movies
+            try {
+                MovieRecommendation m1 = recommendationMenuState.getMovieRecommendationOne();
+                if (m1 != null) {
+                    rightList.add(createMovieItem("Movie #1", m1.getMovieTitle(), m1.getMovieRating(), m1.getReleaseYear(), m1.getOverview(), m1.getImageUrl()));
+                    rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+                }
+                MovieRecommendation m2 = recommendationMenuState.getMovieRecommendationTwo();
+                if (m2 != null) {
+                    rightList.add(createMovieItem("Movie #2", m2.getMovieTitle(), m2.getMovieRating(), m2.getReleaseYear(), m2.getOverview(), m2.getImageUrl()));
+                    rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+                }
+                MovieRecommendation m3 = recommendationMenuState.getMovieRecommendationThree();
+                if (m3 != null) {
+                    rightList.add(createMovieItem("Movie #3", m3.getMovieTitle(), m3.getMovieRating(), m3.getReleaseYear(), m3.getOverview(), m3.getImageUrl()));
+                    rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
+                }
+                MovieRecommendation m4 = recommendationMenuState.getMovieRecommendationFour();
+                if (m4 != null) {
+                    rightList.add(createMovieItem("Movie #4", m4.getMovieTitle(), m4.getMovieRating(), m4.getReleaseYear(), m4.getOverview(), m4.getImageUrl()));
+                }
+            } catch (Exception e) {
+                rightList.removeAll();
+                rightList.add(new JLabel("Unable to load movies"));
+            }
+
+            leftList.revalidate();
+            leftList.repaint();
+            rightList.revalidate();
+            rightList.repaint();
+        });
     }
 
 }

@@ -11,7 +11,7 @@ public class BackPresenter implements BackOutputBoundary{
 
     public BackPresenter(ViewManagerModel viewManagerModel, NewDocumentViewModel newDocumentViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.homeMenuViewModel = homeMenuViewModel;
+        this.newDocumentViewModel = newDocumentViewModel;
     }
     @Override
     public void prepareSuccessView() {

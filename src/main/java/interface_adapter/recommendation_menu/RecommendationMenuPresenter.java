@@ -44,7 +44,7 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
 
     @Override
     public void switchToRecommendationMenu() {
-        viewManagerModel.setState(newDocumentMenuViewModel.getViewName());
+        viewManagerModel.setState(recommendationMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }
