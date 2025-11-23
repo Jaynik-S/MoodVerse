@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.SQLOutput;
 import java.util.List;
 
 import entity.SongRecommendation;
@@ -143,6 +144,7 @@ public class SpotifyAPIAccessObject {
         String popularity = track.optString("popularity", "");
         popularity = popularity + "/100";
 
+        System.out.println(songName + " by " + artistName + " (" + releaseYear + ")"); // Debug print
         return new SongRecommendation(releaseYear, coverUrl, songName, artistName, popularity, externalUrl);
     }
 

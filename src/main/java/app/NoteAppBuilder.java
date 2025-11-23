@@ -109,7 +109,6 @@ public class NoteAppBuilder {
             );
             cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
         } catch (Exception e) {
-            // Handle exception - could not create recommendation view
             e.printStackTrace();
         }
         return this;

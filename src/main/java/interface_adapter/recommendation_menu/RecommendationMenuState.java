@@ -31,18 +31,37 @@ public class RecommendationMenuState {
     }
 
     public void setSongRecommendation(List<SongRecommendation> songRecommendation) {
-        this.songRecommendationOne = songRecommendation.get(0);
-        this.songRecommendationTwo = songRecommendation.get(1);
-        this.songRecommendationThree = songRecommendation.get(2);
-        this.songRecommendationFour = songRecommendation.get(3);
-        this.songRecommendationFive = songRecommendation.get(4);
+        // Defensive: handle null or lists shorter than 5
+        if (songRecommendation == null) {
+            this.songRecommendationOne = null;
+            this.songRecommendationTwo = null;
+            this.songRecommendationThree = null;
+            this.songRecommendationFour = null;
+            this.songRecommendationFive = null;
+            return;
+        }
+
+        this.songRecommendationOne = songRecommendation.size() > 0 ? songRecommendation.get(0) : null;
+        this.songRecommendationTwo = songRecommendation.size() > 1 ? songRecommendation.get(1) : null;
+        this.songRecommendationThree = songRecommendation.size() > 2 ? songRecommendation.get(2) : null;
+        this.songRecommendationFour = songRecommendation.size() > 3 ? songRecommendation.get(3) : null;
+        this.songRecommendationFive = songRecommendation.size() > 4 ? songRecommendation.get(4) : null;
     }
 
     public void setMovieRecommendation(List<MovieRecommendation> movieRecommendation) {
-        this.movieRecommendationOne = movieRecommendation.get(0);
-        this.movieRecommendationTwo = movieRecommendation.get(1);
-        this.movieRecommendationThree = movieRecommendation.get(2);
-        this.movieRecommendationFour = movieRecommendation.get(3);
+        // Defensive: handle null or lists shorter than 4
+        if (movieRecommendation == null) {
+            this.movieRecommendationOne = null;
+            this.movieRecommendationTwo = null;
+            this.movieRecommendationThree = null;
+            this.movieRecommendationFour = null;
+            return;
+        }
+
+        this.movieRecommendationOne = movieRecommendation.size() > 0 ? movieRecommendation.get(0) : null;
+        this.movieRecommendationTwo = movieRecommendation.size() > 1 ? movieRecommendation.get(1) : null;
+        this.movieRecommendationThree = movieRecommendation.size() > 2 ? movieRecommendation.get(2) : null;
+        this.movieRecommendationFour = movieRecommendation.size() > 3 ? movieRecommendation.get(3) : null;
     }
 
     public SongRecommendation getSongRecommendationOne() {
