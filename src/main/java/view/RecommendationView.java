@@ -30,13 +30,13 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private static final int HEIGHT_SCORE = 40;
     private static final int WIDTH_SCORE = 80;
 
-    private static final int HEIGHT_SONG = 120;
-    private static final int WIDTH_SONG = 120;
+    private static final int HEIGHT_SONG = 167;
+    private static final int WIDTH_SONG = 167;
     private static final int BORDER_SONG = 4;
     private static final int WIDTH_LEFT = 500;
     private static final int VERTICAL_SPACING = 6;
-    private static final int HEIGHT_MOVIE = 150;
-    private static final int WIDTH_MOVIE = 100;
+    private static final int HEIGHT_MOVIE = 210;
+    private static final int WIDTH_MOVIE = 140;
 
     private final RecommendationMenuController recommendationController;
 
