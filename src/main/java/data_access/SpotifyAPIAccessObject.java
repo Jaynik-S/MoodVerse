@@ -25,6 +25,8 @@ public class SpotifyAPIAccessObject {
     private static String accessToken;
     private static String yearRange = "2006-2025";
     private static int limit = 5;
+    private static final int MIN_POPULARITY = 15;
+
     private List<String> terms;
 
     public SpotifyAPIAccessObject(List<String> terms) {
@@ -60,6 +62,7 @@ public class SpotifyAPIAccessObject {
         HttpClient client = HttpClient.newHttpClient();
         List<JSONObject> collected = new ArrayList<>();
         Set<String> seenIds = new LinkedHashSet<>();
+        Set<String> seenArtists = new LinkedHashSet<>();
 
         List<String> queries = new ArrayList<>();
         for (int i = 0; i < keywords.size(); i++) {
@@ -108,7 +111,24 @@ public class SpotifyAPIAccessObject {
                 String id = track.optString("id", null);
                 if (id == null || id.isEmpty()) continue;
 
+                // Skip tracks with popularity below the minimum
+                int popularity = track.optInt("popularity", 0);
+                if (popularity < MIN_POPULARITY) {
+                    continue;
+                }
+
+                // Enforce unique primary artist per collected track
+                JSONArray artistsArr = track.optJSONArray("artists");
+                String primaryArtist = null;
+                if (artistsArr != null && artistsArr.length() > 0) {
+                    primaryArtist = artistsArr.getJSONObject(0).optString("name", "").trim();
+                }
+                if (primaryArtist == null || primaryArtist.isEmpty() || seenArtists.contains(primaryArtist)) {
+                    continue;
+                }
+
                 if (seenIds.add(id)) {
+                    seenArtists.add(primaryArtist);
                     collected.add(track);
                     if (collected.size() >= limit) break;
                 }
