@@ -74,6 +74,9 @@ public class NewDocumentPresenter implements
         final NewDocumentState state = newDocumentViewModel.getState();
         state.setSuccessMessage("Document saved successfully");
 
+        state.setTitle(outputData.getTitle());
+        state.setTextBody(outputData.getText());
+
         if (outputData.getDate() != null){
             state.setDate(outputData.getDate().format(formatter));
         }
