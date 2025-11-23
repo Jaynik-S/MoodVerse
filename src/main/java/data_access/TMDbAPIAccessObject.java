@@ -110,6 +110,7 @@ public class TMDbAPIAccessObject {
         String posterUrl = (posterPath == null || posterPath.isEmpty())
                 ? "—"
                 : "https://image.tmdb.org/t/p/original" + posterPath;
+        System.out.println(title + " " + year + " " + voteAvg);
         return new MovieRecommendation(year, posterUrl, title, voteAvg, overview);
     }
     

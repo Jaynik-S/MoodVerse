@@ -6,13 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/MainNoteApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/SongRecommendation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/SongRecommendation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/HomeMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/HomeMenuView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/data_access/VerifyPasswordDataAccessObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/data_access/VerifyPasswordDataAccessObjectTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/entity/EntityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/entity/EntityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/TMDbAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/TMDbAPIAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/app/HomeMenuDemoMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/z_old_note/NoteInteractorTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +37,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Jaynik-S/MoodVerse.git&quot;,
-    &quot;accountId&quot;: &quot;33a06d87-4f14-460f-babf-534d06f817f2&quot;
+    &quot;accountId&quot;: &quot;ccca2fde-80c6-4bca-93c3-de150a9a11ba&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -52,22 +51,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HomeMenuDemoMain.executor": "Run",
-    "Application.MainNoteApplication.executor": "Run",
-    "JUnit.MainNoteApplicationTest.executor": "Run",
-    "JUnit.VerifyPasswordDataAccessObjectTest.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "AppBuilder",
-    "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.file-colors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HomeMenuDemoMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainNoteApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainNoteApplicationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VerifyPasswordDataAccessObjectTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.data_access in note-application.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.file-colors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.MainNoteApplication">
     <configuration name="HomeMenuDemoMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.HomeMenuDemoMain" />
@@ -125,9 +128,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="data_access in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="data_access.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainNoteApplication" />
+        <item itemvalue="JUnit.data_access in note-application" />
         <item itemvalue="JUnit.MainNoteApplicationTest" />
         <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
         <item itemvalue="Application.HomeMenuDemoMain" />
@@ -138,6 +156,7 @@
     <attachedChunks>
       <set>
         <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -148,6 +167,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763427219985</updated>
+      <workItem from="1763864068257" duration="1805000" />
+      <workItem from="1763866127806" duration="297000" />
     </task>
     <servers />
   </component>
