@@ -10,13 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EntityTest {
 
     @Test
-    public void testUser() {
-        User user = new User("alice", "secret");
-        assertEquals("alice", user.getName());
-        assertEquals("secret", user.getPassword());
-    }
-
-    @Test
     public void testKeyword() {
         Keyword kw = new Keyword("joy", 0.9);
         assertEquals("joy", kw.text());

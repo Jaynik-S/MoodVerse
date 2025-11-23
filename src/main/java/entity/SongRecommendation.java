@@ -26,5 +26,3 @@ public class SongRecommendation {
     public String getPopularityScore() { return popularityScore; }
     public String getExternalUrl() { return externalUrl; }
 }
-
-// TODO: CHECK IF popularityScore TYPE IS INT OR STRING (ADD /100)? -- verify score is out of 100
