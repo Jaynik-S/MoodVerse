@@ -31,7 +31,7 @@ public class GetRecommendationsInteractor implements  GetRecommendationsInputBou
                 List<MovieRecommendation> movieRecommendations = userDataAccessObject.fetchMovieRecommendations(keywords);
                 GetRecommendationsOutputData outputData = new GetRecommendationsOutputData(keywords, songRecommendations, movieRecommendations);
                 recommendationPresenter.prepareSuccessView(outputData);
-
+                recommendationPresenter.switchToRecommendationMenu();
             } catch (Exception e) {
                 recommendationPresenter.prepareFailView("Failed to get recommendations: " + e.getMessage());
             }

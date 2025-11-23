@@ -7,11 +7,11 @@
     <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/NoteAppBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/NLPAnalysisDataAccessObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/data_access/TMDbAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/TMDbAPIAccessObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/recommendation_menu/RecommendationMenuState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/app/HomeMenuDemoMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/z_old_note/NoteInteractorTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/get_recommendations/GetRecommendationsInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RecommendationView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +168,7 @@
       <option name="presentableId" value="Default" />
       <updated>1763427219985</updated>
       <workItem from="1763864068257" duration="1805000" />
-      <workItem from="1763866127806" duration="297000" />
+      <workItem from="1763866127806" duration="2335000" />
     </task>
     <servers />
   </component>

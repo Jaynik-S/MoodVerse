@@ -24,7 +24,7 @@ public class SpotifyAPIAccessObject {
     private static final String CLIENT_SECRET = dotenv.get("SPOTIFY_CLIENT_SECRET");
     private static String accessToken;
     private static String yearRange = "2006-2025";
-    private static int limit = 4;
+    private static int limit = 5;
     private List<String> terms;
 
     public SpotifyAPIAccessObject(List<String> terms) {
@@ -77,7 +77,7 @@ public class SpotifyAPIAccessObject {
             if (collected.size() >= limit) break;
 
             String q = "(" + keywordStr + ")" + yearClause;
-            System.out.println(q);
+            // System.out.println(q);
             String encoded = URLEncoder.encode(q, StandardCharsets.UTF_8);
             int perRequest = Math.min(50, limit - collected.size()); // Spotify limit is 50
 
@@ -144,7 +144,7 @@ public class SpotifyAPIAccessObject {
         String popularity = track.optString("popularity", "");
         popularity = popularity + "/100";
 
-        System.out.println(songName + " by " + artistName + " (" + releaseYear + ")"); // Debug print
+        System.out.println(songName + " by " + artistName + " (" + releaseYear + ") " + popularity); // Debug print
         return new SongRecommendation(releaseYear, coverUrl, songName, artistName, popularity, externalUrl);
     }
 

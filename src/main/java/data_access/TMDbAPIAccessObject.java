@@ -21,7 +21,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class TMDbAPIAccessObject {
     private static final Dotenv dotenv = Dotenv.load();
     private static final String TMDB_API_KEY = dotenv.get("TMDB_API_KEY");
-    private static int limit = 5;
+    private static int limit = 4;
     private List<String> terms;
 
     public TMDbAPIAccessObject(List<String> terms){
@@ -33,6 +33,7 @@ public class TMDbAPIAccessObject {
         HttpClient client = HttpClient.newHttpClient();
 
         for (String t : terms) {
+            // System.out.print((t));
             String url = String.format(
                     "https://api.themoviedb.org/3/search/keyword?api_key=%s&query=%s&page=1",
                     TMDB_API_KEY,

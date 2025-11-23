@@ -72,7 +72,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         backButton.addActionListener(
                 evt -> {
-                if (evt.getSource().equals(backButton)) {
+                if (evt.getSource().equals(backButton) && recommendationController != null) {
                     recommendationController.executeBack();
                 }
             }
@@ -86,14 +86,14 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         leftPanel.setBorder(BorderFactory.createTitledBorder("Songs"));
         leftList = new JPanel();
         leftList.setLayout(new BoxLayout(leftList, BoxLayout.Y_AXIS));
-
-        // initially empty — populated by `setFields` when recommendations arrive
+        leftPanel.add(new JScrollPane(leftList), BorderLayout.CENTER);
 
         // Right panel: Movies
         final JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBorder(BorderFactory.createTitledBorder("Movies"));
         rightList = new JPanel();
         rightList.setLayout(new BoxLayout(rightList, BoxLayout.Y_AXIS));
+        rightPanel.add(new JScrollPane(rightList), BorderLayout.CENTER);
 
         // initially empty — populated by `setFields` when recommendations arrive
 
@@ -342,4 +342,3 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     }
 
 }
-

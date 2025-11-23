@@ -102,9 +102,10 @@ public class NoteAppBuilder {
     public NoteAppBuilder addRecommendationView() {
         recommendationMenuViewModel = new RecommendationMenuViewModel();
         try {
-            recommendationView = new RecommendationView(
+            // Temporary placeholder; real controller is attached in addRecommendationMenuUseCase
+            recommendationView = new view.RecommendationView(
                     recommendationMenuViewModel,
-                    null, // Controller will be set later
+                    null,
                     recommendationMenuViewModel.getState()
             );
             cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
@@ -180,7 +181,7 @@ public class NoteAppBuilder {
         final SaveEntryInputBoundary saveEntryInteractor = new SaveEntryInteractor(
                 savePresenter, noteDataAccess);
 
-        // Get Recommendations Use Case
+        // Get Recommendations Use Case (results go to recommendation menu)
         final RecommendationMenuPresenter recommendationPresenter = new RecommendationMenuPresenter(
                 recommendationMenuViewModel, viewManagerModel);
         final GetRecommendationsInputBoundary getRecommendationsInteractor = new GetRecommendationsInteractor(
@@ -208,7 +209,7 @@ public class NoteAppBuilder {
                 viewManagerModel, newDocumentViewModel);
         final GoBackInputBoundary goBackInteractor = new GoBackInteractor(goBackPresenter);
 
-        // Get Recommendations interactor (already created, but we need it for the controller)
+        // Get Recommendations interactor and presenter for this view
         final RecommendationMenuPresenter recommendationPresenter = new RecommendationMenuPresenter(
                 recommendationMenuViewModel, viewManagerModel);
         final GetRecommendationsInputBoundary getRecommendationsInteractor = new GetRecommendationsInteractor(
@@ -217,9 +218,19 @@ public class NoteAppBuilder {
         final RecommendationMenuController controller = new RecommendationMenuController(
                 getRecommendationsInteractor, goBackInteractor);
 
-        // Note: RecommendationView doesn't have a setController method,
-        // controller is passed in constructor but we created view with null earlier
-        // The view already has the controller reference from constructor
+        // Recreate RecommendationView with a real controller if it was initially constructed with null
+        try {
+            recommendationView = new RecommendationView(
+                    recommendationMenuViewModel,
+                    controller,
+                    recommendationMenuViewModel.getState()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Register or replace the card for the recommendation view
+        cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
         return this;
     }
 
