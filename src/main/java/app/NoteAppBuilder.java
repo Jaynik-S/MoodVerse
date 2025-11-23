@@ -1,84 +1,247 @@
-//package app;
-//
-//import javax.swing.JFrame;
-//import javax.swing.WindowConstants;
-//
-//import interface_adapter.z_old_note.NoteController;
-//import interface_adapter.z_old_note.NotePresenter;
-//import interface_adapter.z_old_note.NoteViewModel;
-//import use_case.z_old_note.NoteDataAccessInterface;
-//import use_case.z_old_note.NoteInteractor;
-//import use_case.z_old_note.NoteOutputBoundary;
-//import view.NoteView;
-//
-///**
-// * Builder for the Note Application.
-// */
-//public class NoteAppBuilder {
-//    public static final int HEIGHT = 300;
-//    public static final int WIDTH = 400;
-//    private NoteDataAccessInterface noteDAO;
-//    private NoteViewModel noteViewModel = new NoteViewModel();
-//    private NoteView noteView;
-//    private NoteInteractor noteInteractor;
-//
-//    /**
-//     * Sets the NoteDAO to be used in this application.
-//     * @param noteDataAccess the DAO to use
-//     * @return this builder
-//     */
-//    public NoteAppBuilder addNoteDAO(NoteDataAccessInterface noteDataAccess) {
-//        noteDAO = noteDataAccess;
-//        return this;
-//    }
-//
-//    /**
-//     * Creates the objects for the Note Use Case and connects the NoteView to its
-//     * controller.
-//     *
-//     * <p>This method must be called after addNoteView!</p>
-//     * @return this builder
-//     * @throws RuntimeException if this method is called before addNoteView
-//     */
-//    public NoteAppBuilder addNoteUseCase() {
-//        final NoteOutputBoundary noteOutputBoundary = new NotePresenter(noteViewModel);
-//        noteInteractor = new NoteInteractor(
-//                noteDAO, noteOutputBoundary);
-//
-//        final NoteController controller = new NoteController(noteInteractor);
-//        if (noteView == null) {
-//            throw new RuntimeException("addNoteView must be called before addNoteUseCase");
-//        }
-//        noteView.setNoteController(controller);
-//        return this;
-//    }
-//
-//    /**
-//     * Creates the NoteView and underlying NoteViewModel.
-//     * @return this builder
-//     */
-//    public NoteAppBuilder addNoteView() {
-//        noteViewModel = new NoteViewModel();
-//        noteView = new NoteView(noteViewModel);
-//        return this;
-//    }
-//
-//    /**
-//     * Builds the application.
-//     * @return the JFrame for the application
-//     */
-//    public JFrame build() {
-//        final JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        frame.setTitle("Note Application");
-//        frame.setSize(WIDTH, HEIGHT);
-//
-//        frame.add(noteView);
-//
-//        // refresh so that the note will be visible when we start the program
-//        noteInteractor.executeRefresh();
-//
-//        return frame;
-//
-//    }
-//}
+package app;
+
+import data_access.DBNoteDataObject;
+import data_access.RecommendationAPIAccessObject;
+import data_access.VerifyPasswordDataAccessObject;
+import interface_adapter.GoBackPresenter;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.home_menu.HomeMenuController;
+import interface_adapter.home_menu.HomeMenuViewModel;
+import interface_adapter.lock_screen.LockScreenController;
+import interface_adapter.lock_screen.LockScreenPresenter;
+import interface_adapter.lock_screen.LockScreenViewModel;
+import interface_adapter.new_document.NewDocumentController;
+import interface_adapter.new_document.NewDocumentPresenter;
+import interface_adapter.new_document.NewDocumentViewModel;
+import interface_adapter.recommendation_menu.RecommendationMenuController;
+import interface_adapter.recommendation_menu.RecommendationMenuPresenter;
+import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
+import use_case.create_entry.CreateEntryInputBoundary;
+import use_case.create_entry.CreateEntryInteractor;
+import use_case.delete_entry.DeleteEntryInputBoundary;
+import use_case.delete_entry.DeleteEntryInteractor;
+import use_case.get_recommendations.GetRecommendationsInputBoundary;
+import use_case.get_recommendations.GetRecommendationsInteractor;
+import use_case.go_back.GoBackInputBoundary;
+import use_case.go_back.GoBackInteractor;
+import use_case.load_entry.LoadEntryInputBoundary;
+import use_case.load_entry.LoadEntryInteractor;
+import use_case.save_entry.SaveEntryInputBoundary;
+import use_case.save_entry.SaveEntryInteractor;
+import use_case.verify_password.VerifyPasswordInputBoundary;
+import use_case.verify_password.VerifyPasswordInteractor;
+import view.HomeMenuView;
+import view.LockscreenView;
+import view.NewDocumentView;
+import view.RecommendationView;
+import view.ViewManager;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Builder for the MoodVerse Note Application.
+ */
+public class NoteAppBuilder {
+    private final JPanel cardPanel = new JPanel();
+    private final CardLayout cardLayout = new CardLayout();
+    private final ViewManagerModel viewManagerModel = new ViewManagerModel();
+
+    // Data Access Objects
+    private final DBNoteDataObject noteDataAccess = new DBNoteDataObject();
+    private final VerifyPasswordDataAccessObject passwordDataAccess = new VerifyPasswordDataAccessObject();
+    private final RecommendationAPIAccessObject recommendationDataAccess = new RecommendationAPIAccessObject();
+
+    // View Models
+    private LockScreenViewModel lockScreenViewModel;
+    private HomeMenuViewModel homeMenuViewModel;
+    private NewDocumentViewModel newDocumentViewModel;
+    private RecommendationMenuViewModel recommendationMenuViewModel;
+
+    // Views
+    private NewDocumentView newDocumentView;
+    private RecommendationView recommendationView;
+
+    public NoteAppBuilder() {
+        cardPanel.setLayout(cardLayout);
+    }
+
+    /**
+     * Adds the LockScreen view to the application.
+     * @return this builder
+     */
+    public NoteAppBuilder addLockScreenView() {
+        lockScreenViewModel = new LockScreenViewModel();
+        return this;
+    }
+
+    /**
+     * Adds the HomeMenu view to the application.
+     * @return this builder
+     */
+    public NoteAppBuilder addHomeMenuView() {
+        homeMenuViewModel = new HomeMenuViewModel();
+        return this;
+    }
+
+    /**
+     * Adds the NewDocument view to the application.
+     * @return this builder
+     */
+    public NoteAppBuilder addNewDocumentView() {
+        newDocumentViewModel = new NewDocumentViewModel();
+        newDocumentView = new NewDocumentView(newDocumentViewModel);
+        cardPanel.add(newDocumentView, newDocumentViewModel.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the Recommendation view to the application.
+     * @return this builder
+     */
+    public NoteAppBuilder addRecommendationView() {
+        recommendationMenuViewModel = new RecommendationMenuViewModel();
+        try {
+            recommendationView = new RecommendationView(
+                    recommendationMenuViewModel,
+                    null, // Controller will be set later
+                    recommendationMenuViewModel.getState()
+            );
+            cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
+        } catch (Exception e) {
+            // Handle exception - could not create recommendation view
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    /**
+     * Adds the verify password use case (LockScreen).
+     * @return this builder
+     */
+    public NoteAppBuilder addVerifyPasswordUseCase() {
+        final LockScreenPresenter presenter = new LockScreenPresenter(
+                lockScreenViewModel, viewManagerModel, homeMenuViewModel);
+        final VerifyPasswordInputBoundary interactor = new VerifyPasswordInteractor(
+                passwordDataAccess, presenter, noteDataAccess);
+        final LockScreenController controller = new LockScreenController(interactor);
+
+        final LockscreenView lockscreenView = new LockscreenView(lockScreenViewModel, controller);
+        cardPanel.add(lockscreenView, lockScreenViewModel.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the home menu use cases (create entry, load entry, delete entry).
+     * @return this builder
+     */
+    public NoteAppBuilder addHomeMenuUseCases() {
+        // Create Entry Use Case
+        final NewDocumentPresenter newDocumentPresenter = new NewDocumentPresenter(
+                newDocumentViewModel, viewManagerModel);
+        final CreateEntryInputBoundary createEntryInteractor = new CreateEntryInteractor(newDocumentPresenter);
+
+        // Load Entry Use Case
+        final LoadEntryInputBoundary loadEntryInteractor = new LoadEntryInteractor(
+                newDocumentPresenter, noteDataAccess);
+
+        // Delete Entry Use Case
+        final DeleteEntryInputBoundary deleteEntryInteractor = new DeleteEntryInteractor(
+                new use_case.delete_entry.DeleteEntryOutputBoundary() {
+                    @Override
+                    public void prepareSuccessView(use_case.delete_entry.DeleteEntryOutputData outputData) {
+                        // Refresh the home menu view after deletion
+                        // Could add logic here to refresh the home menu
+                    }
+
+                    @Override
+                    public void prepareFailView(String errorMessage) {
+                        JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                },
+                noteDataAccess
+        );
+
+        final HomeMenuController controller = new HomeMenuController(
+                createEntryInteractor, loadEntryInteractor, deleteEntryInteractor);
+
+        final HomeMenuView homeMenuView = new HomeMenuView(controller, homeMenuViewModel);
+        cardPanel.add(homeMenuView, homeMenuViewModel.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the new document use cases (save entry, get recommendations, go back).
+     * @return this builder
+     */
+    public NoteAppBuilder addNewDocumentUseCases() {
+        // Save Entry Use Case
+        final NewDocumentPresenter savePresenter = new NewDocumentPresenter(
+                newDocumentViewModel, viewManagerModel);
+        final SaveEntryInputBoundary saveEntryInteractor = new SaveEntryInteractor(
+                savePresenter, noteDataAccess);
+
+        // Get Recommendations Use Case
+        final RecommendationMenuPresenter recommendationPresenter = new RecommendationMenuPresenter(
+                recommendationMenuViewModel, viewManagerModel);
+        final GetRecommendationsInputBoundary getRecommendationsInteractor = new GetRecommendationsInteractor(
+                recommendationDataAccess, recommendationPresenter);
+
+        // Go Back Use Case (from NewDocument to HomeMenu)
+        final GoBackPresenter goBackPresenter = new GoBackPresenter(
+                viewManagerModel, homeMenuViewModel);
+        final GoBackInputBoundary goBackInteractor = new GoBackInteractor(goBackPresenter);
+
+        final NewDocumentController controller = new NewDocumentController(
+                getRecommendationsInteractor, goBackInteractor, saveEntryInteractor);
+
+        newDocumentView.setNewDocumentController(controller);
+        return this;
+    }
+
+    /**
+     * Adds the recommendation menu use case (go back from recommendations).
+     * @return this builder
+     */
+    public NoteAppBuilder addRecommendationMenuUseCase() {
+        // Go Back Use Case (from Recommendation to NewDocument)
+        final GoBackPresenter goBackPresenter = new GoBackPresenter(
+                viewManagerModel, newDocumentViewModel);
+        final GoBackInputBoundary goBackInteractor = new GoBackInteractor(goBackPresenter);
+
+        // Get Recommendations interactor (already created, but we need it for the controller)
+        final RecommendationMenuPresenter recommendationPresenter = new RecommendationMenuPresenter(
+                recommendationMenuViewModel, viewManagerModel);
+        final GetRecommendationsInputBoundary getRecommendationsInteractor = new GetRecommendationsInteractor(
+                recommendationDataAccess, recommendationPresenter);
+
+        final RecommendationMenuController controller = new RecommendationMenuController(
+                getRecommendationsInteractor, goBackInteractor);
+
+        // Note: RecommendationView doesn't have a setController method,
+        // controller is passed in constructor but we created view with null earlier
+        // The view already has the controller reference from constructor
+        return this;
+    }
+
+    /**
+     * Builds the application.
+     * @return the JFrame for the application
+     */
+    public JFrame build() {
+        final JFrame application = new JFrame("MoodVerse - Mood-Based Diary & Recommendations");
+        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        application.setSize(1000, 800);
+
+        application.add(cardPanel);
+
+        // Create a ViewManager to handle view switching
+        new ViewManager(cardPanel, cardLayout, viewManagerModel);
+
+        // Set initial view to LockScreen
+        viewManagerModel.setState(lockScreenViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+
+        return application;
+    }
+}

@@ -90,7 +90,7 @@ public class HomeMenuView extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
 
         // Fake data table for demo
-        initDummyData();
+//        initDummyData(); // removed for actual use
         refreshTable();
 
         table.addMouseListener(new MouseAdapter() {

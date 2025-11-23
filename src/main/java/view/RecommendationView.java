@@ -60,7 +60,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         this.recommendationState = recommendationState;
 
-        this.recommendationViewModel.addPropertyChangeListener(this); //todo: add this 
+        this.recommendationViewModel.addPropertyChangeListener(this);
 
         // Do not access recommendation lists here — they are empty until the use-case runs.
         // Create empty containers and populate them when `propertyChange` fires.
