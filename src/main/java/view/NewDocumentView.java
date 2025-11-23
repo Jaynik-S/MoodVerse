@@ -134,7 +134,9 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final NewDocumentState state = (NewDocumentState) evt.getNewValue();
-        setFields(state);
+        if(state.getError() == null) {
+            setFields(state);
+        }
         if (state.getError() != null) {
             JOptionPane.showMessageDialog(this, state.getError(),
                     "Error", JOptionPane.ERROR_MESSAGE);
