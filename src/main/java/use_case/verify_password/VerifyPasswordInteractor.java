@@ -22,17 +22,20 @@ public class VerifyPasswordInteractor implements VerifyPasswordInputBoundary {
         String password = inputData.getPassword();
         try {
             String passwordStatus = userDataAccess.verifyPassword(password);
-            List<Map<String, Object>> allEntries = renderEntriesDataAccess.getAll();
-            VerifyPasswordOutputData outputData = new VerifyPasswordOutputData(passwordStatus, allEntries);
-            userPresenter.prepareSuccessView(outputData);
+            if (passwordStatus.equals("Incorrect Password")) {
+                userPresenter.prepareFailView("Incorrect Password");
+            } else {
+                List<Map<String, Object>> allEntries = renderEntriesDataAccess.getAll();
+                VerifyPasswordOutputData outputData = new VerifyPasswordOutputData(passwordStatus, allEntries);
+                userPresenter.prepareSuccessView(outputData);
+            }
         } catch (Exception e) {
             userPresenter.prepareFailView("Failed to verify password: " + e.getMessage());
         }
     }
-
-    @Override
-    public void switchToHomeMenu() {
-        // userPresenter.switchToHomeMenu(); TODO: check flow later
-    }
+//
+//    @Override
+//    public void switchToHomeMenu() {
+//    }
 
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class VerifyPasswordOutputData {
     private final String passwordStatus;
-    private final List<Object> allEntries;
+    private final List<Map<String, Object>> allEntries;
 
     public VerifyPasswordOutputData(String passwordStatus, List<Map<String, Object>> allEntries) {
         this.passwordStatus = passwordStatus;
@@ -13,5 +13,5 @@ public class VerifyPasswordOutputData {
     }
 
     public String passwordStatus() {  return passwordStatus;  }
-    public List<Object> getAllEntries() {return allEntries;}
+    public List<Map<String, Object>> getAllEntries() {return allEntries;}
 }
