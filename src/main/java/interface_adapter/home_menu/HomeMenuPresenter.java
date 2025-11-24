@@ -57,13 +57,26 @@ public class HomeMenuPresenter{
     }
 
     public void presentEntriesFromData(List<Map<String, Object>> rawEntries) {
+
+        List<Map<String, Object>> sortedEntries = new ArrayList<>(rawEntries);
+
+        sortedEntries.sort((a, b) ->{
+            Object ua = a.get("updatedDate");
+            Object ub = b.get("updatedDate");
+
+            if (ua instanceof java.time.LocalDateTime && ub instanceof java.time.LocalDateTime) {
+                return ((java.time.LocalDateTime) ub).compareTo((java.time.LocalDateTime) ua);
+            }
+            return 0;
+        });
+
         List<String> titles = new ArrayList<>();
         List<String> createdDates = new ArrayList<>();
         List<String> updatedDates = new ArrayList<>();
         List<String> keywords = new ArrayList<>();
         List<String> storagePaths = new ArrayList<>();
 
-        for (Map<String, Object> data : rawEntries) {
+        for (Map<String, Object> data : sortedEntries) {
             // convert to string
             titles.add(objectToString(data.get("title")));
             createdDates.add(objectToString(data.get("createdDate")));

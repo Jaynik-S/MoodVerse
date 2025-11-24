@@ -16,5 +16,6 @@ public class HomeMenuViewModel extends ViewModel{
 
     public void setState(HomeMenuState state) {
         this.state = state;
+        this.firePropertyChanged();
     }
 }

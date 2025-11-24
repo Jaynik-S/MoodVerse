@@ -14,10 +14,13 @@ import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 
 // General format of home menu UIs. Will changed based on use cases
 
-public class HomeMenuView extends JPanel {
+public class HomeMenuView extends JPanel implements PropertyChangeListener {
     private final HomeMenuController controller;
     private final HomeMenuViewModel viewModel;
     private final JTable table;
@@ -26,6 +29,7 @@ public class HomeMenuView extends JPanel {
     public HomeMenuView(HomeMenuController controller, HomeMenuViewModel viewModel) {
         this.controller = controller;
         this.viewModel = viewModel;
+        this.viewModel.addPropertyChangeListener(this);
 
         setLayout(new BorderLayout());
         setSize(new Dimension(1000, 800));
@@ -167,6 +171,11 @@ public class HomeMenuView extends JPanel {
             String updateToShow = i < updatedDates.size() ? updatedDates.get(i) : "";
             model.addRow(new Object[]{titles.get(i), createdToShow, updateToShow, "Delete"});
         }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        refreshTable();
     }
 }
 
