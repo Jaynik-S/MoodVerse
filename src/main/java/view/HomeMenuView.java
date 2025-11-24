@@ -2,15 +2,13 @@ package view;
 import interface_adapter.home_menu.HomeMenuController;
 import interface_adapter.home_menu.HomeMenuState;
 import interface_adapter.home_menu.HomeMenuViewModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableCellEditor;
+
+import javax.swing.table.*;
 import javax.swing.AbstractCellEditor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.List;
 import java.awt.event.MouseAdapter;
@@ -28,28 +26,33 @@ public class HomeMenuView extends JPanel {
     public HomeMenuView(HomeMenuController controller, HomeMenuViewModel viewModel) {
         this.controller = controller;
         this.viewModel = viewModel;
-        this.setLayout(new BorderLayout());
-        this.setSize(new Dimension(1000, 800));
+
+        setLayout(new BorderLayout());
+        setSize(new Dimension(1000, 800));
+        setBackground(new Color(245, 248, 255));
+        setBorder(BorderFactory.createEmptyBorder(16,16,16,16));
 
         // Title and New Entry button
 
         JLabel titleLabel = new JLabel("MoodVerse");
-        titleLabel.setFont(new Font(titleLabel.getFont().getFontName(), Font.BOLD, 24));
+        titleLabel.setFont(new Font(titleLabel.getFont().getFontName(), Font.BOLD, 26));
+        titleLabel.setForeground(new Color(30, 64, 175));
 
         JButton newEntryButton = new JButton("New Entry");
+        newEntryButton.setFont(new Font(newEntryButton.getFont().getFontName(), Font.BOLD, 14));
+        newEntryButton.setFocusPainted(false);
+        newEntryButton.setForeground(Color.BLACK);
+        newEntryButton.setBackground(new Color(37, 99, 235));
+        newEntryButton.setBorder(BorderFactory.createEmptyBorder(6,14,6,14));
         newEntryButton.addActionListener(e -> {
             controller.newEntry();
         });
 
         JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(new Color(219, 234, 254));
+        topPanel.setBorder(BorderFactory.createEmptyBorder(8, 12, 12,12));
         topPanel.add(titleLabel, BorderLayout.WEST);
         topPanel.add(newEntryButton, BorderLayout.EAST);
-
-        // Background color
-        topPanel.setBackground(Color.CYAN);
-
-        //Space between top and table
-        topPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
         this.add(topPanel, BorderLayout.NORTH);
 
@@ -67,6 +70,18 @@ public class HomeMenuView extends JPanel {
 
 
         table = new JTable(model);
+        table.setRowHeight(26);
+        table.setFillsViewportHeight(true);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        StripedTableCellRenderer leftRenderer =
+                new StripedTableCellRenderer(SwingConstants.LEFT);
+        StripedTableCellRenderer centerRenderer =
+                new StripedTableCellRenderer(SwingConstants.CENTER);
+
+        table.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
+        table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
 
         table.getColumnModel().getColumn(3).setCellRenderer(new DeleteButtonRenderer());
         table.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(controller, viewModel));
@@ -74,18 +89,26 @@ public class HomeMenuView extends JPanel {
 
         // Grid
         table.setShowGrid(true);
-        table.setGridColor(Color.black);
+        table.setGridColor(new Color(226, 232, 240));
 
         // Table front and color
         JTableHeader tableHeader = table.getTableHeader();
-        tableHeader.setBackground(Color.lightGray);
-        tableHeader.setForeground(Color.black);
+        tableHeader.setBackground(Color.PINK);
+        tableHeader.setForeground(new Color(55, 61, 81));
         tableHeader.setFont(new Font(tableHeader.getFont().getFontName(), Font.BOLD, 12));
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
-        this.add(scrollPane, BorderLayout.CENTER);
+        JPanel tableCard = new JPanel(new BorderLayout());
+        tableCard.setBackground(Color.WHITE);
+        tableCard.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(226, 232, 240)),
+                BorderFactory.createEmptyBorder(8,8,8,8)
+        ));
+        tableCard.add(scrollPane, BorderLayout.CENTER);
+
+        add(tableCard, BorderLayout.CENTER);
 
         // Fake data table for demo
 //        initDummyData(); // removed for actual use
@@ -147,11 +170,43 @@ public class HomeMenuView extends JPanel {
     }
 }
 
+class StripedTableCellRenderer extends DefaultTableCellRenderer {
+
+    public StripedTableCellRenderer(int horizontalAlignment) {
+        setHorizontalAlignment(horizontalAlignment);
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(
+            JTable table, Object value, boolean isSelected,
+            boolean hasFocus, int row, int column) {
+
+        Component c = super.getTableCellRendererComponent(
+                table, value, isSelected, hasFocus, row, column);
+
+        if (!isSelected) {
+            if (row % 2 == 0) {
+                c.setBackground(new Color(250, 252, 255));
+            } else {
+                c.setBackground(Color.WHITE);
+            }
+        } else {
+            c.setBackground(new Color(219, 234, 254)); // 选中高亮
+        }
+        return c;
+    }
+}
+
 // Delete Bottom
 class DeleteButtonRenderer extends JButton implements TableCellRenderer {
 
     public DeleteButtonRenderer() {
         setOpaque(true);
+        setForeground(Color.WHITE);
+        setBackground(Color.RED);
+        setFocusPainted(false);
+        setBorder(BorderFactory.createEmptyBorder(4,10,4,10));
+        setText("Delete");
     }
 
     @Override
@@ -159,7 +214,13 @@ class DeleteButtonRenderer extends JButton implements TableCellRenderer {
             JTable table, Object value,
             boolean isSelected, boolean hasFocus,
             int row, int column) {
-        setText("Delete");
+
+        if (isSelected) {
+            setBackground(new Color(220,38,38));
+        }
+        else{
+            setBackground(new Color(220,68,68));
+        }
         return this;
     }
 }
@@ -177,7 +238,13 @@ class DeleteButtonEditor extends AbstractCellEditor
     public DeleteButtonEditor(HomeMenuController controller, HomeMenuViewModel viewModel) {
         this.controller = controller;
         this.viewModel = viewModel;
+
         button.addActionListener(this);
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(239, 68, 68));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createEmptyBorder(4,10,4,10));
+        button.setOpaque(true);
     }
 
     @Override
