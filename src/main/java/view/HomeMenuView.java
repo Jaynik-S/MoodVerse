@@ -54,7 +54,7 @@ public class HomeMenuView extends JPanel {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Table
-        String[] columnNames = {"Titles", "Date", "Keywords", "Delete"};
+        String[] columnNames = {"Titles", "Created", "Update", ""};
 //        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         // Made the table row can be highlighted but can not edit
@@ -68,11 +68,9 @@ public class HomeMenuView extends JPanel {
 
         table = new JTable(model);
 
-        table.getColumn("Delete").setCellRenderer(new DeleteButtonRenderer());
-        table.getColumn("Delete").setCellEditor(new DeleteButtonEditor(controller, viewModel));
+        table.getColumnModel().getColumn(3).setCellRenderer(new DeleteButtonRenderer());
+        table.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(controller, viewModel));
 
-
-        this.add(new JScrollPane(table), BorderLayout.CENTER);
 
         // Grid
         table.setShowGrid(true);
@@ -137,14 +135,14 @@ public class HomeMenuView extends JPanel {
         model.setRowCount(0);
 
         List<String> titles = state.getTitles();
+        List<String> createdDates = state.getCreatedDates();
         List<String> updatedDates = state.getUpdatedDates();
-        List<String> keywords = state.getKeywords();
 
         int n = titles.size();
         for (int i = 0; i < n; i++) {
-            String dateToShow = i < updatedDates.size() ? updatedDates.get(i) : "";
-            String keywordsToShow = i < keywords.size() ? keywords.get(i) : "";
-            model.addRow(new Object[]{titles.get(i), dateToShow, keywordsToShow, "Delete"});
+            String createdToShow = i < createdDates.size() ? createdDates.get(i) : "";
+            String updateToShow = i < updatedDates.size() ? updatedDates.get(i) : "";
+            model.addRow(new Object[]{titles.get(i), createdToShow, updateToShow, "Delete"});
         }
     }
 }
