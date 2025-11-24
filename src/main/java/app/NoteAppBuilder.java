@@ -6,6 +6,7 @@ import data_access.VerifyPasswordDataAccessObject;
 import interface_adapter.GoBackPresenter;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.home_menu.HomeMenuController;
+import interface_adapter.home_menu.HomeMenuPresenter;
 import interface_adapter.home_menu.HomeMenuViewModel;
 import interface_adapter.lock_screen.LockScreenController;
 import interface_adapter.lock_screen.LockScreenPresenter;
@@ -55,6 +56,7 @@ public class NoteAppBuilder {
     // View Models
     private LockScreenViewModel lockScreenViewModel;
     private HomeMenuViewModel homeMenuViewModel;
+    private HomeMenuPresenter homeMenuPresenter;
     private NewDocumentViewModel newDocumentViewModel;
     private RecommendationMenuViewModel recommendationMenuViewModel;
 
@@ -81,6 +83,7 @@ public class NoteAppBuilder {
      */
     public NoteAppBuilder addHomeMenuView() {
         homeMenuViewModel = new HomeMenuViewModel();
+        homeMenuPresenter = new HomeMenuPresenter(homeMenuViewModel);
         return this;
     }
 
@@ -109,8 +112,13 @@ public class NoteAppBuilder {
      * @return this builder
      */
     public NoteAppBuilder addVerifyPasswordUseCase() {
+        if (homeMenuViewModel == null) {
+            addHomeMenuView();
+        } else if (homeMenuPresenter == null) {
+            homeMenuPresenter = new HomeMenuPresenter(homeMenuViewModel);
+        }
         final LockScreenPresenter presenter = new LockScreenPresenter(
-                lockScreenViewModel, viewManagerModel, homeMenuViewModel);
+                lockScreenViewModel, viewManagerModel, homeMenuViewModel, homeMenuPresenter);
         final VerifyPasswordInputBoundary interactor = new VerifyPasswordInteractor(
                 passwordDataAccess, presenter, noteDataAccess);
         final LockScreenController controller = new LockScreenController(interactor);
@@ -246,6 +254,13 @@ public class NoteAppBuilder {
 
         // Create a ViewManager to handle view switching
         new ViewManager(cardPanel, cardLayout, viewManagerModel);
+
+        if (homeMenuPresenter != null && homeMenuViewModel != null) {
+            viewManagerModel.addPropertyChangeListener(new HomeMenuRefreshListener(
+                    homeMenuViewModel.getViewName(),
+                    noteDataAccess,
+                    homeMenuPresenter));
+        }
 
         // Set initial view to LockScreen
         viewManagerModel.setState(lockScreenViewModel.getViewName());
