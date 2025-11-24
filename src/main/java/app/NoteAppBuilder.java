@@ -101,17 +101,6 @@ public class NoteAppBuilder {
      */
     public NoteAppBuilder addRecommendationView() {
         recommendationMenuViewModel = new RecommendationMenuViewModel();
-        try {
-            // Temporary placeholder; real controller is attached in addRecommendationMenuUseCase
-            recommendationView = new view.RecommendationView(
-                    recommendationMenuViewModel,
-                    null,
-                    recommendationMenuViewModel.getState()
-            );
-            cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return this;
     }
 
@@ -175,6 +164,9 @@ public class NoteAppBuilder {
      * @return this builder
      */
     public NoteAppBuilder addNewDocumentUseCases() {
+        if (recommendationMenuViewModel == null) {
+            recommendationMenuViewModel = new RecommendationMenuViewModel();
+        }
         // Save Entry Use Case
         final NewDocumentPresenter savePresenter = new NewDocumentPresenter(
                 newDocumentViewModel, viewManagerModel);
@@ -204,6 +196,9 @@ public class NoteAppBuilder {
      * @return this builder
      */
     public NoteAppBuilder addRecommendationMenuUseCase() {
+        if (recommendationMenuViewModel == null) {
+            recommendationMenuViewModel = new RecommendationMenuViewModel();
+        }
         // Go Back Use Case (from Recommendation to NewDocument)
         final GoBackPresenter goBackPresenter = new GoBackPresenter(
                 viewManagerModel, newDocumentViewModel);
@@ -218,19 +213,23 @@ public class NoteAppBuilder {
         final RecommendationMenuController controller = new RecommendationMenuController(
                 getRecommendationsInteractor, goBackInteractor);
 
-        // Recreate RecommendationView with a real controller if it was initially constructed with null
-        try {
-            recommendationView = new RecommendationView(
-                    recommendationMenuViewModel,
-                    controller,
-                    recommendationMenuViewModel.getState()
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (recommendationView == null) {
+            try {
+                recommendationView = new RecommendationView(
+                        recommendationMenuViewModel,
+                        controller,
+                        recommendationMenuViewModel.getState()
+                );
+                cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Guard against empty recommendationView.
+            // This way we simply switch to the existing view when the back button is pressed rather than instantiating
+            // a new one.
+            recommendationView.setRecommendationController(controller);
         }
-
-        // Register or replace the card for the recommendation view
-        cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
         return this;
     }
 

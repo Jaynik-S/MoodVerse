@@ -38,7 +38,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private static final int HEIGHT_MOVIE = 210;
     private static final int WIDTH_MOVIE = 140;
 
-    private final RecommendationMenuController recommendationController;
+    private RecommendationMenuController recommendationController;
 
     private final RecommendationMenuViewModel recommendationViewModel;
 
@@ -339,6 +339,10 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
             rightList.revalidate();
             rightList.repaint();
         });
+    }
+
+    public void setRecommendationController(RecommendationMenuController recommendationController) {
+        this.recommendationController = recommendationController;
     }
 
 }
