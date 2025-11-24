@@ -1,5 +1,6 @@
 package interface_adapter.home_menu;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -47,6 +48,7 @@ public class HomeMenuPresenter{
         state.setErrorMessage("");
 
         viewModel.setState(state);
+        viewModel.firePropertyChanged();
     }
 
     //Error message
@@ -54,9 +56,13 @@ public class HomeMenuPresenter{
         HomeMenuState state = viewModel.getState();
         state.setErrorMessage(errorMessage);
         viewModel.setState(state);
+        viewModel.firePropertyChanged();
     }
 
     public void presentEntriesFromData(List<Map<String, Object>> rawEntries) {
+        if (rawEntries == null) {
+            rawEntries = Collections.emptyList();
+        }
         List<String> titles = new ArrayList<>();
         List<String> createdDates = new ArrayList<>();
         List<String> updatedDates = new ArrayList<>();

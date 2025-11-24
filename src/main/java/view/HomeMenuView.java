@@ -12,6 +12,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,7 +21,7 @@ import java.awt.event.MouseEvent;
 
 // General format of home menu UIs. Will changed based on use cases
 
-public class HomeMenuView extends JPanel {
+public class HomeMenuView extends JPanel implements PropertyChangeListener {
     private final HomeMenuController controller;
     private final HomeMenuViewModel viewModel;
     private final JTable table;
@@ -30,6 +32,7 @@ public class HomeMenuView extends JPanel {
         this.viewModel = viewModel;
         this.setLayout(new BorderLayout());
         this.setSize(new Dimension(1000, 800));
+        this.viewModel.addPropertyChangeListener(this);
 
         // Title and New Entry button
 
@@ -115,6 +118,25 @@ public class HomeMenuView extends JPanel {
 
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName() != null && !evt.getPropertyName().equals("state")) {
+            return;
+        }
+        SwingUtilities.invokeLater(() -> {
+            refreshTable();
+            Object newValue = evt.getNewValue();
+            if (newValue instanceof HomeMenuState) {
+                HomeMenuState state = (HomeMenuState) newValue;
+                String errorMessage = state.getErrorMessage();
+                if (errorMessage != null && !errorMessage.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, errorMessage,
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
+
     private void initDummyData() {
         HomeMenuState state = viewModel.getState();
         state.setTitles(List.of("Beach Day", "Winter Night"));
@@ -133,6 +155,9 @@ public class HomeMenuView extends JPanel {
 
     private void refreshTable() {
         HomeMenuState state = viewModel.getState();
+        if (state == null) {
+            return;
+        }
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
@@ -210,4 +235,3 @@ class DeleteButtonEditor extends AbstractCellEditor
         fireEditingStopped();
     }
 }
-
