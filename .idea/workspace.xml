@@ -52,6 +52,7 @@
     "Application.MainNoteApplication.executor": "Run",
     "JUnit.MainNoteApplicationTest.executor": "Run",
     "JUnit.VerifyPasswordDataAccessObjectTest.executor": "Run",
+    "JUnit.VerifyPasswordInteractorTest.executor": "Run",
     "JUnit.data_access in note-application.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -65,84 +66,89 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.MainNoteApplication">
-    <configuration name="HomeMenuDemoMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.HomeMenuDemoMain" />
+  <component name="RunManager" selected="JUnit.CreateEntryInteractorTest">
+    <configuration name="CreateEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.*" />
+          <option name="PATTERN" value="use_case.create_entry.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
-      <module name="note-application" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainNoteApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="note-application" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="app" />
-      <option name="MAIN_CLASS_NAME" value="app.MainNoteApplicationTest" />
+      <option name="PACKAGE_NAME" value="use_case.create_entry" />
+      <option name="MAIN_CLASS_NAME" value="use_case.create_entry.CreateEntryInteractorTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VerifyPasswordDataAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeleteEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data_access.*" />
+          <option name="PATTERN" value="use_case.delete_entry.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="data_access" />
-      <option name="MAIN_CLASS_NAME" value="data_access.VerifyPasswordDataAccessObjectTest" />
+      <option name="PACKAGE_NAME" value="use_case.delete_entry" />
+      <option name="MAIN_CLASS_NAME" value="use_case.delete_entry.DeleteEntryInteractorTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="data_access in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GetRecommendationsInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data_access.*" />
+          <option name="PATTERN" value="use_case.get_recommendations.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="data_access" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="use_case.get_recommendations" />
+      <option name="MAIN_CLASS_NAME" value="use_case.get_recommendations.GetRecommendationsInteractorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoBackInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="use_case.go_back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="use_case.go_back" />
+      <option name="MAIN_CLASS_NAME" value="use_case.go_back.GoBackInteractorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoadEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="use_case.load_entry.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="use_case.load_entry" />
+      <option name="MAIN_CLASS_NAME" value="use_case.load_entry.LoadEntryInteractorTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainNoteApplication" />
-        <item itemvalue="JUnit.data_access in note-application" />
-        <item itemvalue="JUnit.MainNoteApplicationTest" />
-        <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
-        <item itemvalue="Application.HomeMenuDemoMain" />
+        <item itemvalue="JUnit.CreateEntryInteractorTest" />
+        <item itemvalue="JUnit.DeleteEntryInteractorTest" />
+        <item itemvalue="JUnit.GetRecommendationsInteractorTest" />
+        <item itemvalue="JUnit.GoBackInteractorTest" />
+        <item itemvalue="JUnit.LoadEntryInteractorTest" />
       </list>
     </recent_temporary>
   </component>

@@ -167,12 +167,22 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         smallBoxes.add(ratingField);
         topRow.add(titleField, BorderLayout.CENTER);
         topRow.add(smallBoxes, BorderLayout.EAST);
-        JTextField descField = new JTextField(overview);
-        descField.setEditable(false);
-        descField.setPreferredSize(new Dimension(200, 120));
+        // Let movie descriptions overflow into a scrollable area so longer
+        // texts remain readable even when the panel is narrow.
+        JTextArea descArea = new JTextArea(overview);
+        descArea.setEditable(false);
+        descArea.setLineWrap(false);
+        descArea.setWrapStyleWord(false);
+        descArea.setCaretPosition(0);
+
+        JScrollPane descScroll = new JScrollPane(descArea);
+        descScroll.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        descScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        descScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        descScroll.setPreferredSize(new Dimension(200, 120));
 
         details.add(topRow, BorderLayout.NORTH);
-        details.add(descField, BorderLayout.CENTER);
+        details.add(descScroll, BorderLayout.CENTER);
         item.add(coverWrap, BorderLayout.WEST);
         item.add(details, BorderLayout.CENTER);
 
