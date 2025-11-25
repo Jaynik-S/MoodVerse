@@ -209,7 +209,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         descField.setPreferredSize(new Dimension(200, 120));
 
         details.add(topRow, BorderLayout.NORTH);
-        details.add(descField, BorderLayout.CENTER);
+        details.add(descScroll, BorderLayout.CENTER);
         item.add(coverWrap, BorderLayout.WEST);
         item.add(details, BorderLayout.CENTER);
 
