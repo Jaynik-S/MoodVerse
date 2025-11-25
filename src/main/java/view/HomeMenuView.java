@@ -279,6 +279,24 @@ class DeleteButtonEditor extends AbstractCellEditor
         if (modelRow < paths.size()) {
             String storagePath = paths.get(modelRow);
             controller.deleteEntry(storagePath);
+
+            if (modelRow < state.getTitles().size()) {
+                state.getTitles().remove(modelRow);
+            }
+            if (modelRow < state.getCreatedDates().size()) {
+                state.getCreatedDates().remove(modelRow);
+            }
+            if (modelRow < state.getUpdatedDates().size()) {
+                state.getUpdatedDates().remove(modelRow);
+            }
+            if (modelRow < state.getKeywords().size()) {
+                state.getKeywords().remove(modelRow);
+            }
+            if (modelRow < state.getStoragePaths().size()) {
+                state.getStoragePaths().remove(modelRow);
+            }
+
+            viewModel.setState(state);
         }
 
         fireEditingStopped();

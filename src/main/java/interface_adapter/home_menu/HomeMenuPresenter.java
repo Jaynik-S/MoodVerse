@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class HomeMenuPresenter{
 
     private final HomeMenuViewModel viewModel;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public HomeMenuPresenter(HomeMenuViewModel viewModel) {
         this.viewModel = viewModel;
