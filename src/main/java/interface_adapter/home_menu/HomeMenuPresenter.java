@@ -1,4 +1,7 @@
 package interface_adapter.home_menu;
+import javax.swing.text.DateFormatter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +10,7 @@ import java.util.stream.Collectors;
 public class HomeMenuPresenter{
 
     private final HomeMenuViewModel viewModel;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public HomeMenuPresenter(HomeMenuViewModel viewModel) {
         this.viewModel = viewModel;
@@ -15,6 +19,21 @@ public class HomeMenuPresenter{
     private String objectToString(Object value) {
         return value == null ? "" : value.toString();
     }
+
+    private String formatDateValue(Object value) {
+        if (value == null) {
+            return "";
+        }
+
+        String s = value.toString();
+        try {
+            LocalDateTime dt = LocalDateTime.parse(s);
+            return dt.format(formatter);
+        } catch (Exception e) {
+            return s;
+        }
+    }
+
 
 
     private String keywordsToDisplay(Object keywordsObj) {
@@ -79,8 +98,8 @@ public class HomeMenuPresenter{
         for (Map<String, Object> data : sortedEntries) {
             // convert to string
             titles.add(objectToString(data.get("title")));
-            createdDates.add(objectToString(data.get("createdDate")));
-            updatedDates.add(objectToString(data.get("updatedDate")));
+            createdDates.add(formatDateValue(data.get("createdDate")));
+            updatedDates.add(formatDateValue(data.get("updatedDate")));
             keywords.add(keywordsToDisplay(data.get("keywords")));
             storagePaths.add(objectToString(data.get("storagePath")));
         }
