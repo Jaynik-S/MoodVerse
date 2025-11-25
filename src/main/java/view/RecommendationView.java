@@ -45,9 +45,9 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private final RecommendationMenuState recommendationState;
 
     private final JButton backButton = new JButton("Back");
-    private JPanel leftList;
-    private JPanel rightList;
-    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState) throws MalformedURLException {
+    private final JPanel leftList;
+    private final JPanel rightList;
+    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState) {
 
         this.setSize(1000, 800);
 
