@@ -1,14 +1,11 @@
 package view;
 
-import entity.MovieRecommendation;
-import entity.SongRecommendation;
-import interface_adapter.recommendation_menu.RecommendationMenuController;
-import interface_adapter.recommendation_menu.RecommendationMenuState;
-import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -16,6 +13,27 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
+import entity.MovieRecommendation;
+import entity.SongRecommendation;
+import interface_adapter.recommendation_menu.RecommendationMenuController;
+import interface_adapter.recommendation_menu.RecommendationMenuState;
+import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
 
 /**
  * The View for when the user is viewing a note in the program.
@@ -30,13 +48,13 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private static final int HEIGHT_SCORE = 40;
     private static final int WIDTH_SCORE = 80;
 
-    private static final int HEIGHT_SONG = 167;
-    private static final int WIDTH_SONG = 167;
+    private static final int HEIGHT_SONG = 140;
+    private static final int WIDTH_SONG = 140;
     private static final int BORDER_SONG = 4;
     private static final int WIDTH_LEFT = 500;
     private static final int VERTICAL_SPACING = 6;
-    private static final int HEIGHT_MOVIE = 210;
-    private static final int WIDTH_MOVIE = 140;
+    private static final int HEIGHT_MOVIE = 170;
+    private static final int WIDTH_MOVIE = 120;
 
     private RecommendationMenuController recommendationController;
 
@@ -49,7 +67,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private JPanel rightList;
     public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState) throws MalformedURLException {
 
-        this.setSize(1000, 800);
+        this.setSize(1000, 750);
 
         // Prevent the window from being resized smaller than a usable minimum
         this.setMinimumSize(new Dimension(WIDTH_RECOMMENDATION_MIN, HEIGHT_RECOMMENDATION_MIN));
@@ -86,13 +104,24 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         leftPanel.setBorder(BorderFactory.createTitledBorder("Songs"));
         leftList = new JPanel();
         leftList.setLayout(new BoxLayout(leftList, BoxLayout.Y_AXIS));
-        leftPanel.add(new JScrollPane(leftList), BorderLayout.CENTER);
+        // fix left list width so it stays at half (WIDTH_LEFT) and can scroll vertically
+        leftList.setPreferredSize(new Dimension(WIDTH_LEFT, HEIGHT_RECOMMENDATION_MIN));
+        leftList.setMaximumSize(new Dimension(WIDTH_LEFT, Integer.MAX_VALUE));
+        final JScrollPane leftScroll = new JScrollPane(leftList);
+        leftScroll.setPreferredSize(new Dimension(WIDTH_LEFT, HEIGHT_RECOMMENDATION_MIN));
+        leftPanel.add(leftScroll, BorderLayout.CENTER);
 
         // Right panel: Movies
         final JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBorder(BorderFactory.createTitledBorder("Movies"));
         rightList = new JPanel();
         rightList.setLayout(new BoxLayout(rightList, BoxLayout.Y_AXIS));
+        // fix right panel width so it stays at half (WIDTH_LEFT) and can scroll vertically
+        rightList.setPreferredSize(new Dimension(WIDTH_LEFT, HEIGHT_RECOMMENDATION_MIN));
+        rightList.setMaximumSize(new Dimension(WIDTH_LEFT, Integer.MAX_VALUE));
+        rightPanel.setPreferredSize(new Dimension(WIDTH_LEFT, HEIGHT_RECOMMENDATION_MIN));
+        rightPanel.setMaximumSize(new Dimension(WIDTH_LEFT, Integer.MAX_VALUE));
+        // add scroll pane inline using the existing rightPanel
         rightPanel.add(new JScrollPane(rightList), BorderLayout.CENTER);
 
         // initially empty — populated by `setFields` when recommendations arrive
@@ -127,7 +156,10 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private JPanel createMovieItem(String title, String movieName, String score, String year, String overview, String imageUrl) {
 
         final JPanel item = new JPanel(new BorderLayout(8, 8));
-        item.setBorder(BorderFactory.createTitledBorder(title));
+        // show a visible border that uses the platform default (avoid hardcoded gray)
+        item.setBorder(BorderFactory.createCompoundBorder(
+            UIManager.getBorder("TextField.border"),
+            BorderFactory.createEmptyBorder(6, 6, 6, 6)));
 
         JLabel cover = new JLabel();
         cover.setHorizontalAlignment(JLabel.CENTER);
@@ -147,13 +179,21 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         coverWrap.setPreferredSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         coverWrap.setMaximumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         coverWrap.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(4, 4, 4, 4)));
+            UIManager.getBorder("TextField.border"),
+            BorderFactory.createEmptyBorder(4, 4, 4, 4)));
 
         final JPanel details = new JPanel(new BorderLayout(6, 6));
         final JPanel topRow = new JPanel(new BorderLayout(6, 6));
-        JTextField titleField = new JTextField(movieName);
+        // use a non-editable single-line JTextField for the title so it matches song titles
+        final JTextField titleField = new JTextField(movieName);
         titleField.setEditable(false);
+        // titleField.setBackground(UIManager.getColor("TextField.background"));
+        // titleField.setBorder(UIManager.getBorder("TextField.border"));
+        // titleField.setFont(UIManager.getFont("TextField.font"));
+        // titleField.setForeground(UIManager.getColor("TextField.foreground"));
+        // titleField.setHorizontalAlignment(JTextField.LEFT);
+        // // set a preferred height to visually match the small year/rating boxes
+        // titleField.setPreferredSize(new Dimension(200, 40));
         JPanel smallBoxes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
         JTextField yearField = new JTextField(year);
         yearField.setPreferredSize(new Dimension(80, 40));
@@ -167,8 +207,16 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         smallBoxes.add(ratingField);
         topRow.add(titleField, BorderLayout.CENTER);
         topRow.add(smallBoxes, BorderLayout.EAST);
-        JTextField descField = new JTextField(overview);
+        // description / overview should wrap into multiple lines
+        final JTextArea descField = new JTextArea(overview);
+        descField.setLineWrap(true);
+        descField.setWrapStyleWord(true);
         descField.setEditable(false);
+        // use the same background color as text fields so it appears consistent
+        // descField.setOpaque(true);
+        // descField.setBackground(UIManager.getColor("TextField.background"));
+        // descField.setBorder(UIManager.getBorder("TextField.border"));
+        descField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 120));
         descField.setPreferredSize(new Dimension(200, 120));
 
         details.add(topRow, BorderLayout.NORTH);
@@ -178,6 +226,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         int itemHeight = HEIGHT_MOVIE;
 
+        // allow item to expand horizontally to fill half of the view (GridLayout gives half-width)
         item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
         item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
         item.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -192,7 +241,10 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
          */
     private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) throws MalformedURLException {
         final JPanel item = new JPanel(new BorderLayout(8, 8));
-        item.setBorder(BorderFactory.createTitledBorder(title));
+        // show a visible border that uses the platform default (avoid hardcoded gray)
+        item.setBorder(BorderFactory.createCompoundBorder(
+            UIManager.getBorder("TextField.border"),
+            BorderFactory.createEmptyBorder(6, 6, 6, 6)));
 
 
         final JLabel cover = new JLabel();
@@ -214,8 +266,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         coverWrap.setMinimumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         coverWrap.setMaximumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         coverWrap.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(BORDER_SONG, BORDER_SONG, BORDER_SONG, BORDER_SONG)));
+            UIManager.getBorder("TextField.border"),
+            BorderFactory.createEmptyBorder(BORDER_SONG, BORDER_SONG, BORDER_SONG, BORDER_SONG)));
 
         // Details
         final JPanel details = new JPanel(new BorderLayout(6, 6));
