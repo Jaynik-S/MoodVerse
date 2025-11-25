@@ -96,10 +96,10 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         backButton.addActionListener(
                 evt -> {
-                if (evt.getSource().equals(backButton) && recommendationController != null) {
-                    recommendationController.executeBack();
+                    if (evt.getSource().equals(backButton) && recommendationController != null) {
+                        recommendationController.executeBack();
+                    }
                 }
-            }
         );
 
         // Main area: two panels side-by-side
@@ -209,7 +209,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         descField.setPreferredSize(new Dimension(200, 120));
 
         details.add(topRow, BorderLayout.NORTH);
-        details.add(descScroll, BorderLayout.CENTER);
+        details.add(descField, BorderLayout.CENTER);
         item.add(coverWrap, BorderLayout.WEST);
         item.add(details, BorderLayout.CENTER);
 
@@ -228,9 +228,9 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     }
 
 
-        /**
-         * Build a song item panel used in the recommendations list.
-         */
+    /**
+     * Build a song item panel used in the recommendations list.
+     */
     private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) throws MalformedURLException {
         final JPanel item = new JPanel(new BorderLayout(8, 8));
         item.setBorder(BorderFactory.createTitledBorder(title));
