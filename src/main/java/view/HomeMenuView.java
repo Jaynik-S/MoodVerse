@@ -272,33 +272,48 @@ class DeleteButtonEditor extends AbstractCellEditor
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int modelRow = table.convertRowIndexToModel(currentRow);
+        // Save current row
+        int viewRow = currentRow;
+        JTable table = this.table;
 
-        HomeMenuState state = viewModel.getState();
-        java.util.List<String> paths = state.getStoragePaths();
-        if (modelRow < paths.size()) {
-            String storagePath = paths.get(modelRow);
-            controller.deleteEntry(storagePath);
+        // stopped editing first, instead of in the end
+        fireEditingStopped();
 
-            if (modelRow < state.getTitles().size()) {
-                state.getTitles().remove(modelRow);
-            }
-            if (modelRow < state.getCreatedDates().size()) {
-                state.getCreatedDates().remove(modelRow);
-            }
-            if (modelRow < state.getUpdatedDates().size()) {
-                state.getUpdatedDates().remove(modelRow);
-            }
-            if (modelRow < state.getKeywords().size()) {
-                state.getKeywords().remove(modelRow);
-            }
-            if (modelRow < state.getStoragePaths().size()) {
-                state.getStoragePaths().remove(modelRow);
-            }
-
-            viewModel.setState(state);
+        if (table == null || viewRow < 0) {
+            return;
         }
 
-        fireEditingStopped();
+        int modelRow = table.convertRowIndexToModel(viewRow);
+
+        HomeMenuState state = viewModel.getState();
+
+        java.util.List<String> titles = state.getTitles();
+        java.util.List<String> created = state.getCreatedDates();
+        java.util.List<String> updated = state.getUpdatedDates();
+        java.util.List<String> keywords = state.getKeywords();
+        java.util.List<String> paths = state.getStoragePaths();
+
+        if (modelRow >= 0 && modelRow < paths.size()) {
+            String storagePath = paths.get(modelRow);
+
+            titles.remove(modelRow);
+            if (modelRow < created.size()) {
+                created.remove(modelRow);
+            }
+            if (modelRow < updated.size()) {
+                updated.remove(modelRow);
+            }
+            if (modelRow < keywords.size()) {
+                keywords.remove(modelRow);
+            }
+            paths.remove(modelRow);
+
+            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+            if (modelRow < tableModel.getRowCount()) {
+                tableModel.removeRow(modelRow);
+            }
+
+            controller.deleteEntry(storagePath);
+        }
     }
 }
