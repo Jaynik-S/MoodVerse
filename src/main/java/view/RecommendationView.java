@@ -1,21 +1,44 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
 import entity.MovieRecommendation;
 import entity.SongRecommendation;
 import interface_adapter.recommendation_menu.RecommendationMenuController;
 import interface_adapter.recommendation_menu.RecommendationMenuState;
 import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * The View for when the user is viewing a note in the program.
@@ -27,13 +50,14 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     // minimal width for recommendation view
     private static final int WIDTH_RECOMMENDATION_MIN = 800;
 
-    private static final int HEIGHT_SCORE = 40;
+    private static final int HEIGHT_SCORE = 50;
     private static final int WIDTH_SCORE = 80;
 
     private static final int HEIGHT_SONG = 167;
     private static final int WIDTH_SONG = 167;
     private static final int BORDER_SONG = 4;
-    private static final int WIDTH_LEFT = 500;
+    private static final int WIDTH_LEFT = 600;
+    private static final int WIDTH_RIGHT = 600;
     private static final int VERTICAL_SPACING = 6;
     private static final int HEIGHT_MOVIE = 210;
     private static final int WIDTH_MOVIE = 140;
@@ -72,10 +96,10 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         backButton.addActionListener(
                 evt -> {
-                if (evt.getSource().equals(backButton) && recommendationController != null) {
-                    recommendationController.executeBack();
+                    if (evt.getSource().equals(backButton) && recommendationController != null) {
+                        recommendationController.executeBack();
+                    }
                 }
-            }
         );
 
         // Main area: two panels side-by-side
@@ -152,22 +176,35 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         final JPanel details = new JPanel(new BorderLayout(6, 6));
         final JPanel topRow = new JPanel(new BorderLayout(6, 6));
+        // Fix the height of the top row so it matches the other fixed rows
+        topRow.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
+        topRow.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
+        topRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
+
         JTextField titleField = new JTextField(movieName);
         titleField.setEditable(false);
+        // make the title visually prominent (kept same font size)
+        titleField.setFont(titleField.getFont().deriveFont(16f));
+        // ensure title field uses the same row height
+        titleField.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
+
         JPanel smallBoxes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
         JTextField yearField = new JTextField(year);
-        yearField.setPreferredSize(new Dimension(80, 40));
+        // match the score row height so components align vertically
+        yearField.setPreferredSize(new Dimension(80, HEIGHT_SCORE));
         yearField.setHorizontalAlignment(JTextField.CENTER);
         yearField.setEditable(false);
         JTextField ratingField = new JTextField(score);
-        ratingField.setPreferredSize(new Dimension(80, 40));
+        ratingField.setPreferredSize(new Dimension(80, HEIGHT_SCORE));
         ratingField.setHorizontalAlignment(JTextField.CENTER);
         ratingField.setEditable(false);
         smallBoxes.add(yearField);
         smallBoxes.add(ratingField);
         topRow.add(titleField, BorderLayout.CENTER);
         topRow.add(smallBoxes, BorderLayout.EAST);
-        JTextField descField = new JTextField(overview);
+        JTextArea descField = new JTextArea(overview);
+        descField.setLineWrap(true);
+        descField.setWrapStyleWord(true);
         descField.setEditable(false);
         descField.setPreferredSize(new Dimension(200, 120));
 
@@ -178,8 +215,12 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
 
         int itemHeight = HEIGHT_MOVIE;
 
+        // Allow the movie item to expand horizontally with the view while
+        // keeping a fixed height. Preferred width is left flexible (0)
+        // and maximum width is very large so BoxLayout will stretch it.
         item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
-        item.setPreferredSize(new Dimension(Short.MAX_VALUE, itemHeight));
+        item.setPreferredSize(new Dimension(0, itemHeight));
+        item.setMinimumSize(new Dimension(0, itemHeight));
         item.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
@@ -187,9 +228,9 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     }
 
 
-        /**
-         * Build a song item panel used in the recommendations list.
-         */
+    /**
+     * Build a song item panel used in the recommendations list.
+     */
     private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) throws MalformedURLException {
         final JPanel item = new JPanel(new BorderLayout(8, 8));
         item.setBorder(BorderFactory.createTitledBorder(title));
@@ -221,9 +262,22 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         final JPanel details = new JPanel(new BorderLayout(6, 6));
 
         final JPanel nameRow = new JPanel(new BorderLayout(6, 6));
+        // Fix the height of this row so controls inside don't change layout
+        // when the view is resized. Width remains flexible.
+        nameRow.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
+        nameRow.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
+        nameRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
         final JTextField nameField = new JTextField(songName);
+        // make the title visually prominent
+        nameField.setFont(nameField.getFont().deriveFont(16f));
+        // ensure the nameField exactly matches the fixed row height
+        nameField.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
+        nameField.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
+        nameField.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
         final JTextField scoreField = new JTextField(score);
         scoreField.setPreferredSize(new Dimension(WIDTH_SCORE, HEIGHT_SCORE));
+        scoreField.setMinimumSize(new Dimension(WIDTH_SCORE, HEIGHT_SCORE));
+        scoreField.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
         scoreField.setHorizontalAlignment(JTextField.CENTER);
         scoreField.setEditable(false);
         nameField.setEditable(false);
@@ -231,6 +285,10 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         nameRow.add(scoreField, BorderLayout.EAST);
 
         final JPanel artistRow = new JPanel(new BorderLayout(6, 6));
+        // Fix the height of the artist row to match the score row height
+        artistRow.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
+        artistRow.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
+        artistRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
         final JTextField artistField = new JTextField(artist);
         final JTextField yearField = new JTextField(year);
         yearField.setPreferredSize(new Dimension(WIDTH_SCORE, HEIGHT_SCORE));
@@ -241,7 +299,26 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         artistRow.add(yearField, BorderLayout.EAST);
 
         final JTextField urlField = new JTextField(url);
+        // make URL read-only but clickable
         urlField.setEditable(false);
+        urlField.setForeground(Color.BLUE);
+        urlField.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        urlField.setToolTipText(url);
+        urlField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    if (url == null || url.isEmpty()) return;
+                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                        Desktop.getDesktop().browse(new URI(url));
+                    } else {
+                        JOptionPane.showMessageDialog(RecommendationView.this, "Opening links is not supported on this platform.", "Not Supported", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(RecommendationView.this, "Unable to open link: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         details.add(nameRow, BorderLayout.NORTH);
         details.add(artistRow, BorderLayout.CENTER);
@@ -250,8 +327,11 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         item.add(coverWrap, BorderLayout.WEST);
         item.add(details, BorderLayout.CENTER);
 
-        item.setMaximumSize(new Dimension(WIDTH_LEFT, HEIGHT_SONG));
-        item.setPreferredSize(new Dimension(WIDTH_LEFT, HEIGHT_SONG));
+        // Make song items horizontally flexible so they follow the list width
+        // instead of using a fixed WIDTH_LEFT. Height remains fixed.
+        item.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SONG));
+        item.setPreferredSize(new Dimension(0, HEIGHT_SONG));
+        item.setMinimumSize(new Dimension(0, HEIGHT_SONG));
         item.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         return item;
