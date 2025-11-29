@@ -19,8 +19,8 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
     private final NewDocumentViewModel newDocumentViewModel;
     private NewDocumentController newDocumentController;
 
-    private final JTextField titleInputField = new JTextField(20);
-    private final JTextField dateInputField = new JTextField(10);
+    private final JTextField titleInputField = new JTextField(15);
+    private final JTextField dateInputField = new JTextField(12);
     private final JTextArea textBodyInputField = new JTextArea(20, 40);
 
     private final JButton backButton = new JButton("Back");
@@ -67,6 +67,7 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         ));
         dateInputField.setFont(new Font("SansSerif", Font.PLAIN, 14));
         dateInputField.setPreferredSize(new Dimension(150, 30));
+        dateInputField.setHorizontalAlignment(JTextField.CENTER);
 
         dateInputField.setEditable(false); //Can't type
         dateInputField.setFocusable(false); //Can't select
@@ -157,4 +158,3 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         this.newDocumentController = controller;
     }
 }
-

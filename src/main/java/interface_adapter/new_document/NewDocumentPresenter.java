@@ -18,7 +18,7 @@ public class NewDocumentPresenter implements
     private final NewDocumentViewModel newDocumentViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm a");
 
     public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel, ViewManagerModel viewManagerModel){
         this.newDocumentViewModel = newDocumentViewModel;
