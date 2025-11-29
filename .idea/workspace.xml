@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/entity/EntityTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/app/MainNoteApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/app/MainNoteApplicationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +74,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.entity in note-application">
+  <component name="RunManager" selected="JUnit.All in note-application">
     <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
       <module name="note-application" />
@@ -89,31 +88,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreateEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="use_case.create_entry.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="use_case.create_entry" />
-      <option name="MAIN_CLASS_NAME" value="use_case.create_entry.CreateEntryInteractorTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeleteEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MainNoteApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="use_case.delete_entry.*" />
+          <option name="PATTERN" value="app.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="use_case.delete_entry" />
-      <option name="MAIN_CLASS_NAME" value="use_case.delete_entry.DeleteEntryInteractorTest" />
+      <option name="PACKAGE_NAME" value="app" />
+      <option name="MAIN_CLASS_NAME" value="app.MainNoteApplicationTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -150,11 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in note-application" />
+        <item itemvalue="JUnit.MainNoteApplicationTest" />
         <item itemvalue="JUnit.entity in note-application" />
         <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
         <item itemvalue="Application.MainNoteApplication" />
-        <item itemvalue="JUnit.CreateEntryInteractorTest" />
-        <item itemvalue="JUnit.DeleteEntryInteractorTest" />
       </list>
     </recent_temporary>
   </component>
