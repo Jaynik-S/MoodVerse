@@ -1,46 +1,64 @@
 package data_access;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// TODO: Re-enable and fix these tests to not modify actual .env file
 public class VerifyPasswordDataAccessObjectTest {
-//
-//    private Path createTempEnvFile(List<String> lines) throws Exception {
-//        Path temp = Paths.get(".env-test");
-//        Files.write(temp, lines);
-//        return temp;
-//    }
-//
-//    @Test
-//    public void testWriteEnvValue_NewKeyAppended() throws Exception {
-//        Path envPath = Paths.get(".env");
-//        Files.write(envPath, List.of("EXISTING=1"));
-//
-//        VerifyPasswordDataAccessObject.writeEnvValue("NEW_KEY", "VALUE");
-//
-//        List<String> lines = Files.readAllLines(envPath);
-//        assertTrue(lines.contains("EXISTING=1"));
-//        assertTrue(lines.contains("NEW_KEY=VALUE"));
-//    }
-//
-//    @Test
-//    public void testWriteEnvValue_ExistingKeyUpdated() throws Exception {
-//        Path envPath = Paths.get(".env");
-//        Files.write(envPath, List.of("PASSWORD=old", "OTHER=2"));
-//
-//        VerifyPasswordDataAccessObject.writeEnvValue("PASSWORD", "newpass");
-//
-//        List<String> lines = Files.readAllLines(envPath);
-//        assertTrue(lines.contains("PASSWORD=newpass"));
-//        assertTrue(lines.contains("OTHER=2"));
-//    }
-}
 
+    private static final Path ENV_TEST_PATH = Paths.get(".env-test");
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        VerifyPasswordDataAccessObject.setEnvPathForTesting(ENV_TEST_PATH);
+        Files.writeString(ENV_TEST_PATH, "PASSWORD=\n");
+        VerifyPasswordDataAccessObject.setSysPasswordForTesting(null);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        // clean up temp env file
+        if (Files.exists(ENV_TEST_PATH)) {
+            Files.delete(ENV_TEST_PATH);
+        }
+    }
+
+    @Test
+    public void testSavingNewPasswordCreatesEntryInEnv() throws Exception {
+        VerifyPasswordDataAccessObject dao = new VerifyPasswordDataAccessObject();
+
+        String result = dao.verifyPassword("newSecret");
+
+        assertEquals("Created new password.", result);
+        String content = Files.readString(ENV_TEST_PATH);
+        assertTrue(content.contains("PASSWORD=newSecret"));
+    }
+
+    @Test
+    public void testIncorrectPassword() throws Exception {
+        // Simulate an existing password
+        VerifyPasswordDataAccessObject.setSysPasswordForTesting("correctPass");
+        VerifyPasswordDataAccessObject dao = new VerifyPasswordDataAccessObject();
+
+        String result = dao.verifyPassword("wrongPass");
+
+        assertEquals("Incorrect Password", result);
+    }
+
+    @Test
+    public void testCorrectPassword() throws Exception {
+        // Simulate an existing password
+        VerifyPasswordDataAccessObject.setSysPasswordForTesting("correctPass");
+        VerifyPasswordDataAccessObject dao = new VerifyPasswordDataAccessObject();
+
+        String result = dao.verifyPassword("correctPass");
+
+        assertEquals("Correct Password", result);
+    }
+}

@@ -3,17 +3,21 @@ package data_access;
 import io.github.cdimascio.dotenv.Dotenv;
 import use_case.verify_password.VerifyPasswordUserDataAccessInterface;
 
-import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
 public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAccessInterface {
     public String passwordStatus;
-    private static Dotenv dotenv = Dotenv.load();
+    private static final Dotenv dotenv = Dotenv.load();
     private static String SYS_PASSWORD = dotenv.get("PASSWORD");
+    private static Path envPath = Paths.get(".env");
+
+    public static void setSysPasswordForTesting(String password) {
+        SYS_PASSWORD = password;
+    }
+    public static void setEnvPathForTesting(Path path) { envPath = path;  }
 
     public static void writeEnvValue(String key, String value) throws Exception {
-        Path envPath = Paths.get(".env");
         List<String> lines = Files.readAllLines(envPath);
         boolean keyFound = false;
 
@@ -24,12 +28,14 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
                 break;
             }
         }
-        if (!keyFound) { lines.add(key + "=" + value);  }
+        if (!keyFound) {
+            lines.add(key + "=" + value);
+        }
         Files.write(envPath, lines);
     }
 
     public String verifyPassword(String password) throws Exception {
-        if (SYS_PASSWORD.equals(password)) {
+        if (SYS_PASSWORD != null && SYS_PASSWORD.equals(password)) {
             passwordStatus = "Correct Password";
 
         } else if (SYS_PASSWORD == null || SYS_PASSWORD.isEmpty()) {
@@ -40,7 +46,9 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
                 throw new Exception("Failed to set new password: ", e);
             }
 
-        } else {  passwordStatus = "Incorrect Password";  }
+        } else {
+            passwordStatus = "Incorrect Password";
+        }
         return passwordStatus;
     }
 }
