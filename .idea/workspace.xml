@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env-test" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/VerifyPasswordDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/VerifyPasswordDataAccessObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/data_access/VerifyPasswordDataAccessObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/data_access/VerifyPasswordDataAccessObjectTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/entity/EntityTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +61,7 @@
     "JUnit.VerifyPasswordDataAccessObjectTest.testSavingNewPasswordCreatesEntryInEnv.executor": "Debug",
     "JUnit.VerifyPasswordInteractorTest.executor": "Run",
     "JUnit.data_access in note-application.executor": "Run",
+    "JUnit.entity in note-application.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -76,7 +75,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.VerifyPasswordDataAccessObjectTest">
+  <component name="RunManager" selected="JUnit.entity in note-application">
     <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
       <module name="note-application" />
@@ -120,21 +119,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GetRecommendationsInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="note-application" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="use_case.get_recommendations.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="use_case.get_recommendations" />
-      <option name="MAIN_CLASS_NAME" value="use_case.get_recommendations.GetRecommendationsInteractorTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="VerifyPasswordDataAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
@@ -150,13 +134,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="entity in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="entity" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.entity in note-application" />
         <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
         <item itemvalue="Application.MainNoteApplication" />
         <item itemvalue="JUnit.CreateEntryInteractorTest" />
         <item itemvalue="JUnit.DeleteEntryInteractorTest" />
-        <item itemvalue="JUnit.GetRecommendationsInteractorTest" />
       </list>
     </recent_temporary>
   </component>
