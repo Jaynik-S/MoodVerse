@@ -1,5 +1,4 @@
 package interface_adapter.home_menu;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 public class HomeMenuPresenter{
 
     private final HomeMenuViewModel viewModel;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm a");
 
     public HomeMenuPresenter(HomeMenuViewModel viewModel) {
         this.viewModel = viewModel;
@@ -20,7 +19,7 @@ public class HomeMenuPresenter{
         return value == null ? "" : value.toString();
     }
 
-    private String formatDateValue(Object value) {
+    private static String formatDateValue(Object value) {
         if (value == null) {
             return "";
         }
@@ -36,7 +35,7 @@ public class HomeMenuPresenter{
 
 
 
-    private String keywordsToDisplay(Object keywordsObj) {
+    private static String keywordsToDisplay(Object keywordsObj) {
         if (keywordsObj == null) {
             return "";
         }
@@ -76,15 +75,18 @@ public class HomeMenuPresenter{
     }
 
     public void presentEntriesFromData(List<Map<String, Object>> rawEntries) {
-
+        if (rawEntries == null || rawEntries.isEmpty()) {
+            presentEntries(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            return;
+        }
         List<Map<String, Object>> sortedEntries = new ArrayList<>(rawEntries);
 
         sortedEntries.sort((a, b) ->{
             Object ua = a.get("updatedDate");
             Object ub = b.get("updatedDate");
 
-            if (ua instanceof java.time.LocalDateTime && ub instanceof java.time.LocalDateTime) {
-                return ((java.time.LocalDateTime) ub).compareTo((java.time.LocalDateTime) ua);
+            if (ua instanceof LocalDateTime && ub instanceof LocalDateTime) {
+                return ((LocalDateTime) ub).compareTo((LocalDateTime) ua);
             }
             return 0;
         });

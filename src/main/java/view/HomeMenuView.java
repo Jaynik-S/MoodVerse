@@ -61,7 +61,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Table
-        String[] columnNames = {"Titles", "Created", "Update", ""};
+        String[] columnNames = {"Titles", "Created", "Updated", "Delete"};
 //        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         // Made the table row can be highlighted but can not edit
