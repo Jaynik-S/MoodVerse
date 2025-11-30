@@ -44,9 +44,6 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
                 BorderFactory.createEmptyBorder(8, 12, 8, 12))
         );
 
-        JLabel headerLabel = new JLabel("New Entry");
-        headerLabel.setFont(new Font(headerLabel.getFont().getFontName(), Font.BOLD, 18));
-        headerLabel.setForeground(new Color(30, 64, 175));
 
         // Button styling to stay consistent across app
         styleSecondaryButton(backButton);
@@ -55,11 +52,10 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
         buttonPanel.setOpaque(false);
-        buttonPanel.add(backButton);
         buttonPanel.add(recommendButton);
         buttonPanel.add(saveButton);
 
-        topCard.add(headerLabel, BorderLayout.WEST);
+        topCard.add(backButton, BorderLayout.WEST);
         topCard.add(buttonPanel, BorderLayout.EAST);
 
         // Main content card
@@ -145,6 +141,7 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         button.setFont(new Font(button.getFont().getFontName(), Font.BOLD, 14));
         button.setFocusPainted(false);
         button.setForeground(Color.WHITE);
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI()); // fix for MacOS
         button.setBackground(new Color(37, 99, 235));
         button.setBorder(BorderFactory.createEmptyBorder(6, 14, 6, 14));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
