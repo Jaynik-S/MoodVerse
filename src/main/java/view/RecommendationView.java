@@ -11,6 +11,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -62,6 +64,16 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private static final int HEIGHT_MOVIE = 210;
     private static final int WIDTH_MOVIE = 140;
 
+    private static final int FIELD_PAD_Y = 6;
+    private static final int FIELD_PAD_X = 10;
+
+    private static final float FONT_TITLE = 15f;
+    private static final float FONT_SUBTITLE = 13f;
+    private static final float FONT_META = 12f;
+    private static final float FONT_URL = 11f;
+    private static final float FONT_DESC = 12f;
+    private static final float FONT_MIN = 10f;
+
     private RecommendationMenuController recommendationController;
 
     private final RecommendationMenuViewModel recommendationViewModel;
@@ -71,28 +83,24 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     private final JButton backButton = new JButton("Back");
     private JPanel leftList;
     private JPanel rightList;
-    public RecommendationView(RecommendationMenuViewModel recommendationViewModel, RecommendationMenuController recommendationController, RecommendationMenuState recommendationState) throws MalformedURLException {
+
+    public RecommendationView(RecommendationMenuViewModel recommendationViewModel,
+                              RecommendationMenuController recommendationController,
+                              RecommendationMenuState recommendationState) {
 
         this.setSize(1000, 800);
 
-        // Prevent the window from being resized smaller than a usable minimum
         this.setMinimumSize(new Dimension(WIDTH_RECOMMENDATION_MIN, HEIGHT_RECOMMENDATION_MIN));
 
         this.recommendationViewModel = recommendationViewModel;
-
         this.recommendationController = recommendationController;
-
         this.recommendationState = recommendationState;
 
         this.recommendationViewModel.addPropertyChangeListener(this);
 
-        // Do not access recommendation lists here — they are empty until the use-case runs.
-        // Create empty containers and populate them when `propertyChange` fires.
-
         // Top panel with a left-aligned Back button
         final JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.add(backButton);
-
 
         backButton.addActionListener(
                 evt -> {
@@ -102,27 +110,36 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
                 }
         );
 
-        // Main area: two panels side-by-side
         final JPanel mainPanel = new JPanel(new GridLayout(1, 2, 8, 0));
 
-        // Left panel: Songs
+        // song pannel
         final JPanel leftPanel = new JPanel(new BorderLayout());
-        leftPanel.setBorder(BorderFactory.createTitledBorder("Songs"));
+        leftPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "Songs"),
+                BorderFactory.createEmptyBorder(6, 6, 6, 6)));
+
         leftList = new JPanel();
         leftList.setLayout(new BoxLayout(leftList, BoxLayout.Y_AXIS));
-        leftPanel.add(new JScrollPane(leftList), BorderLayout.CENTER);
+        leftList.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 
-        // Right panel: Movies
+        final JScrollPane leftScroll = new JScrollPane(leftList);
+        leftScroll.setBorder(BorderFactory.createEmptyBorder());
+        leftPanel.add(leftScroll, BorderLayout.CENTER);
+
+        //  movie pannel
         final JPanel rightPanel = new JPanel(new BorderLayout());
-        rightPanel.setBorder(BorderFactory.createTitledBorder("Movies"));
+        rightPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "Movies"),
+                BorderFactory.createEmptyBorder(6, 6, 6, 6)));
+
         rightList = new JPanel();
         rightList.setLayout(new BoxLayout(rightList, BoxLayout.Y_AXIS));
-        rightPanel.add(new JScrollPane(rightList), BorderLayout.CENTER);
+        rightList.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 
-        // initially empty — populated by `setFields` when recommendations arrive
+        final JScrollPane rightScroll = new JScrollPane(rightList);
+        rightScroll.setBorder(BorderFactory.createEmptyBorder());
+        rightPanel.add(rightScroll, BorderLayout.CENTER);
 
-
-        // add left and right panel to main area
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
 
@@ -148,14 +165,66 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         }
     }
 
+    // invisible border used only for padding (no inner outlines)
+    private static void styleReadOnlyField(JTextField field, float fontSize, boolean bold) {
+        field.setEditable(false);
+        field.setBorder(BorderFactory.createEmptyBorder(FIELD_PAD_Y, FIELD_PAD_X, FIELD_PAD_Y, FIELD_PAD_X));
+        field.setOpaque(false);
+        field.setFocusable(false);
+        final int style = bold ? java.awt.Font.BOLD : java.awt.Font.PLAIN;
+        field.setFont(field.getFont().deriveFont(style, fontSize));
+    }
+
+    private static void styleReadOnlyArea(JTextArea area, float fontSize) {
+        area.setEditable(false);
+        area.setBorder(BorderFactory.createEmptyBorder(FIELD_PAD_Y, FIELD_PAD_X, FIELD_PAD_Y, FIELD_PAD_X));
+        area.setOpaque(false);
+        area.setFocusable(false);
+        area.setFont(area.getFont().deriveFont(fontSize));
+    }
+
+    // shrinks a text field's font size until its text fits the available width
+    private static void installAutoFontShrink(final JTextField field, final float minSize) {
+        field.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                shrinkFontToFit(field, minSize);
+            }
+        });
+        SwingUtilities.invokeLater(() -> shrinkFontToFit(field, minSize));
+    }
+
+    private static void shrinkFontToFit(JTextField field, float minSize) {
+        final String txt = field.getText();
+        if (txt == null || txt.isEmpty()) return;
+
+        final int available = Math.max(0, field.getWidth() - field.getInsets().left - field.getInsets().right - 4);
+        if (available <= 0) return;
+
+        float size = field.getFont().getSize2D();
+        final java.awt.Font base = field.getFont();
+
+        while (size > minSize) {
+            final java.awt.Font f = base.deriveFont(size);
+            final int w = field.getFontMetrics(f).stringWidth(txt);
+            if (w <= available) {
+                field.setFont(f);
+                return;
+            }
+            size -= 0.5f;
+        }
+        field.setFont(base.deriveFont(minSize));
+    }
+
     private JPanel createMovieItem(String title, String movieName, String score, String year, String overview, String imageUrl) {
 
         final JPanel item = new JPanel(new BorderLayout(8, 8));
-        item.setBorder(BorderFactory.createTitledBorder(title));
+        item.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder(title),
+                BorderFactory.createEmptyBorder(6, 6, 6, 6)));
 
         JLabel cover = new JLabel();
         cover.setHorizontalAlignment(JLabel.CENTER);
-        // try to load image from URL and scale to cover area (WIDTH_MOVIE x HEIGHT_MOVIE minus border)
         ImageIcon movieIcon = loadAndScale(imageUrl, WIDTH_MOVIE - BORDER_SONG * 2, HEIGHT_MOVIE - BORDER_SONG * 2);
         if (movieIcon != null) {
             cover.setIcon(movieIcon);
@@ -165,142 +234,139 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         cover.setPreferredSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         cover.setMinimumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         cover.setMaximumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
+
         JPanel coverWrap = new JPanel(new BorderLayout());
         coverWrap.add(cover, BorderLayout.CENTER);
         coverWrap.setMinimumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         coverWrap.setPreferredSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
         coverWrap.setMaximumSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
-        coverWrap.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(4, 4, 4, 4)));
+        coverWrap.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 
         final JPanel details = new JPanel(new BorderLayout(6, 6));
         final JPanel topRow = new JPanel(new BorderLayout(6, 6));
-        // Fix the height of the top row so it matches the other fixed rows
+
         topRow.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
         topRow.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
         topRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
 
         JTextField titleField = new JTextField(movieName);
-        titleField.setEditable(false);
-        // make the title visually prominent (kept same font size)
-        titleField.setFont(titleField.getFont().deriveFont(16f));
-        // ensure title field uses the same row height
+        styleReadOnlyField(titleField, FONT_TITLE, true);
         titleField.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
+        installAutoFontShrink(titleField, FONT_MIN);
 
         JPanel smallBoxes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
         JTextField yearField = new JTextField(year);
-        // match the score row height so components align vertically
         yearField.setPreferredSize(new Dimension(80, HEIGHT_SCORE));
         yearField.setHorizontalAlignment(JTextField.CENTER);
-        yearField.setEditable(false);
+        styleReadOnlyField(yearField, FONT_META, false);
+
         JTextField ratingField = new JTextField(score);
         ratingField.setPreferredSize(new Dimension(80, HEIGHT_SCORE));
         ratingField.setHorizontalAlignment(JTextField.CENTER);
-        ratingField.setEditable(false);
+        styleReadOnlyField(ratingField, FONT_META, false);
+
         smallBoxes.add(yearField);
         smallBoxes.add(ratingField);
+
         topRow.add(titleField, BorderLayout.CENTER);
         topRow.add(smallBoxes, BorderLayout.EAST);
+
         JTextArea descField = new JTextArea(overview);
         descField.setLineWrap(true);
         descField.setWrapStyleWord(true);
-        descField.setEditable(false);
+        styleReadOnlyArea(descField, FONT_DESC);
         descField.setPreferredSize(new Dimension(200, 120));
 
         details.add(topRow, BorderLayout.NORTH);
         details.add(descField, BorderLayout.CENTER);
+
         item.add(coverWrap, BorderLayout.WEST);
         item.add(details, BorderLayout.CENTER);
 
         int itemHeight = HEIGHT_MOVIE;
 
-        // Allow the movie item to expand horizontally with the view while
-        // keeping a fixed height. Preferred width is left flexible (0)
-        // and maximum width is very large so BoxLayout will stretch it.
         item.setMaximumSize(new Dimension(Integer.MAX_VALUE, itemHeight));
         item.setPreferredSize(new Dimension(0, itemHeight));
         item.setMinimumSize(new Dimension(0, itemHeight));
         item.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-
         return item;
     }
-
 
     /**
      * Build a song item panel used in the recommendations list.
      */
     private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) throws MalformedURLException {
         final JPanel item = new JPanel(new BorderLayout(8, 8));
-        item.setBorder(BorderFactory.createTitledBorder(title));
-
+        // Keep a single border around the whole entry
+        item.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder(title),
+                BorderFactory.createEmptyBorder(6, 6, 6, 6)));
 
         final JLabel cover = new JLabel();
         cover.setHorizontalAlignment(JLabel.CENTER);
-        // try to load song image and scale to the cover area
+
         ImageIcon songIcon = loadAndScale(imageUrl, WIDTH_SONG - BORDER_SONG * 2, HEIGHT_SONG - BORDER_SONG * 2);
         if (songIcon != null) {
             cover.setIcon(songIcon);
         } else {
             cover.setText("<html><div style='text-align:center;'>COVER<br>IMAGE<br>(640x640)</div></html>");
         }
-        // enforce fixed size for song covers
+
         cover.setPreferredSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         cover.setMinimumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         cover.setMaximumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
+
         final JPanel coverWrap = new JPanel(new BorderLayout());
         coverWrap.add(cover, BorderLayout.CENTER);
         coverWrap.setPreferredSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         coverWrap.setMinimumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
         coverWrap.setMaximumSize(new Dimension(WIDTH_SONG, HEIGHT_SONG));
-        coverWrap.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(BORDER_SONG, BORDER_SONG, BORDER_SONG, BORDER_SONG)));
+        coverWrap.setBorder(BorderFactory.createEmptyBorder(BORDER_SONG, BORDER_SONG, BORDER_SONG, BORDER_SONG));
 
-        // Details
         final JPanel details = new JPanel(new BorderLayout(6, 6));
 
         final JPanel nameRow = new JPanel(new BorderLayout(6, 6));
-        // Fix the height of this row so controls inside don't change layout
-        // when the view is resized. Width remains flexible.
         nameRow.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
         nameRow.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
         nameRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
+
         final JTextField nameField = new JTextField(songName);
-        // make the title visually prominent
-        nameField.setFont(nameField.getFont().deriveFont(16f));
-        // ensure the nameField exactly matches the fixed row height
+        styleReadOnlyField(nameField, FONT_TITLE, true);
+        installAutoFontShrink(nameField, FONT_MIN);
         nameField.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
         nameField.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
         nameField.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
+
         final JTextField scoreField = new JTextField(score);
         scoreField.setPreferredSize(new Dimension(WIDTH_SCORE, HEIGHT_SCORE));
         scoreField.setMinimumSize(new Dimension(WIDTH_SCORE, HEIGHT_SCORE));
         scoreField.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
         scoreField.setHorizontalAlignment(JTextField.CENTER);
-        scoreField.setEditable(false);
-        nameField.setEditable(false);
+        styleReadOnlyField(scoreField, FONT_META, false);
+
         nameRow.add(nameField, BorderLayout.CENTER);
         nameRow.add(scoreField, BorderLayout.EAST);
 
         final JPanel artistRow = new JPanel(new BorderLayout(6, 6));
-        // Fix the height of the artist row to match the score row height
         artistRow.setPreferredSize(new Dimension(0, HEIGHT_SCORE));
         artistRow.setMinimumSize(new Dimension(0, HEIGHT_SCORE));
         artistRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SCORE));
+
         final JTextField artistField = new JTextField(artist);
+        styleReadOnlyField(artistField, FONT_SUBTITLE, false);
+
         final JTextField yearField = new JTextField(year);
         yearField.setPreferredSize(new Dimension(WIDTH_SCORE, HEIGHT_SCORE));
         yearField.setHorizontalAlignment(JTextField.CENTER);
-        artistField.setEditable(false);
-        yearField.setEditable(false);
+        styleReadOnlyField(yearField, FONT_META, false);
+
         artistRow.add(artistField, BorderLayout.CENTER);
         artistRow.add(yearField, BorderLayout.EAST);
 
         final JTextField urlField = new JTextField(url);
-        // make URL read-only but clickable
-        urlField.setEditable(false);
+        styleReadOnlyField(urlField, FONT_URL, false);
+        installAutoFontShrink(urlField, FONT_MIN);
         urlField.setForeground(Color.BLUE);
         urlField.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         urlField.setToolTipText(url);
@@ -312,10 +378,16 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
                     if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                         Desktop.getDesktop().browse(new URI(url));
                     } else {
-                        JOptionPane.showMessageDialog(RecommendationView.this, "Opening links is not supported on this platform.", "Not Supported", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(RecommendationView.this,
+                                "Opening links is not supported on this platform.",
+                                "Not Supported",
+                                JOptionPane.WARNING_MESSAGE);
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(RecommendationView.this, "Unable to open link: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(RecommendationView.this,
+                            "Unable to open link: " + ex.getMessage(),
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -327,8 +399,6 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         item.add(coverWrap, BorderLayout.WEST);
         item.add(details, BorderLayout.CENTER);
 
-        // Make song items horizontally flexible so they follow the list width
-        // instead of using a fixed WIDTH_LEFT. Height remains fixed.
         item.setMaximumSize(new Dimension(Integer.MAX_VALUE, HEIGHT_SONG));
         item.setPreferredSize(new Dimension(0, HEIGHT_SONG));
         item.setMinimumSize(new Dimension(0, HEIGHT_SONG));
@@ -351,6 +421,7 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void setFields(RecommendationMenuState recommendationMenuState) {
         SwingUtilities.invokeLater(() -> {
             leftList.removeAll();
@@ -383,7 +454,6 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
                     leftList.add(createSongItem("Song #5", s5.getSongName(), s5.getPopularityScore(), s5.getArtistName(), s5.getReleaseYear(), s5.getExternalUrl(), s5.getImageUrl()));
                 }
             } catch (Exception e) {
-                // If creating song items fails, show a simple fallback label
                 leftList.removeAll();
                 leftList.add(new JLabel("Unable to load songs"));
             }
