@@ -45,7 +45,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         JButton newEntryButton = new JButton("New Entry");
         newEntryButton.setFont(new Font(newEntryButton.getFont().getFontName(), Font.BOLD, 14));
         newEntryButton.setFocusPainted(false);
-        newEntryButton.setForeground(Color.BLACK);
+        newEntryButton.setForeground(Color.WHITE);
         newEntryButton.setUI(new javax.swing.plaf.basic.BasicButtonUI()); // fix for MacOS
         newEntryButton.setBackground(new Color(37, 99, 235));
         newEntryButton.setBorder(BorderFactory.createEmptyBorder(6,14,6,14));
@@ -62,14 +62,16 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Table
-        String[] columnNames = {"Title", "Created", "Updated", "Delete"};
+        // String[] columnNames = {"Title", "Created", "Updated", "Delete"};
+        String[] columnNames = {"Title", "Created", "Delete Entry"};
 //        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         // Made the table row can be highlighted but can not edit
         model = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 3;
+                // return column == 3;
+                return column == 2;
             }
         };
 
@@ -86,10 +88,10 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
 
         table.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
         table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        // table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
 
-        table.getColumnModel().getColumn(3).setCellRenderer(new DeleteButtonRenderer());
-        table.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(controller, viewModel));
+        table.getColumnModel().getColumn(2).setCellRenderer(new DeleteButtonRenderer());
+        table.getColumnModel().getColumn(2).setCellEditor(new DeleteButtonEditor(controller, viewModel));
 
 
         // Grid
@@ -170,7 +172,8 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         for (int i = 0; i < n; i++) {
             String createdToShow = i < createdDates.size() ? createdDates.get(i) : "";
             String updateToShow = i < updatedDates.size() ? updatedDates.get(i) : "";
-            model.addRow(new Object[]{titles.get(i), createdToShow, updateToShow, "Delete"});
+            // model.addRow(new Object[]{titles.get(i), createdToShow, updateToShow, "Delete"});
+            model.addRow(new Object[]{titles.get(i), createdToShow, "Delete"});
         }
     }
 
