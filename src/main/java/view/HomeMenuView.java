@@ -90,7 +90,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
 
         table.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);   // Title
         table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Created
-        table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Keywords
+        table.getColumnModel().getColumn(2).setCellRenderer(leftRenderer); // Keywords
 
         table.getColumnModel().getColumn(3).setCellRenderer(new DeleteButtonRenderer());
         table.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(controller, viewModel));
