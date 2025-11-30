@@ -25,20 +25,14 @@ MoodVerse is a desktop diary app that lets users create, save, edit, and organiz
 
 1. **Password-Protected Access**  
    On startup, the app presents a lock screen. Users must enter the correct password before accessing any diary entries.
-
-   _Example lock screen:_  
    ![Lock Screen](docs/images/lock-screen.png)
 
 2. **Home / Entry List View**  
    After unlocking, users land on the home screen, where they can browse existing diary entries and choose to create a new one.
-
-   _Example home menu:_  
    ![Home Menu](docs/images/home-menu.png)
 
 3. **Write an Entry**  
    From the home screen, users can create a new diary entry and type their thoughts.
-
-   _Example new entry view:_  
    ![New Entry](docs/images/new-entry.png)
 
 4. **Save & Organize**  
@@ -46,8 +40,6 @@ MoodVerse is a desktop diary app that lets users create, save, edit, and organiz
 
 5. **NLP Analysis & Recommendations**  
    When users request recommendations, the app uses Stanford CoreNLP to identify keywords, phrases, and overall themes in the entry. These are then sent to Spotify and TMDb to fetch songs and movies that match the themes and vibe of the writing.
-
-   _Example recommendations view:_  
    ![Recommendations](docs/images/recommendations.png)
 
 ## Getting Started
