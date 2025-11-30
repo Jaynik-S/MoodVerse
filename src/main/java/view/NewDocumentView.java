@@ -19,8 +19,8 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
     private final NewDocumentViewModel newDocumentViewModel;
     private NewDocumentController newDocumentController;
 
-    private final JTextField titleInputField = new JTextField(20);
-    private final JTextField dateInputField = new JTextField(10);
+    private final JTextField titleInputField = new JTextField(15);
+    private final JTextField dateInputField = new JTextField(12);
     private final JTextArea textBodyInputField = new JTextArea(20, 40);
 
     private final JButton backButton = new JButton("Back");
@@ -31,74 +31,93 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         this.newDocumentViewModel = newDocumentViewModel;
         this.newDocumentViewModel.addPropertyChangeListener(this);
 
-        // Set up the main layout
-        this.setLayout(new BorderLayout(10, 10));
-        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // Soft background and outer padding matching HomeMenuView
+        setLayout(new BorderLayout(16, 16));
+        setBackground(new Color(245, 248, 255));
+        setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
 
-        // Top panel with buttons
-        final JPanel topPanel = new JPanel(new BorderLayout());
-        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
+        // Top bar container (card-like) with buttons right-aligned
+        JPanel topCard = new JPanel(new BorderLayout());
+        topCard.setBackground(new Color(219, 234, 254));
+        topCard.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(191, 219, 254)),
+                BorderFactory.createEmptyBorder(8, 12, 8, 12))
+        );
+
+        JLabel headerLabel = new JLabel("New Entry");
+        headerLabel.setFont(new Font(headerLabel.getFont().getFontName(), Font.BOLD, 18));
+        headerLabel.setForeground(new Color(30, 64, 175));
+
+        // Button styling to stay consistent across app
+        styleSecondaryButton(backButton);
+        styleSecondaryButton(recommendButton);
+        stylePrimaryButton(saveButton);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        buttonPanel.setOpaque(false);
         buttonPanel.add(backButton);
         buttonPanel.add(recommendButton);
         buttonPanel.add(saveButton);
-        topPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        // Content panel
-        final JPanel contentPanel = new JPanel(new BorderLayout(10, 10));
-        contentPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        contentPanel.setBackground(Color.LIGHT_GRAY);
+        topCard.add(headerLabel, BorderLayout.WEST);
+        topCard.add(buttonPanel, BorderLayout.EAST);
 
-        // Title and Date panel
-        final JPanel titleDatePanel = new JPanel(new BorderLayout(10, 5));
-        titleDatePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        titleDatePanel.setBackground(Color.LIGHT_GRAY);
+        // Main content card
+        JPanel contentCard = new JPanel(new BorderLayout(12, 12));
+        contentCard.setBackground(Color.WHITE);
+        contentCard.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(226, 232, 240)),
+                BorderFactory.createEmptyBorder(16, 16, 16, 16))
+        );
 
-        // Title field
+        // Title + date row
+        JPanel titleDatePanel = new JPanel(new BorderLayout(10, 0));
+        titleDatePanel.setOpaque(false);
+
         titleInputField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.BLACK, 1),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
-        titleInputField.setFont(new Font("SansSerif", Font.PLAIN, 14));
+                BorderFactory.createLineBorder(new Color(209, 213, 219)),
+                BorderFactory.createEmptyBorder(6, 8, 6, 8))
+        );
+        titleInputField.setFont(new Font("SansSerif", Font.PLAIN, 16));
 
-        // Date field
         dateInputField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.BLACK, 1),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
+                BorderFactory.createLineBorder(new Color(209, 213, 219)),
+                BorderFactory.createEmptyBorder(6, 8, 6, 8))
+        );
         dateInputField.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        dateInputField.setPreferredSize(new Dimension(150, 30));
-
+        dateInputField.setPreferredSize(new Dimension(150, 32));
+        dateInputField.setHorizontalAlignment(JTextField.CENTER);
         dateInputField.setEditable(false); //Can't type
         dateInputField.setFocusable(false); //Can't select
+
         titleDatePanel.add(titleInputField, BorderLayout.CENTER);
         titleDatePanel.add(dateInputField, BorderLayout.EAST);
 
-        // Text body panel
-        final JPanel textBodyPanel = new JPanel(new BorderLayout());
-        textBodyPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-        textBodyPanel.setBackground(Color.LIGHT_GRAY);
+        // Body area
+        JPanel textBodyPanel = new JPanel(new BorderLayout());
+        textBodyPanel.setOpaque(false);
 
-        textBodyInputField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.BLACK, 1),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
         textBodyInputField.setFont(new Font("SansSerif", Font.PLAIN, 14));
         textBodyInputField.setLineWrap(true);
         textBodyInputField.setWrapStyleWord(true);
+        textBodyInputField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(209, 213, 219)),
+                BorderFactory.createEmptyBorder(8, 10, 8, 10))
+        );
 
-        final JScrollPane scrollPane = new JScrollPane(textBodyInputField);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scrollPane = new JScrollPane(textBodyInputField);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getViewport().setBackground(Color.WHITE);
+
         textBodyPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add title/date and text body to content panel
-        contentPanel.add(titleDatePanel, BorderLayout.NORTH);
-        contentPanel.add(textBodyPanel, BorderLayout.CENTER);
+        contentCard.add(titleDatePanel, BorderLayout.NORTH);
+        contentCard.add(textBodyPanel, BorderLayout.CENTER);
 
-        // Add panels to main view
-        this.add(topPanel, BorderLayout.NORTH);
-        this.add(contentPanel, BorderLayout.CENTER);
+        add(topCard, BorderLayout.NORTH);
+        add(contentCard, BorderLayout.CENTER);
 
-        // Add action listeners
+        // Behaviour wiring remains the same
         saveButton.addActionListener(evt -> {
             if (evt.getSource().equals(saveButton)) {
                 final String title = titleInputField.getText();
@@ -120,6 +139,27 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
                 newDocumentController.executeGetRecommendations(textBody);
             }
         });
+    }
+
+    private static void stylePrimaryButton(JButton button) {
+        button.setFont(new Font(button.getFont().getFontName(), Font.BOLD, 14));
+        button.setFocusPainted(false);
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(37, 99, 235));
+        button.setBorder(BorderFactory.createEmptyBorder(6, 14, 6, 14));
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    private static void styleSecondaryButton(JButton button) {
+        button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 13));
+        button.setFocusPainted(false);
+        button.setForeground(new Color(55, 65, 81));
+        button.setBackground(new Color(239, 246, 255));
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(191, 219, 254)),
+                BorderFactory.createEmptyBorder(6, 12, 6, 12))
+        );
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -157,4 +197,3 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         this.newDocumentController = controller;
     }
 }
-

@@ -248,7 +248,7 @@ public class NoteAppBuilder {
     public JFrame build() {
         final JFrame application = new JFrame("MoodVerse - Mood-Based Diary & Recommendations");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        application.setSize(1300, 1000);
+        application.setSize(1350, 1100);
 
         application.add(cardPanel);
 

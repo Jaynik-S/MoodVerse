@@ -1,18 +1,12 @@
 package view;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.*;
 
 import interface_adapter.lock_screen.LockScreenController;
 import interface_adapter.lock_screen.LockScreenState;
@@ -26,7 +20,8 @@ public class LockscreenView extends JPanel implements ActionListener, PropertyCh
     private final LockScreenController lockScreenController;
 
     private final JLabel title = new JLabel("MoodVerse");
-    private final JPasswordField passwordInputField = new JPasswordField(15);
+    private final JLabel subtitle = new JLabel("Enter your password to continue.");
+    private final JPasswordField passwordInputField = new JPasswordField(18);
     private final JButton enterButton = new JButton("Enter");
 
     public LockscreenView(LockScreenViewModel lockscreenViewModel, LockScreenController lockScreenController) {
@@ -36,19 +31,60 @@ public class LockscreenView extends JPanel implements ActionListener, PropertyCh
 
         this.lockScreenViewModel.addPropertyChangeListener(this);
 
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        passwordInputField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        passwordInputField.setMaximumSize(passwordInputField.getPreferredSize());
-        enterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Root background + padding to mirror HomeMenuView
+        setLayout(new GridBagLayout());
+        setBackground(new Color(245, 248, 255));
+        setBorder(BorderFactory.createEmptyBorder(24, 24, 24, 24));
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(Box.createVerticalGlue());
-        this.add(title);
-        this.add(Box.createVerticalStrut(VERTICAL_GAP));
-        this.add(passwordInputField);
-        this.add(Box.createVerticalStrut(VERTICAL_GAP));
-        this.add(enterButton);
-        this.add(Box.createVerticalGlue());
+        // Card container
+        JPanel card = new JPanel();
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setBackground(Color.WHITE);
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(226, 232, 240)),
+                BorderFactory.createEmptyBorder(24, 32, 24, 32))
+        );
+
+        // Typography similar to HomeMenuView title
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 26));
+        title.setForeground(new Color(30, 64, 175));
+
+        subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        subtitle.setFont(new Font(subtitle.getFont().getFontName(), Font.PLAIN, 13));
+        subtitle.setForeground(new Color(75, 85, 99));
+
+        passwordInputField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        passwordInputField.setMaximumSize(new Dimension(260, 32));
+        passwordInputField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(209, 213, 219)),
+                BorderFactory.createEmptyBorder(6, 8, 6, 8))
+        );
+        passwordInputField.setFont(new Font(passwordInputField.getFont().getFontName(), Font.PLAIN, 14));
+
+        // Primary button styling to match New Entry button
+        enterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        enterButton.setFont(new Font(enterButton.getFont().getFontName(), Font.BOLD, 14));
+        enterButton.setFocusPainted(false);
+        enterButton.setForeground(Color.WHITE);
+        enterButton.setBackground(new Color(37, 99, 235));
+        enterButton.setBorder(BorderFactory.createEmptyBorder(8, 18, 8, 18));
+        enterButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        // Build vertical layout
+        card.add(title);
+        card.add(Box.createVerticalStrut(6));
+        card.add(subtitle);
+        card.add(Box.createVerticalStrut(VERTICAL_GAP * 2));
+        card.add(passwordInputField);
+        card.add(Box.createVerticalStrut(VERTICAL_GAP * 2));
+        card.add(enterButton);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(card, gbc);
 
         enterButton.addActionListener(this);
     }
@@ -75,6 +111,5 @@ public class LockscreenView extends JPanel implements ActionListener, PropertyCh
             state.setError(null);
         }
     }
-
 
 }
