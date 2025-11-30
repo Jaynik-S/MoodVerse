@@ -77,9 +77,13 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
 
 
         table = new JTable(model);
-        table.setRowHeight(26);
+        table.setRowHeight(30);
         table.setFillsViewportHeight(true);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        // Increase base font size for table cells
+        Font baseTableFont = table.getFont();
+        table.setFont(baseTableFont.deriveFont(16f));
 
         StripedTableCellRenderer leftRenderer =
                 new StripedTableCellRenderer(SwingConstants.LEFT);
@@ -102,7 +106,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         JTableHeader tableHeader = table.getTableHeader();
         tableHeader.setBackground(Color.PINK);
         tableHeader.setForeground(new Color(55, 61, 81));
-        tableHeader.setFont(new Font(tableHeader.getFont().getFontName(), Font.BOLD, 12));
+        tableHeader.setFont(new Font(tableHeader.getFont().getFontName(), Font.BOLD, 14));
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -143,22 +147,6 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
 
     }
 
-    private void initDummyData() {
-        HomeMenuState state = viewModel.getState();
-        state.setTitles(List.of("Beach Day", "Winter Night"));
-        state.setCreatedDates(List.of("2025-09-09", "2025-07-10"));
-        state.setUpdatedDates(List.of("2025-09-10", "2025-07-11"));
-        state.setKeywords(List.of("happy, sunny", "None"));
-//        state.setEntryIDs(List.of(1, 2));
-
-        state.setStoragePaths(List.of(
-                "data/entries/entry1.json",
-                "data/entries/entry2.json"
-        ));
-
-        viewModel.setState(state);
-    }
-
     private void refreshTable() {
         HomeMenuState state = viewModel.getState();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -197,6 +185,10 @@ class StripedTableCellRenderer extends DefaultTableCellRenderer {
         Component c = super.getTableCellRendererComponent(
                 table, value, isSelected, hasFocus, row, column);
 
+        // Increase font size for cell text
+        Font baseFont = c.getFont();
+        c.setFont(baseFont.deriveFont(16f));
+
         if (!isSelected) {
             if (row % 2 == 0) {
                 c.setBackground(new Color(250, 252, 255));
@@ -220,6 +212,7 @@ class DeleteButtonRenderer extends JButton implements TableCellRenderer {
         setFocusPainted(false);
         setBorder(BorderFactory.createEmptyBorder(4,10,4,10));
         setText("Delete");
+        setFont(getFont().deriveFont(Font.PLAIN, 16f));
     }
 
     @Override
@@ -258,6 +251,7 @@ class DeleteButtonEditor extends AbstractCellEditor
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createEmptyBorder(4,10,4,10));
         button.setOpaque(true);
+        button.setFont(button.getFont().deriveFont(Font.PLAIN, 16f));
     }
 
     @Override

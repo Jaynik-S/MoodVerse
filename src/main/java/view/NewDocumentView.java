@@ -74,14 +74,15 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
                 BorderFactory.createLineBorder(new Color(209, 213, 219)),
                 BorderFactory.createEmptyBorder(6, 8, 6, 8))
         );
-        titleInputField.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        // Match larger, readable size similar to HomeMenuView table text
+        titleInputField.setFont(new Font("SansSerif", Font.PLAIN, 18));
 
         dateInputField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(209, 213, 219)),
                 BorderFactory.createEmptyBorder(6, 8, 6, 8))
         );
-        dateInputField.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        dateInputField.setPreferredSize(new Dimension(150, 32));
+        dateInputField.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        dateInputField.setPreferredSize(new Dimension(150, 36));
         dateInputField.setHorizontalAlignment(JTextField.CENTER);
         dateInputField.setEditable(false); //Can't type
         dateInputField.setFocusable(false); //Can't select
@@ -93,7 +94,8 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         JPanel textBodyPanel = new JPanel(new BorderLayout());
         textBodyPanel.setOpaque(false);
 
-        textBodyInputField.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        // Increase text body size for better readability
+        textBodyInputField.setFont(new Font("SansSerif", Font.PLAIN, 16));
         textBodyInputField.setLineWrap(true);
         textBodyInputField.setWrapStyleWord(true);
         textBodyInputField.setBorder(BorderFactory.createCompoundBorder(
