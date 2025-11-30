@@ -46,6 +46,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         newEntryButton.setFont(new Font(newEntryButton.getFont().getFontName(), Font.BOLD, 14));
         newEntryButton.setFocusPainted(false);
         newEntryButton.setForeground(Color.BLACK);
+        newEntryButton.setUI(new javax.swing.plaf.basic.BasicButtonUI()); // fix for MacOS
         newEntryButton.setBackground(new Color(37, 99, 235));
         newEntryButton.setBorder(BorderFactory.createEmptyBorder(6,14,6,14));
         newEntryButton.addActionListener(e -> {

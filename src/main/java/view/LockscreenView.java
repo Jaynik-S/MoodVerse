@@ -67,6 +67,7 @@ public class LockscreenView extends JPanel implements ActionListener, PropertyCh
         enterButton.setFont(new Font(enterButton.getFont().getFontName(), Font.BOLD, 14));
         enterButton.setFocusPainted(false);
         enterButton.setForeground(Color.WHITE);
+        enterButton.setUI(new javax.swing.plaf.basic.BasicButtonUI()); // fix for MacOS
         enterButton.setBackground(new Color(37, 99, 235));
         enterButton.setBorder(BorderFactory.createEmptyBorder(8, 18, 8, 18));
         enterButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
