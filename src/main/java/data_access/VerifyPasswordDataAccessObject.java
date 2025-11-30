@@ -18,6 +18,11 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
     public static void setEnvPathForTesting(Path path) { envPath = path;  }
 
     public static void writeEnvValue(String key, String value) throws Exception {
+        if (!Files.exists(envPath)) {
+            Files.createFile(envPath);
+            Files.write(envPath, Collections.singletonList("PASSWORD="));
+        }
+
         List<String> lines = Files.readAllLines(envPath);
         boolean keyFound = false;
 
