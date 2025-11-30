@@ -7,12 +7,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
 import entity.MovieRecommendation;
-import entity.SongRecommendation;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -61,7 +60,8 @@ public class TMDbAPIAccessObject {
         if (ids == null || ids.isEmpty()) return List.of();
 
         HttpClient client = HttpClient.newHttpClient();
-        Set<JSONObject> collected = new LinkedHashSet<>();
+        List<JSONObject> collected = new ArrayList<>();
+        Set<String> seenTitles = new HashSet<>();
 
         List<String> queries = new ArrayList<>();
         for (int i = 0; i < ids.size(); i++) {
@@ -92,12 +92,22 @@ public class TMDbAPIAccessObject {
             if (results == null) continue;
 
             for (int i = 0; i < results.length(); i++) {
-                collected.add(results.getJSONObject(i));
                 if (collected.size() >= limit) break;
+
+                JSONObject movie = results.getJSONObject(i);
+                String title = movie.optString("title", "").trim();
+
+                // Ensure we don't collect movies that share the same title
+                if (title.isEmpty() || seenTitles.contains(title)) {
+                    continue;
+                }
+
+                seenTitles.add(title);
+                collected.add(movie);
             }
         }
 
-        return new ArrayList<>(collected).subList(0, Math.min(collected.size(), limit));
+        return collected.subList(0, Math.min(collected.size(), limit));
     }
     
     public MovieRecommendation JSONtoMovieRecommendation(JSONObject movie) {
@@ -146,4 +156,3 @@ public class TMDbAPIAccessObject {
 //        }
 //    }
 }
-
