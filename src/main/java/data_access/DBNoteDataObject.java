@@ -54,6 +54,8 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
     @Override
     public boolean save(DiaryEntry entry) throws Exception {
         try {
+            RecommendationAPIAccessObject recommendationAPI = new RecommendationAPIAccessObject();
+            entry.setKeywords(recommendationAPI.fetchKeywords(entry.getText()));
             JSONObject json = new JSONObject();
             json.put("title", entry.getTitle());
             json.put("text", entry.getText());

@@ -63,18 +63,16 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
 
         // Table
         // String[] columnNames = {"Title", "Created", "Updated", "Delete"};
-        String[] columnNames = {"Title", "Created", "Delete Entry"};
-//        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        String[] columnNames = {"Title", "Created", "Keywords", "Delete Entry"};
 
         // Made the table row can be highlighted but can not edit
         model = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                // return column == 3;
-                return column == 2;
+                // only the Delete column is editable (button)
+                return column == 3;
             }
         };
-
 
         table = new JTable(model);
         table.setRowHeight(30);
@@ -90,13 +88,18 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         StripedTableCellRenderer centerRenderer =
                 new StripedTableCellRenderer(SwingConstants.CENTER);
 
-        table.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
-        table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        // table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);   // Title
+        table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Created
+        table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Keywords
 
-        table.getColumnModel().getColumn(2).setCellRenderer(new DeleteButtonRenderer());
-        table.getColumnModel().getColumn(2).setCellEditor(new DeleteButtonEditor(controller, viewModel));
+        table.getColumnModel().getColumn(3).setCellRenderer(new DeleteButtonRenderer());
+        table.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(controller, viewModel));
 
+        TableColumnModel columnModel = table.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(250);
+        columnModel.getColumn(1).setPreferredWidth(75);
+        columnModel.getColumn(2).setPreferredWidth(500);
+        columnModel.getColumn(3).setPreferredWidth(35);
 
         // Grid
         table.setShowGrid(true);
@@ -133,7 +136,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
 
                 HomeMenuState state = viewModel.getState();
 
-                // Open Entry
+                // Open Entry when clicking the Title column
                 if (row >= 0 && col == 0) {
 
                     java.util.List<String> paths = state.getStoragePaths();
@@ -155,13 +158,15 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         List<String> titles = state.getTitles();
         List<String> createdDates = state.getCreatedDates();
         List<String> updatedDates = state.getUpdatedDates();
+        List<String> keywords = state.getKeywords();
 
         int n = titles.size();
         for (int i = 0; i < n; i++) {
             String createdToShow = i < createdDates.size() ? createdDates.get(i) : "";
             String updateToShow = i < updatedDates.size() ? updatedDates.get(i) : "";
+            String keywordsToShow = i < keywords.size() ? keywords.get(i) : "";
             // model.addRow(new Object[]{titles.get(i), createdToShow, updateToShow, "Delete"});
-            model.addRow(new Object[]{titles.get(i), createdToShow, "Delete"});
+            model.addRow(new Object[]{titles.get(i), createdToShow, keywordsToShow, "Delete"});
         }
     }
 
