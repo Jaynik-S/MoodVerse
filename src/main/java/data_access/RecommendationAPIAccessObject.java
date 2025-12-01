@@ -1,31 +1,22 @@
 package data_access;
 
-import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import entity.MovieRecommendation;
 import entity.SongRecommendation;
 import entity.Keyword;
 import use_case.get_recommendations.GetRecommendationsUserDataAccessInterface;
 
 import java.util.List;
-import java.util.Properties;
 
 public class RecommendationAPIAccessObject implements GetRecommendationsUserDataAccessInterface {
 
     private final NLPAnalysisDataAccessObject nlpAnalysisDataAccessObject;
 
     public RecommendationAPIAccessObject() {
-        this(createDefaultNlpDao());
+        this(NLPAnalysisDataAccessObject.createWithDefaultPipeline());
     }
 
     public RecommendationAPIAccessObject(NLPAnalysisDataAccessObject nlpAnalysisDataAccessObject) {
         this.nlpAnalysisDataAccessObject = nlpAnalysisDataAccessObject;
-    }
-
-    private static NLPAnalysisDataAccessObject createDefaultNlpDao() {
-        Properties props = new Properties();
-        props.setProperty("annotators", "tokenize,ssplit,pos,lemma");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-        return new NLPAnalysisDataAccessObject(pipeline);
     }
 
     @Override

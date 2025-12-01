@@ -7,6 +7,7 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 import entity.AnalysisResult;
 import entity.Keyword;
+import use_case.analyze_keywords.AnalyzeKeywordsDataAccessInterface;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Adapter responsible for extracting keywords from diary text using Stanford CoreNLP.
@@ -21,7 +23,7 @@ import java.util.Map;
  * the external NLP dependency while returning domain entities (keywords) to the
  * use cases.
  */
-public final class NLPAnalysisDataAccessObject {
+public final class NLPAnalysisDataAccessObject implements AnalyzeKeywordsDataAccessInterface {
     private final StanfordCoreNLP pipeline;
     private static int limit = 20;
 
@@ -30,8 +32,19 @@ public final class NLPAnalysisDataAccessObject {
     }
 
     /**
-     * Returns the top 10 noun-phrase keywords found in the provided text.
+     * Convenience factory for a CoreNLP-backed DAO with the annotators needed for keyword extraction.
      */
+    public static NLPAnalysisDataAccessObject createWithDefaultPipeline() {
+        Properties props = new Properties();
+        props.setProperty("annotators", "tokenize,ssplit,pos,lemma");
+        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+        return new NLPAnalysisDataAccessObject(pipeline);
+    }
+
+    /**
+     * Returns the most frequent noun-phrase keywords found in the provided text.
+     */
+    @Override
     public AnalysisResult analyze(String text) {
         if (text == null || text.isBlank()) {
             return new AnalysisResult(List.of());
