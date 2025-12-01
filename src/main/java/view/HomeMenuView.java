@@ -17,6 +17,17 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Swing view for the home menu.
+ * <p>
+ * This panel displays a table of diary entries, including the title, creation
+ * date, keywords, and a Delete button for each entry. It listens to changes
+ * on the HomeMenuViewModel and refreshes the table when the state
+ * is updated. User actions such as creating, opening, and deleting entries
+ * are delegated to the HomeMenuController.
+ */
+
+
 // General format of home menu UIs. Will changed based on use cases
 
 public class HomeMenuView extends JPanel implements PropertyChangeListener {
@@ -297,27 +308,43 @@ class DeleteButtonEditor extends AbstractCellEditor
         java.util.List<String> keywords = state.getKeywords();
         java.util.List<String> paths = state.getStoragePaths();
 
-        if (modelRow >= 0 && modelRow < paths.size()) {
-            String storagePath = paths.get(modelRow);
-
-            titles.remove(modelRow);
-            if (modelRow < created.size()) {
-                created.remove(modelRow);
-            }
-            if (modelRow < updated.size()) {
-                updated.remove(modelRow);
-            }
-            if (modelRow < keywords.size()) {
-                keywords.remove(modelRow);
-            }
-            paths.remove(modelRow);
-
-            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-            if (modelRow < tableModel.getRowCount()) {
-                tableModel.removeRow(modelRow);
-            }
-
-            controller.deleteEntry(storagePath);
+        if (modelRow < 0 || modelRow >= paths.size()) {
+            return;
         }
+
+        String storagePath = paths.get(modelRow);
+
+        int choice = javax.swing.JOptionPane.showConfirmDialog(
+                table,
+                "Are you sure you want to delete this entry?",
+                "Confirm Delete",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+
+        if (choice != javax.swing.JOptionPane.YES_OPTION) {
+            // Clicked NO
+            return;
+        }
+
+        titles.remove(modelRow);
+        if (modelRow < created.size()) {
+            created.remove(modelRow);
+        }
+        if (modelRow < updated.size()) {
+            updated.remove(modelRow);
+        }
+        if (modelRow < keywords.size()) {
+            keywords.remove(modelRow);
+        }
+        paths.remove(modelRow);
+
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        if (modelRow < tableModel.getRowCount()) {
+            tableModel.removeRow(modelRow);
+        }
+
+        controller.deleteEntry(storagePath);
+
     }
 }

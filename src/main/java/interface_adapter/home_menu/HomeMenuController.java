@@ -6,6 +6,14 @@ import use_case.load_entry.LoadEntryInputData;
 import use_case.delete_entry.DeleteEntryInputBoundary;
 import use_case.delete_entry.DeleteEntryInputData;
 
+/**
+ * Controller for the home menu view.
+ * This class receives user actions from the home menu UI and invokes the
+ * corresponding use cases for creating, loading, and deleting diary entries.
+ * It constructs input data objects when necessary and delegates execution to
+ * the appropriate input boundary.
+ */
+
 public class HomeMenuController {
 
     private final CreateEntryInputBoundary createEntryUseCase;
