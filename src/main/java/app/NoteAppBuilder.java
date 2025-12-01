@@ -2,6 +2,7 @@ package app;
 
 import data_access.DBNoteDataObject;
 import data_access.RecommendationAPIAccessObject;
+import data_access.NLPAnalysisDataAccessObject;
 import data_access.VerifyPasswordDataAccessObject;
 import interface_adapter.GoBackPresenter;
 import interface_adapter.ViewManagerModel;
@@ -17,6 +18,8 @@ import interface_adapter.new_document.NewDocumentViewModel;
 import interface_adapter.recommendation_menu.RecommendationMenuController;
 import interface_adapter.recommendation_menu.RecommendationMenuPresenter;
 import interface_adapter.recommendation_menu.RecommendationMenuViewModel;
+import use_case.analyze_keywords.AnalyzeKeywordsInputBoundary;
+import use_case.analyze_keywords.AnalyzeKeywordsInteractor;
 import use_case.create_entry.CreateEntryInputBoundary;
 import use_case.create_entry.CreateEntryInteractor;
 import use_case.delete_entry.DeleteEntryInputBoundary;
@@ -49,9 +52,12 @@ public class NoteAppBuilder {
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
 
     // Data Access Objects
+    private final NLPAnalysisDataAccessObject nlpAnalysisDataAccessObject =
+            NLPAnalysisDataAccessObject.createWithDefaultPipeline();
     private final DBNoteDataObject noteDataAccess = new DBNoteDataObject();
     private final VerifyPasswordDataAccessObject passwordDataAccess = new VerifyPasswordDataAccessObject();
-    private final RecommendationAPIAccessObject recommendationDataAccess = new RecommendationAPIAccessObject();
+    private final RecommendationAPIAccessObject recommendationDataAccess =
+            new RecommendationAPIAccessObject(nlpAnalysisDataAccessObject);
 
     // View Models
     private LockScreenViewModel lockScreenViewModel;
@@ -187,13 +193,17 @@ public class NoteAppBuilder {
         final GetRecommendationsInputBoundary getRecommendationsInteractor = new GetRecommendationsInteractor(
                 recommendationDataAccess, recommendationPresenter);
 
+        // Analyze Keywords Use Case (stays within new document view)
+        final AnalyzeKeywordsInputBoundary analyzeKeywordsInteractor = new AnalyzeKeywordsInteractor(
+                nlpAnalysisDataAccessObject, savePresenter);
+
         // Go Back Use Case (from NewDocument to HomeMenu)
         final GoBackPresenter goBackPresenter = new GoBackPresenter(
                 viewManagerModel, homeMenuViewModel);
         final GoBackInputBoundary goBackInteractor = new GoBackInteractor(goBackPresenter);
 
         final NewDocumentController controller = new NewDocumentController(
-                getRecommendationsInteractor, goBackInteractor, saveEntryInteractor);
+                getRecommendationsInteractor, goBackInteractor, saveEntryInteractor, analyzeKeywordsInteractor);
 
         newDocumentView.setNewDocumentController(controller);
         return this;
