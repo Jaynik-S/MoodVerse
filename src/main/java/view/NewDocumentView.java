@@ -50,7 +50,6 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
                 BorderFactory.createEmptyBorder(8, 12, 8, 12))
         );
 
-
         // Button styling to stay consistent across app
         styleSecondaryButton(backButton);
         styleSecondaryButton(recommendButton);
@@ -188,7 +187,8 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
                     keywordsDisplayField.setText("Extracting keywords...");
                     final String textBody = textBodyInputField.getText();
                     newDocumentController.executeAnalyzeKeywords(textBody);
-                } else {
+                }
+                else {
                     keywordsVisible = false;
                     keywordsPanel.setVisible(false);
                     toggleKeywordsButton.setText("Show Keywords");
@@ -236,7 +236,8 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
         if (state.getError() == null) {
             if ("keywords".equals(evt.getPropertyName())) {
                 updateKeywords(state.getKeywords());
-            } else {
+            }
+            else {
                 setFields(state);
             }
         }
@@ -259,7 +260,8 @@ public class NewDocumentView extends JPanel implements ActionListener, PropertyC
             if (!keywordsVisible) {
                 keywordsPanel.setVisible(false);
             }
-        } else {
+        }
+        else {
             keywordsDisplayField.setText(String.join(", ", keywords));
             keywordsPanel.setVisible(keywordsVisible);
         }

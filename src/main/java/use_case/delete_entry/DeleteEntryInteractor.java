@@ -20,8 +20,9 @@ public class DeleteEntryInteractor implements DeleteEntryInputBoundary {
         }
         try {
             dataAccess.deleteByPath(entryPath);
-        } catch (Exception e) {
-            String message = "Failed to delete entry: " + e.getMessage();
+        }
+        catch (Exception error) {
+            String message = "Failed to delete entry: " + error.getMessage();
             presenter.prepareFailView(message);
             return;
         }

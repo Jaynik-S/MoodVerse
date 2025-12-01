@@ -17,14 +17,14 @@ public class NewDocumentPresenter implements
         SaveEntryOutputBoundary,
         LoadEntryOutputBoundary,
         CreateEntryOutputBoundary,
-        AnalyzeKeywordsOutputBoundary{
+        AnalyzeKeywordsOutputBoundary {
 
     private final NewDocumentViewModel newDocumentViewModel;
     private final ViewManagerModel viewManagerModel;
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm a");
 
-    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel, ViewManagerModel viewManagerModel){
+    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel, ViewManagerModel viewManagerModel) {
         this.newDocumentViewModel = newDocumentViewModel;
         this.viewManagerModel = viewManagerModel;
     }
@@ -38,7 +38,8 @@ public class NewDocumentPresenter implements
 
         if (outputData.getDate() != null) {
             state.setDate(outputData.getDate().format(formatter));
-        } else {
+        }
+        else {
             state.setDate("");
         }
 
@@ -61,7 +62,8 @@ public class NewDocumentPresenter implements
 
         if (outputData.getDate() != null) {
             state.setDate(outputData.getDate().format(formatter));
-        } else {
+        }
+        else {
             state.setDate("");
         }
 
@@ -83,7 +85,7 @@ public class NewDocumentPresenter implements
         state.setTitle(outputData.getTitle());
         state.setTextBody(outputData.getText());
 
-        if (outputData.getDate() != null){
+        if (outputData.getDate() != null) {
             state.setDate(outputData.getDate().format(formatter));
         }
 

@@ -30,15 +30,16 @@ public class NewDocumentController {
         this.analyzeKeywordsInteractor = analyzeKeywordsInteractor;
     }
 
-
     public void executeSave(String title, String dateString, String textBody) {
-       LocalDateTime date;
+        LocalDateTime date;
         if (dateString == null || dateString.isEmpty()) {
             date = LocalDateTime.now();
-        } else {
+        }
+        else {
             try {
                 date = LocalDateTime.parse(dateString, formatter);
-            } catch (Exception e) {
+            }
+            catch (Exception error) {
                 date = LocalDateTime.now();
             }
         }

@@ -17,9 +17,23 @@ public class MovieRecommendation {
         this.overview = overview;
     }
 
-    public String getReleaseYear() { return releaseYear; }
-    public String getImageUrl() { return imageUrl; }
-    public String getMovieTitle() { return movieTitle; }
-    public String getMovieRating() { return movieRating; }
-    public String getOverview() { return overview; }
+    public String getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getMovieTitle() {
+        return movieTitle;
+    }
+
+    public String getMovieRating() {
+        return movieRating;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
 }

@@ -15,7 +15,6 @@ public class RecommendationMenuPresenter implements GetRecommendationsOutputBoun
         this.viewManagerModel = viewManagerModel;
     }
 
-
     @Override
     public void prepareSuccessView(GetRecommendationsOutputData outputData) {
         final RecommendationMenuState recommendationMenuState = recommendationMenuViewModel.getState();

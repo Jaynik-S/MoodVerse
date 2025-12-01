@@ -31,20 +31,23 @@ public class RecommendationAPIAccessObject implements GetRecommendationsUserData
     @Override
     public List<SongRecommendation> fetchSongRecommendations(List<String> keywords) throws Exception {
         try {
-        SpotifyAPIAccessObject spotifyAPI = new SpotifyAPIAccessObject(keywords);
-        return spotifyAPI.fetchSongRecommendations();
-        } catch (Exception e) {
-            throw new Exception("Error fetching song recommendations: " + e.getMessage());
+            SpotifyAPIAccessObject spotifyAPI = new SpotifyAPIAccessObject(keywords);
+            return spotifyAPI.fetchSongRecommendations();
+        }
+        catch (Exception error) {
+            throw new Exception("Error fetching song recommendations: " + error.getMessage());
         }
     }
 
     @Override
     public List<MovieRecommendation> fetchMovieRecommendations(List<String> keywords) throws Exception {
         try {
-        TMDbAPIAccessObject tmdbAPI = new TMDbAPIAccessObject(keywords);
-        return tmdbAPI.fetchMovieRecommendations();
-    } catch (Exception e) {
-        throw new Exception("Error fetching movie recommendations: " + e.getMessage());
+            TMDbAPIAccessObject tmdbAPI = new TMDbAPIAccessObject(keywords);
+            return tmdbAPI.fetchMovieRecommendations();
+        }
+        catch (Exception error) {
+            throw new Exception("Error fetching movie recommendations: " + error.getMessage());
+        }
     }
-    }
+
 }

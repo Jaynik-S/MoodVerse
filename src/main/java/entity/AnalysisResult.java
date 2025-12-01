@@ -12,5 +12,7 @@ public final class AnalysisResult {
         this.keywords = List.copyOf(keywords);
     }
 
-    public List<Keyword> keywords() { return keywords; }
+    public List<Keyword> keywords() {
+        return keywords;
+    }
 }

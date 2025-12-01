@@ -8,14 +8,20 @@ import java.util.*;
 
 public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAccessInterface {
     public String passwordStatus;
+
     private static final Dotenv dotenv = Dotenv.load();
+
     private static String SYS_PASSWORD = dotenv.get("PASSWORD");
+
     private static Path envPath = Paths.get(".env");
 
     public static void setSysPasswordForTesting(String password) {
         SYS_PASSWORD = password;
     }
-    public static void setEnvPathForTesting(Path path) { envPath = path;  }
+
+    public static void setEnvPathForTesting(Path path) {
+        envPath = path;
+    }
 
     public static void writeEnvValue(String key, String value) throws Exception {
         if (!Files.exists(envPath)) {
@@ -43,15 +49,18 @@ public class VerifyPasswordDataAccessObject implements VerifyPasswordUserDataAcc
         if (SYS_PASSWORD != null && SYS_PASSWORD.equals(password)) {
             passwordStatus = "Correct Password";
 
-        } else if (SYS_PASSWORD == null || SYS_PASSWORD.isEmpty()) {
+        }
+        else if (SYS_PASSWORD == null || SYS_PASSWORD.isEmpty()) {
             try {
                 writeEnvValue("PASSWORD", password);
                 passwordStatus = "Created new password.";
-            } catch (Exception e) {
-                throw new Exception("Failed to set new password: ", e);
+            }
+            catch (Exception error) {
+                throw new Exception("Failed to set new password: ", error);
             }
 
-        } else {
+        }
+        else {
             passwordStatus = "Incorrect Password";
         }
         return passwordStatus;

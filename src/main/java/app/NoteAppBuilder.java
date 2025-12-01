@@ -120,7 +120,8 @@ public class NoteAppBuilder {
     public NoteAppBuilder addVerifyPasswordUseCase() {
         if (homeMenuViewModel == null) {
             addHomeMenuView();
-        } else if (homeMenuPresenter == null) {
+        }
+        else if (homeMenuPresenter == null) {
             homeMenuPresenter = new HomeMenuPresenter(homeMenuViewModel);
         }
         final LockScreenPresenter presenter = new LockScreenPresenter(
@@ -239,10 +240,12 @@ public class NoteAppBuilder {
                         recommendationMenuViewModel.getState()
                 );
                 cardPanel.add(recommendationView, recommendationMenuViewModel.getViewName());
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-        } else {
+            catch (Exception error) {
+                error.printStackTrace();
+            }
+        }
+        else {
             // Guard against empty recommendationView.
             // This way we simply switch to the existing view when the back button is pressed rather than instantiating
             // a new one.

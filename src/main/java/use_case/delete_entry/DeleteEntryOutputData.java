@@ -6,6 +6,9 @@ public class DeleteEntryOutputData {
     public DeleteEntryOutputData(boolean success) {
         this.success = success;
     }
-    public boolean isSuccess() { return success; }
+
+    public boolean isSuccess() {
+        return success;
+    }
 }
 

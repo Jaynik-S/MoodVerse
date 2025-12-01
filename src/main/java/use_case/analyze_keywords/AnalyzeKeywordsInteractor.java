@@ -40,8 +40,9 @@ public class AnalyzeKeywordsInteractor implements AnalyzeKeywordsInputBoundary {
                     .map(Keyword::text)
                     .toList();
             presenter.prepareSuccessView(new AnalyzeKeywordsOutputData(keywords));
-        } catch (Exception e) {
-            presenter.prepareFailView("Failed to analyze keywords: " + e.getMessage());
+        }
+        catch (Exception error) {
+            presenter.prepareFailView("Failed to analyze keywords: " + error.getMessage());
         }
     }
 }
