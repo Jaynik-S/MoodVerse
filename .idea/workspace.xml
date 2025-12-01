@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="" />
+    <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/use_case/analyze_keywords/AnalyzeKeywordsInputOutputDataTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/use_case/analyze_keywords/AnalyzeKeywordsInteractorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/load_entry/LoadEntryOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/load_entry/LoadEntryOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/save_entry/SaveEntryOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/entity/DiaryEntryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/entity/DiaryEntryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/delete_entry/DeleteEntryInteractorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/use_case/delete_entry/DeleteEntryInteractorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/get_recommendations/GetRecommendationsInteractorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/use_case/get_recommendations/GetRecommendationsInteractorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/load_entry/LoadEntryInteractorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/use_case/load_entry/LoadEntryInteractorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/save_entry/SaveEntryInteractorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/use_case/save_entry/SaveEntryInteractorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/verify_password/VerifyPasswordInteractorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/use_case/verify_password/VerifyPasswordInteractorTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,8 +65,10 @@
   "keyToString": {
     "Application.HomeMenuDemoMain.executor": "Run",
     "Application.MainNoteApplication.executor": "Run",
+    "JUnit.All in note-application.executor": "Coverage",
     "JUnit.CreateEntryInteractorTest.executor": "Run",
     "JUnit.MainNoteApplicationTest.executor": "Run",
+    "JUnit.SaveEntryInteractorTest.executor": "Coverage",
     "JUnit.VerifyPasswordDataAccessObjectTest.executor": "Run",
     "JUnit.VerifyPasswordDataAccessObjectTest.testSavingNewPasswordCreatesEntryInEnv.executor": "Debug",
     "JUnit.VerifyPasswordInteractorTest.executor": "Run",
@@ -63,7 +78,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#40 on checkstyle-fix",
+    "git-widget-placeholder": "TestCoverage",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,7 +88,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.MainNoteApplication">
+  <component name="RunManager" selected="JUnit.SaveEntryInteractorTest">
     <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
       <module name="note-application" />
@@ -110,16 +125,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VerifyPasswordDataAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SaveEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data_access.*" />
+          <option name="PATTERN" value="use_case.save_entry.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="data_access" />
-      <option name="MAIN_CLASS_NAME" value="data_access.VerifyPasswordDataAccessObjectTest" />
+      <option name="PACKAGE_NAME" value="use_case.save_entry" />
+      <option name="MAIN_CLASS_NAME" value="use_case.save_entry.SaveEntryInteractorTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -141,11 +156,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainNoteApplication" />
+        <item itemvalue="JUnit.SaveEntryInteractorTest" />
         <item itemvalue="JUnit.All in note-application" />
+        <item itemvalue="Application.MainNoteApplication" />
         <item itemvalue="JUnit.MainNoteApplicationTest" />
         <item itemvalue="JUnit.entity in note-application" />
-        <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -194,5 +209,11 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MoodVerse$SaveEntryInteractorTest.ic" NAME="SaveEntryInteractorTest Coverage Results" MODIFIED="1764564609054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>use_case.save_entry.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/MoodVerse$All_in_note_application.ic" NAME="All in note-application Coverage Results" MODIFIED="1764563845135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>

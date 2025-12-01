@@ -27,8 +27,5 @@ public class LoadEntryOutputData {
         return date;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
 }
 

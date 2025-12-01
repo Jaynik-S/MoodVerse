@@ -45,6 +45,21 @@ class VerifyPasswordInteractorTest {
         assertFalse(renderAccess.called);
     }
 
+    // Exception path ensuring DAO errors are wrapped in a failure view.
+    @Test
+    void execute_whenVerificationThrows_reportsFailure() {
+        RecordingVerifyPasswordPresenter presenter = new RecordingVerifyPasswordPresenter();
+        ThrowingVerifyPasswordDataAccess verifyAccess = new ThrowingVerifyPasswordDataAccess();
+        StubRenderEntriesDataAccess renderAccess = new StubRenderEntriesDataAccess();
+        VerifyPasswordInteractor interactor = new VerifyPasswordInteractor(verifyAccess, presenter, renderAccess);
+
+        interactor.execute(new VerifyPasswordInputData("any"));
+
+        assertTrue(presenter.errorMessage.startsWith("Failed to verify password: "));
+        assertNull(presenter.successData);
+        assertFalse(renderAccess.called);
+    }
+
     private static final class RecordingVerifyPasswordPresenter implements VerifyPasswordOutputBoundary {
         private VerifyPasswordOutputData successData;
         private String errorMessage;
@@ -60,7 +75,7 @@ class VerifyPasswordInteractorTest {
         }
     }
 
-    private static final class StubVerifyPasswordDataAccess implements VerifyPasswordUserDataAccessInterface {
+    private static class StubVerifyPasswordDataAccess implements VerifyPasswordUserDataAccessInterface {
         private String passwordStatusToReturn = "Unlocked";
         private String lastPassword;
 
@@ -71,7 +86,14 @@ class VerifyPasswordInteractorTest {
         }
     }
 
-    private static final class StubRenderEntriesDataAccess implements RenderEntriesUserDataInterface {
+    private static final class ThrowingVerifyPasswordDataAccess implements VerifyPasswordUserDataAccessInterface {
+        @Override
+        public String verifyPassword(String password) {
+            throw new RuntimeException("service down");
+        }
+    }
+
+    private static class StubRenderEntriesDataAccess implements RenderEntriesUserDataInterface {
         private List<Map<String, Object>> entriesToReturn = List.of();
         private boolean called;
 
