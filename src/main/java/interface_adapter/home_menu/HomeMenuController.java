@@ -1,4 +1,5 @@
 package interface_adapter.home_menu;
+
 import use_case.create_entry.CreateEntryInputBoundary;
 import use_case.load_entry.LoadEntryInputBoundary;
 import use_case.load_entry.LoadEntryInputData;
@@ -35,14 +36,14 @@ public class HomeMenuController {
         this.deleteEntryUseCase = null;
     }
 
-    public void newEntry(){
+    public void newEntry() {
         System.out.println("New Entry Clicked");
         if (createEntryUseCase != null) {
             createEntryUseCase.execute();
         }
     }
 
-    public void openEntry(String  storagePath){
+    public void openEntry(String storagePath) {
         System.out.println("Open Entry Clicked:" + storagePath);
         if (loadEntryUseCase != null) {
             LoadEntryInputData inputData = new LoadEntryInputData(storagePath);
@@ -50,7 +51,7 @@ public class HomeMenuController {
         }
     }
 
-    public void deleteEntry(String  storagePath) {
+    public void deleteEntry(String storagePath) {
         System.out.println("Delete Entry Clicked:" + storagePath);
 
         if (deleteEntryUseCase != null) {
@@ -59,6 +60,3 @@ public class HomeMenuController {
         }
     }
 }
-
-
-

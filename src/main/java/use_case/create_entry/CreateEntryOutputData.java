@@ -14,9 +14,19 @@ public class CreateEntryOutputData {
         this.date = date;
         this.success = success;
     }
-    public String getTitle() {return title;}
-    public String getText() {return text;}
-    public LocalDateTime getDate() {return date;}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
     public boolean isSuccess() {
         return success;
     }

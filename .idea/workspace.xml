@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/data_access/DBNoteDataObjectTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuPresenter.java" afterDir="false" />
@@ -59,8 +60,11 @@
   "keyToString": {
     "Application.HomeMenuDemoMain.executor": "Run",
     "Application.MainNoteApplication.executor": "Run",
+    "JUnit.All in note-application.executor": "Coverage",
     "JUnit.CreateEntryInteractorTest.executor": "Run",
+    "JUnit.DBNoteDataObjectTest.executor": "Run",
     "JUnit.MainNoteApplicationTest.executor": "Run",
+    "JUnit.SaveEntryInteractorTest.executor": "Coverage",
     "JUnit.VerifyPasswordDataAccessObjectTest.executor": "Run",
     "JUnit.VerifyPasswordDataAccessObjectTest.testSavingNewPasswordCreatesEntryInEnv.executor": "Debug",
     "JUnit.VerifyPasswordInteractorTest.executor": "Run",
@@ -80,7 +84,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.MainNoteApplication">
+  <component name="RunManager" selected="JUnit.DBNoteDataObjectTest">
     <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
       <module name="note-application" />
@@ -102,6 +106,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DBNoteDataObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="data_access.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.DBNoteDataObjectTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainNoteApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
@@ -117,42 +136,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VerifyPasswordDataAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SaveEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data_access.*" />
+          <option name="PATTERN" value="use_case.save_entry.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="data_access" />
-      <option name="MAIN_CLASS_NAME" value="data_access.VerifyPasswordDataAccessObjectTest" />
+      <option name="PACKAGE_NAME" value="use_case.save_entry" />
+      <option name="MAIN_CLASS_NAME" value="use_case.save_entry.SaveEntryInteractorTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="entity in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="note-application" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="entity.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="entity" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainNoteApplication" />
+        <item itemvalue="JUnit.DBNoteDataObjectTest" />
         <item itemvalue="JUnit.All in note-application" />
+        <item itemvalue="JUnit.SaveEntryInteractorTest" />
+        <item itemvalue="Application.MainNoteApplication" />
         <item itemvalue="JUnit.MainNoteApplicationTest" />
-        <item itemvalue="JUnit.entity in note-application" />
-        <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -178,6 +183,7 @@
       <workItem from="1764470350465" duration="524000" />
       <workItem from="1764470893647" duration="166000" />
       <workItem from="1764513160474" duration="2254000" />
+      <workItem from="1764539045617" duration="5956000" />
     </task>
     <servers />
   </component>

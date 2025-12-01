@@ -19,7 +19,6 @@ This contract sets out shared expectations and commitments for how our team will
 - Questions about completing TODOs
 - Missing deadlines
 - Missing tutorials/labs
-  
 
 * Respectful and inclusive behaviour are necessary for smooth and productive communication. What are some respectful and inclusive behaviours you expect when communicating with each other during lectures, labs, or outside of class? (Examples: Actively listening to each team members ideas, giving everyone a chance to meaningfully contribute, etc.)
 
@@ -71,4 +70,4 @@ Team Member Signatures:
 
 Arnav
 Abdullah
-Jaynik 
+Jaynik

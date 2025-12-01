@@ -1,6 +1,5 @@
 package data_access;
 
-
 import entity.DiaryEntry;
 import org.json.JSONArray;
 import use_case.delete_entry.DeleteEntryUserDataAccessInterface;
@@ -32,8 +31,9 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
                     (LocalDateTime) data.get("createdDate")
             );
 
-        } catch (Exception e) {
-            throw new Exception("Failed to load diary entry from path: ", e);
+        }
+        catch (Exception error) {
+            throw new Exception("Failed to load diary entry from path: ", error);
         }
     }
 
@@ -46,7 +46,8 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
             Path path = Paths.get(entryPath);
             Files.delete(path);
             return true;
-        } catch (Exception e) {
+        }
+        catch (Exception error) {
             return false;
         }
     }
@@ -69,7 +70,8 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
             Files.writeString(path, json.toString(4));
             return true;
 
-        } catch (Exception e) {
+        }
+        catch (Exception error) {
             return false;
         }
     }
@@ -86,20 +88,23 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
                     allEntries.add(entry);
                 }
             }
-        } catch (Exception e) {
-            throw new Exception("Failed to load diary entries from path: ", e);
+        }
+        catch (Exception error) {
+            throw new Exception("Failed to load diary entries from path: ", error);
         }
 
         return allEntries;
     }
 
-    private boolean existsByPath(String entryPath)  {
+    private boolean existsByPath(String entryPath) {
         Path path = Paths.get(entryPath);
         return Files.exists(path);
     }
 
     private Map<String, Object> parseEntry(String entryPath) throws Exception {
-        if (!existsByPath(entryPath)) { return null;  }
+        if (!existsByPath(entryPath)) {
+            return null;
+        }
         try {
             String content = Files.readString(Paths.get(entryPath));
             JSONObject json = new JSONObject(content);
@@ -128,11 +133,10 @@ public class DBNoteDataObject implements DeleteEntryUserDataAccessInterface, Loa
 
             return result;
 
-        } catch (Exception e) {
-            throw new Exception("Failed to parse diary entry from path: ", e);
+        }
+        catch (Exception error) {
+            throw new Exception("Failed to parse diary entry from path: ", error);
         }
     }
-
-
 
 }

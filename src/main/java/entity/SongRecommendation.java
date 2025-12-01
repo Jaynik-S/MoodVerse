@@ -19,10 +19,27 @@ public class SongRecommendation {
         this.externalUrl = externalUrl;
     }
 
-    public String getReleaseYear() { return releaseYear; }
-    public String getImageUrl() { return imageUrl; }
-    public String getSongName() { return songName; }
-    public String getArtistName() { return artistName; }
-    public String getPopularityScore() { return popularityScore; }
-    public String getExternalUrl() { return externalUrl; }
+    public String getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getSongName() {
+        return songName;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public String getPopularityScore() {
+        return popularityScore;
+    }
+
+    public String getExternalUrl() {
+        return externalUrl;
+    }
 }

@@ -40,8 +40,9 @@ public class HomeMenuRefreshListener implements PropertyChangeListener {
         try {
             List<Map<String, Object>> entries = entriesDataAccess.getAll();
             presenter.presentEntriesFromData(entries);
-        } catch (Exception e) {
-            presenter.presentError("Failed to load entries: " + e.getMessage());
+        }
+        catch (Exception error) {
+            presenter.presentError("Failed to load entries: " + error.getMessage());
         }
     }
 }

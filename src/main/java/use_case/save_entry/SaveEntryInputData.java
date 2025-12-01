@@ -1,6 +1,5 @@
 package use_case.save_entry;
 
-import entity.DiaryEntry;
 import java.time.LocalDateTime;
 
 public class SaveEntryInputData {

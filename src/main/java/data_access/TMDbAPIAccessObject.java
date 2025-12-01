@@ -23,7 +23,7 @@ public class TMDbAPIAccessObject {
     private static int limit = 4;
     private List<String> terms;
 
-    public TMDbAPIAccessObject(List<String> terms){
+    public TMDbAPIAccessObject(List<String> terms) {
         this.terms = terms;
     }
     
@@ -48,7 +48,8 @@ public class TMDbAPIAccessObject {
                     String id = String.valueOf(results.getJSONObject(0).optInt("id"));
                     ids.add(id);
                 }
-            } else {
+            }
+            else {
                 throw new Exception("TMDb keyword search failed: " + res.statusCode());
             }
         }
@@ -76,7 +77,8 @@ public class TMDbAPIAccessObject {
             String encoded = URLEncoder.encode(keywordStr, StandardCharsets.UTF_8);
 
             String url = String.format(
-                    "https://api.themoviedb.org/3/discover/movie?api_key=%s&with_keywords=%s&include_adult=false&sort_by=vote_average.desc&vote_count.gte=350&language=en-US&page=1",
+                    "https://api.themoviedb.org/3/discover/movie?api_key=%s&with_keywords=%s&include_adult=false" +
+                            "&sort_by=vote_average.desc&vote_count.gte=350&language=en-US&page=1",
                     TMDB_API_KEY,
                     encoded
             );
@@ -134,8 +136,9 @@ public class TMDbAPIAccessObject {
                 movieList.add(JSONtoMovieRecommendation(movie));
             }
             return movieList;
-        } catch (Exception e) {
-            throw new Exception("Failed to fetch movie recommendations: ", e);
+        }
+        catch (Exception error) {
+            throw new Exception("Failed to fetch movie recommendations: ", error);
         }
     }
 

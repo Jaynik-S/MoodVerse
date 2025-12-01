@@ -1,6 +1,8 @@
 package interface_adapter.new_document;
 
 import interface_adapter.ViewManagerModel;
+import use_case.analyze_keywords.AnalyzeKeywordsOutputBoundary;
+import use_case.analyze_keywords.AnalyzeKeywordsOutputData;
 import use_case.create_entry.CreateEntryOutputBoundary;
 import use_case.create_entry.CreateEntryOutputData;
 import use_case.load_entry.LoadEntryOutputBoundary;
@@ -9,18 +11,20 @@ import use_case.save_entry.SaveEntryOutputBoundary;
 import use_case.save_entry.SaveEntryOutputData;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class NewDocumentPresenter implements
         SaveEntryOutputBoundary,
         LoadEntryOutputBoundary,
-        CreateEntryOutputBoundary{
+        CreateEntryOutputBoundary,
+        AnalyzeKeywordsOutputBoundary {
 
     private final NewDocumentViewModel newDocumentViewModel;
     private final ViewManagerModel viewManagerModel;
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm a");
 
-    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel, ViewManagerModel viewManagerModel){
+    public NewDocumentPresenter(NewDocumentViewModel newDocumentViewModel, ViewManagerModel viewManagerModel) {
         this.newDocumentViewModel = newDocumentViewModel;
         this.viewManagerModel = viewManagerModel;
     }
@@ -30,10 +34,12 @@ public class NewDocumentPresenter implements
         final NewDocumentState state = newDocumentViewModel.getState();
         state.setTitle(outputData.getTitle());
         state.setTextBody(outputData.getText());
+        state.setKeywords(List.of());
 
         if (outputData.getDate() != null) {
             state.setDate(outputData.getDate().format(formatter));
-        } else {
+        }
+        else {
             state.setDate("");
         }
 
@@ -52,10 +58,12 @@ public class NewDocumentPresenter implements
         final NewDocumentState state = newDocumentViewModel.getState();
         state.setTitle(outputData.getTitle());
         state.setTextBody(outputData.getText());
+        state.setKeywords(List.of());
 
         if (outputData.getDate() != null) {
             state.setDate(outputData.getDate().format(formatter));
-        } else {
+        }
+        else {
             state.setDate("");
         }
 
@@ -77,7 +85,7 @@ public class NewDocumentPresenter implements
         state.setTitle(outputData.getTitle());
         state.setTextBody(outputData.getText());
 
-        if (outputData.getDate() != null){
+        if (outputData.getDate() != null) {
             state.setDate(outputData.getDate().format(formatter));
         }
 
@@ -85,6 +93,17 @@ public class NewDocumentPresenter implements
 
         newDocumentViewModel.setState(state);
         newDocumentViewModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareSuccessView(AnalyzeKeywordsOutputData outputData) {
+        final NewDocumentState state = newDocumentViewModel.getState();
+        state.setKeywords(outputData.getKeywords());
+        state.setError(null);
+        state.setSuccessMessage(null);
+
+        newDocumentViewModel.setState(state);
+        newDocumentViewModel.firePropertyChanged("keywords");
     }
 
     @Override

@@ -1,9 +1,9 @@
-package use_case.get_recommendations;
+package use_case.analyze_keywords;
 
-public class GetRecommendationsInputData {
+public class AnalyzeKeywordsInputData {
     private final String textBody;
 
-    public GetRecommendationsInputData(String textBody) {
+    public AnalyzeKeywordsInputData(String textBody) {
         this.textBody = textBody;
     }
 
@@ -11,4 +11,3 @@ public class GetRecommendationsInputData {
         return textBody;
     }
 }
-

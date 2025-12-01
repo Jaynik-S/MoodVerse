@@ -17,10 +17,6 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
 
         DiaryEntry entry = new DiaryEntry(inputData.getTitle(), inputData.getTextBody(), inputData.getDate());
 
-        if (entry == null) {
-            presenter.prepareFailView("Entry cannot be null.");
-            return;
-        }
         String title = entry.getTitle();
         if (title == null || title.length() == 0) {
             presenter.prepareFailView("Title cannot be empty.");
@@ -48,18 +44,12 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
             return;
         }
 
-        String storagePath = entry.getStoragePath();
-
-        if (storagePath == null || storagePath.length() == 0) {
-            presenter.prepareFailView("Could not determine storage path for entry.");
-            return;
-        }
-
         entry.updatedTime();
         try {
             dataAccess.save(entry);
-        } catch (Exception e) {
-            String message = "Could not save entry." + e.getMessage();
+        }
+        catch (Exception error) {
+            String message = "Could not save entry." + error.getMessage();
             presenter.prepareFailView(message);
             return;
         }

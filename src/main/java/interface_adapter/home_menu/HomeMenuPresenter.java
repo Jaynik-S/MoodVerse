@@ -1,4 +1,5 @@
 package interface_adapter.home_menu;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -39,12 +40,11 @@ public class HomeMenuPresenter{
         try {
             LocalDateTime dt = LocalDateTime.parse(s);
             return dt.format(formatter);
-        } catch (Exception e) {
+        }
+        catch (Exception error) {
             return s;
         }
     }
-
-
 
     private static String keywordsToDisplay(Object keywordsObj) {
         if (keywordsObj == null) {
@@ -93,7 +93,7 @@ public class HomeMenuPresenter{
         }
         List<Map<String, Object>> sortedEntries = new ArrayList<>(rawEntries);
 
-        sortedEntries.sort((a, b) ->{
+        sortedEntries.sort((a, b) -> {
             Object ua = a.get("updatedDate");
             Object ub = b.get("updatedDate");
 
