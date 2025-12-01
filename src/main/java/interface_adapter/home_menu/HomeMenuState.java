@@ -12,7 +12,6 @@ public class HomeMenuState {
 
     private List<String> storagePaths = new ArrayList<>();
 
-
     public List<String> getTitles() {
         return titles;
     }
@@ -52,7 +51,6 @@ public class HomeMenuState {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
 
     public List<String> getStoragePaths() {
         return storagePaths;

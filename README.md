@@ -2,7 +2,6 @@
 
 MoodVerse is a desktop diary app that lets users create, save, edit, and organize personal entries. It uses natural language processing (NLP) to analyze each entry’s sentiment, identify the user’s emotional state, and recommend songs and movies that reflect the overall tone and themes of the writing.
 
-
 ## Table of Contents
 
 1. [Overview](#overview)

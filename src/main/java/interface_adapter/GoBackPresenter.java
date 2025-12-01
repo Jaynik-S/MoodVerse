@@ -2,7 +2,7 @@ package interface_adapter;
 
 import use_case.go_back.GoBackOutputBoundary;
 
-public class GoBackPresenter implements GoBackOutputBoundary{
+public class GoBackPresenter implements GoBackOutputBoundary {
 
     private final ViewManagerModel viewManagerModel;
     private final ViewModel<?> destinationViewModel;
@@ -11,6 +11,7 @@ public class GoBackPresenter implements GoBackOutputBoundary{
         this.viewManagerModel = viewManagerModel;
         this.destinationViewModel = destinationViewModel;
     }
+
     @Override
     public void prepareSuccessView() {
         viewManagerModel.setState(destinationViewModel.getViewName());

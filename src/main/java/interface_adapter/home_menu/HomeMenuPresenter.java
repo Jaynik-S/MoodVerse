@@ -1,4 +1,5 @@
 package interface_adapter.home_menu;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -6,9 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HomeMenuPresenter{
+public class HomeMenuPresenter {
 
     private final HomeMenuViewModel viewModel;
+
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm a");
 
     public HomeMenuPresenter(HomeMenuViewModel viewModel) {
@@ -28,12 +30,11 @@ public class HomeMenuPresenter{
         try {
             LocalDateTime dt = LocalDateTime.parse(s);
             return dt.format(formatter);
-        } catch (Exception e) {
+        }
+        catch (Exception error) {
             return s;
         }
     }
-
-
 
     private static String keywordsToDisplay(Object keywordsObj) {
         if (keywordsObj == null) {
@@ -76,12 +77,13 @@ public class HomeMenuPresenter{
 
     public void presentEntriesFromData(List<Map<String, Object>> rawEntries) {
         if (rawEntries == null || rawEntries.isEmpty()) {
-            presentEntries(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            presentEntries(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+                    new ArrayList<>(), new ArrayList<>());
             return;
         }
         List<Map<String, Object>> sortedEntries = new ArrayList<>(rawEntries);
 
-        sortedEntries.sort((a, b) ->{
+        sortedEntries.sort((a, b) -> {
             Object ua = a.get("updatedDate");
             Object ub = b.get("updatedDate");
 

@@ -8,7 +8,6 @@ public class VerifyPasswordInteractor implements VerifyPasswordInputBoundary {
     private final RenderEntriesUserDataInterface renderEntriesDataAccess;
     private final VerifyPasswordOutputBoundary userPresenter;
 
-
     public VerifyPasswordInteractor(VerifyPasswordUserDataAccessInterface userDataAccessInterface,
                                    VerifyPasswordOutputBoundary verifyPasswordOutputBoundary,
                                     RenderEntriesUserDataInterface renderEntriesDataAccess) {
@@ -24,13 +23,15 @@ public class VerifyPasswordInteractor implements VerifyPasswordInputBoundary {
             String passwordStatus = userDataAccess.verifyPassword(password);
             if (passwordStatus.equals("Incorrect Password")) {
                 userPresenter.prepareFailView("Incorrect Password");
-            } else {
+            }
+            else {
                 List<Map<String, Object>> allEntries = renderEntriesDataAccess.getAll();
                 VerifyPasswordOutputData outputData = new VerifyPasswordOutputData(passwordStatus, allEntries);
                 userPresenter.prepareSuccessView(outputData);
             }
-        } catch (Exception e) {
-            userPresenter.prepareFailView("Failed to verify password: " + e.getMessage());
+        }
+        catch (Exception error) {
+            userPresenter.prepareFailView("Failed to verify password: " + error.getMessage());
         }
     }
 //

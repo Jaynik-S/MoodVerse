@@ -6,5 +6,8 @@ public class VerifyPasswordInputData {
     public VerifyPasswordInputData(String password) {
         this.password = password;
     }
-    String getPassword() { return password;  }
+
+    String getPassword() {
+        return password;
+    }
 }

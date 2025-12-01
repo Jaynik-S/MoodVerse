@@ -19,8 +19,16 @@ public class GetRecommendationsOutputData {
         MovieRecommendations = movieRecommendations;
     }
 
-    public List<String> getKeywords() { return keywords; }
-    public List<SongRecommendation> getSongRecommendations() { return songRecommendations; }
-    public List<MovieRecommendation> getMovieRecommendations() { return MovieRecommendations; }
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    public List<SongRecommendation> getSongRecommendations() {
+        return songRecommendations;
+    }
+
+    public List<MovieRecommendation> getMovieRecommendations() {
+        return MovieRecommendations;
+    }
 }
 

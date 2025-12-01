@@ -12,6 +12,11 @@ public class VerifyPasswordOutputData {
         this.allEntries = allEntries;
     }
 
-    public String passwordStatus() {  return passwordStatus;  }
-    public List<Map<String, Object>> getAllEntries() {return allEntries;}
+    public String passwordStatus() {
+        return passwordStatus;
+    }
+
+    public List<Map<String, Object>> getAllEntries() {
+        return allEntries;
+    }
 }
