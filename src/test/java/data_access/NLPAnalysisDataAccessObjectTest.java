@@ -18,7 +18,8 @@ public class NLPAnalysisDataAccessObjectTest {
     @BeforeAll
     public static void setup() {
         Properties props = new Properties();
-        props.setProperty("annotators", "tokenize,ssplit,pos,lemma"); // break text into tokens; split into sentences; tag each token with its part of speech; compute lemmas (unused)
+        props.setProperty("annotators", "tokenize,ssplit,pos,lemma"); // break text into tokens;
+        // split into sentences; tag each token with its part of speech; compute lemmas (unused)
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         nlpDao = new NLPAnalysisDataAccessObject(pipeline);
     }
@@ -39,13 +40,13 @@ public class NLPAnalysisDataAccessObjectTest {
     @Test
     public void testAnalyze_LimitsToTopTwentyKeywords() {
         String text =
-        """
-        I spent almost the whole day at the beach today, and I swear I could live there forever.
-        The sun was warm but not too much, and the ocean breeze felt like a gentle reminder to slow down.
-        There was this moment right before sunset when the sky turned a perfect mix of gold and pink.
-        I had sand between my toes, salt on my skin, and a melting popsicle in my hand.
-        Everything just felt light, carefree, and full of joy.
-        """;
+            """
+            I spent almost the whole day at the beach today, and I swear I could live there forever.
+            The sun was warm but not too much, and the ocean breeze felt like a gentle reminder to slow down.
+            There was this moment right before sunset when the sky turned a perfect mix of gold and pink.
+            I had sand between my toes, salt on my skin, and a melting popsicle in my hand.
+            Everything just felt light, carefree, and full of joy.
+            """;
         var result = nlpDao.analyze(text);
 
         assertTrue(result.keywords().size() <= 20);

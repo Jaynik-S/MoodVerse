@@ -25,7 +25,6 @@ public class RecommendationMenuState {
         this.displayError = displayError;
     }
 
-
     public String getError() {
         return displayError;
     }
@@ -99,6 +98,5 @@ public class RecommendationMenuState {
     public MovieRecommendation getMovieRecommendationFour() {
         return movieRecommendationFour;
     }
-
 
 }

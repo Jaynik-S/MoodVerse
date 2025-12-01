@@ -38,10 +38,23 @@ public class DiaryEntry {
         this.text = textBody;
     }
 
-    public int getEntryId() { return entryId; }
-    public String getTitle() { return title; }
-    public String getText() { return text; }
-    public List<String> getKeywords() { return keywords; }
+    public int getEntryId() {
+        return entryId;
+
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
     public String getStoragePath() {
         String safeTitle = title;
         if (safeTitle == null || safeTitle.length() == 0) {
@@ -61,20 +74,45 @@ public class DiaryEntry {
 
         return storagePath;
     }
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public List<SongRecommendation> getRecommendations() { return songRecommendations; }
-    public List<MovieRecommendation> getMovieRecommendations() { return MovieRecommendations; }
 
-    public void setTitle(String title) { this.title = title; }
-    public void setText(String text) { this.text = text; }
-    public void setKeywords(List<String> keyword) { this.keywords = keyword; }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public List<SongRecommendation> getRecommendations() {
+        return songRecommendations;
+    }
+
+    public List<MovieRecommendation> getMovieRecommendations() {
+        return MovieRecommendations;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setKeywords(List<String> keyword) {
+        this.keywords = keyword;
+    }
+
     public void setRecommendations(java.util.List<entity.SongRecommendation> songRecommendations) {
         this.songRecommendations = songRecommendations;
     }
+
     public void setMovieRecommendations(java.util.List<entity.MovieRecommendation> movieRecommendations) {
         this.MovieRecommendations = movieRecommendations;
     }
-    public void updatedTime() { this.updatedAt = LocalDateTime.now(); }
+
+    public void updatedTime() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
 }

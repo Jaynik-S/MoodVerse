@@ -108,7 +108,6 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
                 BorderFactory.createEmptyBorder(8, 12, 8, 12))
         );
 
-
         styleSecondaryButton(backButton);
 
         JPanel leftTop = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -193,7 +192,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
             if (img == null) return null;
             Image scaled = img.getScaledInstance(targetW, targetH, Image.SCALE_SMOOTH);
             return new ImageIcon(scaled);
-        } catch (Exception e) {
+        }
+        catch (Exception error) {
             return null;
         }
     }
@@ -263,7 +263,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         field.setFont(base.deriveFont(minSize));
     }
 
-    private JPanel createMovieItem(String title, String movieName, String score, String year, String overview, String imageUrl) {
+    private JPanel createMovieItem(String title, String movieName, String score, String year,
+                                   String overview, String imageUrl) {
 
         JPanel item = new JPanel(new BorderLayout(8, 8));
         item.setOpaque(false);
@@ -277,7 +278,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         ImageIcon movieIcon = loadAndScale(imageUrl, WIDTH_MOVIE - BORDER_SONG * 2, HEIGHT_MOVIE - BORDER_SONG * 2);
         if (movieIcon != null) {
             cover.setIcon(movieIcon);
-        } else {
+        }
+        else {
             cover.setText("<html><div style='text-align:center;'>No\nImage</div></html>");
         }
         cover.setPreferredSize(new Dimension(WIDTH_MOVIE, HEIGHT_MOVIE));
@@ -349,7 +351,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
     /**
      * Build a song item panel used in the recommendations list.
      */
-    private JPanel createSongItem(String title, String songName, String score, String artist, String year, String url, String imageUrl) throws MalformedURLException {
+    private JPanel createSongItem(String title, String songName, String score, String artist,
+                                  String year, String url, String imageUrl) throws MalformedURLException {
         JPanel item = new JPanel(new BorderLayout(8, 8));
         item.setOpaque(false);
         item.setBorder(BorderFactory.createCompoundBorder(
@@ -363,7 +366,8 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
         ImageIcon songIcon = loadAndScale(imageUrl, WIDTH_SONG - BORDER_SONG * 2, HEIGHT_SONG - BORDER_SONG * 2);
         if (songIcon != null) {
             cover.setIcon(songIcon);
-        } else {
+        }
+        else {
             cover.setText("<html><div style='text-align:center;'>No\nImage</div></html>");
         }
 
@@ -434,15 +438,17 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
                     if (url == null || url.isEmpty()) return;
                     if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                         Desktop.getDesktop().browse(new URI(url));
-                    } else {
+                    }
+                    else {
                         JOptionPane.showMessageDialog(RecommendationView.this,
                                 "Opening links is not supported on this platform.",
                                 "Not Supported",
                                 JOptionPane.WARNING_MESSAGE);
                     }
-                } catch (Exception ex) {
+                }
+                catch (Exception error) {
                     JOptionPane.showMessageDialog(RecommendationView.this,
-                            "Unable to open link: " + ex.getMessage(),
+                            "Unable to open link: " + error.getMessage(),
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
@@ -488,29 +494,35 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
             try {
                 SongRecommendation s1 = recommendationMenuState.getSongRecommendationOne();
                 if (s1 != null) {
-                    leftList.add(createSongItem("Song #1", s1.getSongName(), s1.getPopularityScore(), s1.getArtistName(), s1.getReleaseYear(), s1.getExternalUrl(), s1.getImageUrl()));
+                    leftList.add(createSongItem("Song #1", s1.getSongName(), s1.getPopularityScore(),
+                            s1.getArtistName(), s1.getReleaseYear(), s1.getExternalUrl(), s1.getImageUrl()));
                     leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
                 }
                 SongRecommendation s2 = recommendationMenuState.getSongRecommendationTwo();
                 if (s2 != null) {
-                    leftList.add(createSongItem("Song #2", s2.getSongName(), s2.getPopularityScore(), s2.getArtistName(), s2.getReleaseYear(), s2.getExternalUrl(), s2.getImageUrl()));
+                    leftList.add(createSongItem("Song #2", s2.getSongName(), s2.getPopularityScore(),
+                            s2.getArtistName(), s2.getReleaseYear(), s2.getExternalUrl(), s2.getImageUrl()));
                     leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
                 }
                 SongRecommendation s3 = recommendationMenuState.getSongRecommendationThree();
                 if (s3 != null) {
-                    leftList.add(createSongItem("Song #3", s3.getSongName(), s3.getPopularityScore(), s3.getArtistName(), s3.getReleaseYear(), s3.getExternalUrl(), s3.getImageUrl()));
+                    leftList.add(createSongItem("Song #3", s3.getSongName(), s3.getPopularityScore(),
+                            s3.getArtistName(), s3.getReleaseYear(), s3.getExternalUrl(), s3.getImageUrl()));
                     leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
                 }
                 SongRecommendation s4 = recommendationMenuState.getSongRecommendationFour();
                 if (s4 != null) {
-                    leftList.add(createSongItem("Song #4", s4.getSongName(), s4.getPopularityScore(), s4.getArtistName(), s4.getReleaseYear(), s4.getExternalUrl(), s4.getImageUrl()));
+                    leftList.add(createSongItem("Song #4", s4.getSongName(), s4.getPopularityScore(),
+                            s4.getArtistName(), s4.getReleaseYear(), s4.getExternalUrl(), s4.getImageUrl()));
                     leftList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
                 }
                 SongRecommendation s5 = recommendationMenuState.getSongRecommendationFive();
                 if (s5 != null) {
-                    leftList.add(createSongItem("Song #5", s5.getSongName(), s5.getPopularityScore(), s5.getArtistName(), s5.getReleaseYear(), s5.getExternalUrl(), s5.getImageUrl()));
+                    leftList.add(createSongItem("Song #5", s5.getSongName(), s5.getPopularityScore(),
+                            s5.getArtistName(), s5.getReleaseYear(), s5.getExternalUrl(), s5.getImageUrl()));
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception error) {
                 leftList.removeAll();
                 leftList.add(new JLabel("Unable to load songs"));
             }
@@ -519,24 +531,29 @@ public class RecommendationView extends JPanel implements ActionListener, Proper
             try {
                 MovieRecommendation m1 = recommendationMenuState.getMovieRecommendationOne();
                 if (m1 != null) {
-                    rightList.add(createMovieItem("Movie #1", m1.getMovieTitle(), m1.getMovieRating(), m1.getReleaseYear(), m1.getOverview(), m1.getImageUrl()));
+                    rightList.add(createMovieItem("Movie #1", m1.getMovieTitle(), m1.getMovieRating(),
+                            m1.getReleaseYear(), m1.getOverview(), m1.getImageUrl()));
                     rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
                 }
                 MovieRecommendation m2 = recommendationMenuState.getMovieRecommendationTwo();
                 if (m2 != null) {
-                    rightList.add(createMovieItem("Movie #2", m2.getMovieTitle(), m2.getMovieRating(), m2.getReleaseYear(), m2.getOverview(), m2.getImageUrl()));
+                    rightList.add(createMovieItem("Movie #2", m2.getMovieTitle(), m2.getMovieRating(),
+                            m2.getReleaseYear(), m2.getOverview(), m2.getImageUrl()));
                     rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
                 }
                 MovieRecommendation m3 = recommendationMenuState.getMovieRecommendationThree();
                 if (m3 != null) {
-                    rightList.add(createMovieItem("Movie #3", m3.getMovieTitle(), m3.getMovieRating(), m3.getReleaseYear(), m3.getOverview(), m3.getImageUrl()));
+                    rightList.add(createMovieItem("Movie #3", m3.getMovieTitle(), m3.getMovieRating(),
+                            m3.getReleaseYear(), m3.getOverview(), m3.getImageUrl()));
                     rightList.add(Box.createRigidArea(new Dimension(0, VERTICAL_SPACING)));
                 }
                 MovieRecommendation m4 = recommendationMenuState.getMovieRecommendationFour();
                 if (m4 != null) {
-                    rightList.add(createMovieItem("Movie #4", m4.getMovieTitle(), m4.getMovieRating(), m4.getReleaseYear(), m4.getOverview(), m4.getImageUrl()));
+                    rightList.add(createMovieItem("Movie #4", m4.getMovieTitle(), m4.getMovieRating(),
+                            m4.getReleaseYear(), m4.getOverview(), m4.getImageUrl()));
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception error) {
                 rightList.removeAll();
                 rightList.add(new JLabel("Unable to load movies"));
             }

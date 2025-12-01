@@ -1,6 +1,5 @@
 package interface_adapter.recommendation_menu;
 
-
 import entity.MovieRecommendation;
 import entity.SongRecommendation;
 import interface_adapter.ViewModel;
@@ -34,7 +33,6 @@ public class RecommendationMenuViewModel extends ViewModel<RecommendationMenuSta
 
         this.displayError = displayError;
     }
-
 
     public String getError() {
         return displayError;

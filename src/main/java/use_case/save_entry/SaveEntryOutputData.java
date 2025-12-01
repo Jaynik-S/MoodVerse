@@ -1,7 +1,5 @@
 package use_case.save_entry;
 
-import entity.DiaryEntry;
-
 import java.time.LocalDateTime;
 
 public class SaveEntryOutputData {
@@ -9,6 +7,7 @@ public class SaveEntryOutputData {
     private final String text;
     private final LocalDateTime date;
     private final boolean success;
+
     public SaveEntryOutputData(String title, String text, LocalDateTime date, boolean success) {
         this.title = title;
         this.text = text;
@@ -16,9 +15,18 @@ public class SaveEntryOutputData {
         this.success = success;
     }
 
-    public String getTitle() {return title;}
-    public String getText() {return text;}
-    public LocalDateTime getDate() {return date;}
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
     public boolean isSuccess() {
         return success;
     }

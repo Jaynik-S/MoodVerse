@@ -2,7 +2,6 @@ package use_case.create_entry;
 
 import entity.DiaryEntry;
 
-
 public class CreateEntryInteractor implements CreateEntryInputBoundary {
     private final CreateEntryOutputBoundary presenter;
 

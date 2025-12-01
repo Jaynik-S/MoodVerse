@@ -176,8 +176,9 @@ public class SpotifyAPIAccessObject {
                 songList.add(JSONtoSongRecommendation(track));
             }
             return songList;
-        } catch (Exception e) {
-            throw new Exception("Failed to fetch song recommendations: ", e);
+        }
+        catch (Exception error) {
+            throw new Exception("Failed to fetch song recommendations: ", error);
         }
     }
 

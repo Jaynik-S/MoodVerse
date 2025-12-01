@@ -2,7 +2,7 @@ package use_case.load_entry;
 
 import entity.DiaryEntry;
 
-public class LoadEntryInteractor implements LoadEntryInputBoundary{
+public class LoadEntryInteractor implements LoadEntryInputBoundary {
     private final LoadEntryOutputBoundary presenter;
     private final LoadEntryUserDataAccessInterface dataAccess;
 
@@ -22,8 +22,9 @@ public class LoadEntryInteractor implements LoadEntryInputBoundary{
         DiaryEntry entry;
         try {
             entry = dataAccess.getByPath(entryPath);
-        } catch (Exception e) {
-            String message = "Failed to load entry: " + e.getMessage();
+        }
+        catch (Exception error) {
+            String message = "Failed to load entry: " + error.getMessage();
             presenter.prepareFailView(message);
             return;
         }

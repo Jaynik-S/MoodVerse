@@ -58,8 +58,9 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
         entry.updatedTime();
         try {
             dataAccess.save(entry);
-        } catch (Exception e) {
-            String message = "Could not save entry." + e.getMessage();
+        }
+        catch (Exception error) {
+            String message = "Could not save entry." + error.getMessage();
             presenter.prepareFailView(message);
             return;
         }

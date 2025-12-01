@@ -1,4 +1,5 @@
 package view;
+
 import interface_adapter.home_menu.HomeMenuController;
 import interface_adapter.home_menu.HomeMenuState;
 import interface_adapter.home_menu.HomeMenuViewModel;
@@ -13,10 +14,8 @@ import java.awt.*;
 import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 
 // General format of home menu UIs. Will changed based on use cases
 
@@ -34,7 +33,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         setLayout(new BorderLayout());
         setSize(new Dimension(1000, 800));
         setBackground(new Color(245, 248, 255));
-        setBorder(BorderFactory.createEmptyBorder(16,16,16,16));
+        setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
 
         // Title and New Entry button
 
@@ -48,14 +47,14 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         newEntryButton.setForeground(Color.WHITE);
         newEntryButton.setUI(new javax.swing.plaf.basic.BasicButtonUI()); // fix for MacOS
         newEntryButton.setBackground(new Color(37, 99, 235));
-        newEntryButton.setBorder(BorderFactory.createEmptyBorder(6,14,6,14));
+        newEntryButton.setBorder(BorderFactory.createEmptyBorder(6, 14, 6, 14));
         newEntryButton.addActionListener(e -> {
             controller.newEntry();
         });
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(219, 234, 254));
-        topPanel.setBorder(BorderFactory.createEmptyBorder(8, 12, 12,12));
+        topPanel.setBorder(BorderFactory.createEmptyBorder(8, 12, 12, 12));
         topPanel.add(titleLabel, BorderLayout.WEST);
         topPanel.add(newEntryButton, BorderLayout.EAST);
 
@@ -118,7 +117,7 @@ public class HomeMenuView extends JPanel implements PropertyChangeListener {
         tableCard.setBackground(Color.WHITE);
         tableCard.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(226, 232, 240)),
-                BorderFactory.createEmptyBorder(8,8,8,8)
+                BorderFactory.createEmptyBorder(8, 8, 8, 8)
         ));
         tableCard.add(scrollPane, BorderLayout.CENTER);
 
@@ -197,10 +196,12 @@ class StripedTableCellRenderer extends DefaultTableCellRenderer {
         if (!isSelected) {
             if (row % 2 == 0) {
                 c.setBackground(new Color(250, 252, 255));
-            } else {
+            }
+            else {
                 c.setBackground(Color.WHITE);
             }
-        } else {
+        }
+        else {
             c.setBackground(new Color(219, 234, 254)); // 选中高亮
         }
         return c;
@@ -215,7 +216,7 @@ class DeleteButtonRenderer extends JButton implements TableCellRenderer {
         setForeground(Color.WHITE);
         setBackground(Color.RED);
         setFocusPainted(false);
-        setBorder(BorderFactory.createEmptyBorder(4,10,4,10));
+        setBorder(BorderFactory.createEmptyBorder(4, 10, 4, 10));
         setText("Delete");
         setFont(getFont().deriveFont(Font.PLAIN, 16f));
     }
@@ -227,10 +228,10 @@ class DeleteButtonRenderer extends JButton implements TableCellRenderer {
             int row, int column) {
 
         if (isSelected) {
-            setBackground(new Color(220,38,38));
+            setBackground(new Color(220, 38, 38));
         }
-        else{
-            setBackground(new Color(220,68,68));
+        else {
+            setBackground(new Color(220, 68, 68));
         }
         return this;
     }
@@ -254,7 +255,7 @@ class DeleteButtonEditor extends AbstractCellEditor
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(239, 68, 68));
         button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createEmptyBorder(4,10,4,10));
+        button.setBorder(BorderFactory.createEmptyBorder(4, 10, 4, 10));
         button.setOpaque(true);
         button.setFont(button.getFont().deriveFont(Font.PLAIN, 16f));
     }

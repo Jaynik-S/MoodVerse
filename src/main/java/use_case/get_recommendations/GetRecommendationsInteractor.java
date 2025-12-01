@@ -1,11 +1,12 @@
 package use_case.get_recommendations;
+
 import entity.DiaryEntry;
 import entity.SongRecommendation;
 import entity.MovieRecommendation;
 
 import java.util.List;
 
-public class GetRecommendationsInteractor implements  GetRecommendationsInputBoundary {
+public class GetRecommendationsInteractor implements GetRecommendationsInputBoundary {
     private final GetRecommendationsUserDataAccessInterface userDataAccessObject;
     private final GetRecommendationsOutputBoundary recommendationPresenter;
 
@@ -28,12 +29,15 @@ public class GetRecommendationsInteractor implements  GetRecommendationsInputBou
             try {
                 List<String> keywords = userDataAccessObject.fetchKeywords(textBody);
                 List<SongRecommendation> songRecommendations = userDataAccessObject.fetchSongRecommendations(keywords);
-                List<MovieRecommendation> movieRecommendations = userDataAccessObject.fetchMovieRecommendations(keywords);
-                GetRecommendationsOutputData outputData = new GetRecommendationsOutputData(keywords, songRecommendations, movieRecommendations);
+                List<MovieRecommendation> movieRecommendations =
+                        userDataAccessObject.fetchMovieRecommendations(keywords);
+                GetRecommendationsOutputData outputData =
+                        new GetRecommendationsOutputData(keywords, songRecommendations, movieRecommendations);
                 recommendationPresenter.prepareSuccessView(outputData);
                 recommendationPresenter.switchToRecommendationMenu();
-            } catch (Exception e) {
-                recommendationPresenter.prepareFailView("Failed to get recommendations: " + e.getMessage());
+            }
+            catch (Exception error) {
+                recommendationPresenter.prepareFailView("Failed to get recommendations: " + error.getMessage());
             }
         }
     }

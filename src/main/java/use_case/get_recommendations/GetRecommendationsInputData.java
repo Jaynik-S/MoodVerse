@@ -7,6 +7,8 @@ public class GetRecommendationsInputData {
         this.textBody = textBody;
     }
 
-    public String getTextBody() {  return textBody; }
+    public String getTextBody() {
+        return textBody;
+    }
 }
 

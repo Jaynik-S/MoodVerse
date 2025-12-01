@@ -17,6 +17,7 @@ public class NewDocumentState {
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -24,6 +25,7 @@ public class NewDocumentState {
     public String getDate() {
         return date;
     }
+
     public void setDate(String date) {
         this.date = date;
     }
@@ -31,20 +33,32 @@ public class NewDocumentState {
     public String getTextBody() {
         return textBody;
     }
+
     public void setTextBody(String textBody) {
         this.textBody = textBody;
     }
 
-    public List<String> getKeywords() { return keywords; }
-    public void setKeywords(List<String> keywords) { this.keywords = keywords; }
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
+    }
 
     public String getError() {
         return error;
     }
+
     public void setError(String error) {
         this.error = error;
     }
 
-    public String getSuccessMessage() {return successMessage; }
-    public void setSuccessMessage(String successMessage) {this.successMessage = successMessage; }
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    public void setSuccessMessage(String successMessage) {
+        this.successMessage = successMessage;
+    }
 }

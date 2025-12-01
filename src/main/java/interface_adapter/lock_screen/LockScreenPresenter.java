@@ -6,7 +6,7 @@ import interface_adapter.home_menu.HomeMenuViewModel;
 import use_case.verify_password.VerifyPasswordOutputBoundary;
 import use_case.verify_password.VerifyPasswordOutputData;
 
-public class LockScreenPresenter implements VerifyPasswordOutputBoundary{
+public class LockScreenPresenter implements VerifyPasswordOutputBoundary {
 
     private final LockScreenViewModel lockScreenViewModel;
     private final ViewManagerModel viewManagerModel;
@@ -23,7 +23,7 @@ public class LockScreenPresenter implements VerifyPasswordOutputBoundary{
         this.homeMenuPresenter = homeMenuPresenter;
     }
 
-    public void prepareSuccessView(VerifyPasswordOutputData outputData){
+    public void prepareSuccessView(VerifyPasswordOutputData outputData) {
         if (homeMenuPresenter != null && outputData != null) {
             homeMenuPresenter.presentEntriesFromData(outputData.getAllEntries());
         }
@@ -35,11 +35,9 @@ public class LockScreenPresenter implements VerifyPasswordOutputBoundary{
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void prepareFailView(String errorMessage){
+    public void prepareFailView(String errorMessage) {
         final LockScreenState state = lockScreenViewModel.getState();
         state.setError(errorMessage);
         lockScreenViewModel.firePropertyChanged();
     }
 }
-
-
