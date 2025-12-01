@@ -77,7 +77,8 @@ public class TMDbAPIAccessObject {
             String encoded = URLEncoder.encode(keywordStr, StandardCharsets.UTF_8);
 
             String url = String.format(
-                    "https://api.themoviedb.org/3/discover/movie?api_key=%s&with_keywords=%s&include_adult=false&sort_by=vote_average.desc&vote_count.gte=350&language=en-US&page=1",
+                    "https://api.themoviedb.org/3/discover/movie?api_key=%s&with_keywords=%s&include_adult=false" +
+                            "&sort_by=vote_average.desc&vote_count.gte=350&language=en-US&page=1",
                     TMDB_API_KEY,
                     encoded
             );
