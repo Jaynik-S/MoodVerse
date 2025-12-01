@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/SpotifyAPIAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/home_menu/HomeMenuViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/HomeMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/HomeMenuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +70,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Popup__window__for__deletion",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -198,5 +200,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

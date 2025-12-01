@@ -6,9 +6,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Presenter for the home menu view.
+ * This class converts raw entry data coming from the use case and data access
+ * layers into the HomeMenuState used by the HomeMenuViewModel.
+ * It is responsible for formatting dates, joining keyword lists, and updating
+ * the state with either the list of entries or an error message.
+ */
+
 public class HomeMenuPresenter{
 
     private final HomeMenuViewModel viewModel;
+    /**
+     * Formatter used to display entry date and time values in the home menu.
+     */
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm a");
 
     public HomeMenuPresenter(HomeMenuViewModel viewModel) {
@@ -76,7 +87,8 @@ public class HomeMenuPresenter{
 
     public void presentEntriesFromData(List<Map<String, Object>> rawEntries) {
         if (rawEntries == null || rawEntries.isEmpty()) {
-            presentEntries(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            presentEntries(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+                    new ArrayList<>(), new ArrayList<>());
             return;
         }
         List<Map<String, Object>> sortedEntries = new ArrayList<>(rawEntries);

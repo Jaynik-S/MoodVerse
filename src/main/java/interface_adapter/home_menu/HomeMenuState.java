@@ -3,6 +3,13 @@ package interface_adapter.home_menu;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * State object for the home menu view.
+ * This class stores the data needed to render the home menu table, including
+ * the entry titles, creation and update dates, extracted keywords, any
+ * error message to show to the user, and the storage paths for each entry.
+ */
+
 public class HomeMenuState {
     private List<String> titles = new ArrayList<>();
     private List<String> createdDates = new ArrayList<>();
