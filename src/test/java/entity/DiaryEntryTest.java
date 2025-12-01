@@ -67,6 +67,15 @@ public class DiaryEntryTest {
     }
 
     @Test
+    public void testGetStoragePathUsesUntitledWhenTitleEmpty() {
+        DiaryEntry entry = new DiaryEntry();
+        entry.setTitle("");
+        String path = entry.getStoragePath();
+
+        assertTrue(path.contains(") untitled.json"));
+    }
+
+    @Test
     public void testRecommendationsListsCanBeSet() {
         DiaryEntry entry = new DiaryEntry();
         SongRecommendation song = new SongRecommendation("2020", "img", "song", "artist", "90", "url");

@@ -3,6 +3,8 @@ package use_case.load_entry;
 import entity.DiaryEntry;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LoadEntryInteractorTest {
@@ -42,6 +44,40 @@ class LoadEntryInteractorTest {
         assertFalse(dataAccess.getCalled);
     }
 
+    // Ensures DAO exceptions are surfaced as a failure view.
+    @Test
+    void execute_whenDataAccessThrows_reportsFailure() {
+        RecordingLoadEntryPresenter presenter = new RecordingLoadEntryPresenter();
+        FailingLoadEntryDataAccess dataAccess = new FailingLoadEntryDataAccess();
+        LoadEntryInteractor interactor = new LoadEntryInteractor(presenter, dataAccess);
+
+        interactor.execute(new LoadEntryInputData("entries/2.json"));
+
+        assertEquals("Failed to load entry: boom", presenter.errorMessage);
+        assertNull(presenter.successData);
+    }
+
+    // Ensures a null entry from DAO is treated as a failure.
+    @Test
+    void execute_whenDaoReturnsNull_reportsFailure() {
+        RecordingLoadEntryPresenter presenter = new RecordingLoadEntryPresenter();
+        StubLoadEntryDataAccess dataAccess = new StubLoadEntryDataAccess();
+        dataAccess.setEntryToReturn(null);
+        LoadEntryInteractor interactor = new LoadEntryInteractor(presenter, dataAccess);
+
+        interactor.execute(new LoadEntryInputData("entries/3.json"));
+
+        assertEquals("Failed to load entry from path: entries/3.json", presenter.errorMessage);
+        assertNull(presenter.successData);
+    }
+
+    @Test
+    void loadEntryOutputData_exposesDate() {
+        LocalDateTime now = LocalDateTime.now();
+        LoadEntryOutputData data = new LoadEntryOutputData("title", "text", now, true);
+        assertEquals(now, data.getDate());
+    }
+
     private static final class RecordingLoadEntryPresenter implements LoadEntryOutputBoundary {
         private LoadEntryOutputData successData;
         private String errorMessage;
@@ -57,7 +93,7 @@ class LoadEntryInteractorTest {
         }
     }
 
-    private static final class StubLoadEntryDataAccess implements LoadEntryUserDataAccessInterface {
+    private static class StubLoadEntryDataAccess implements LoadEntryUserDataAccessInterface {
         private DiaryEntry entryToReturn = new DiaryEntry();
         private boolean getCalled;
         private String requestedPath;
@@ -71,6 +107,13 @@ class LoadEntryInteractorTest {
 
         void setEntryToReturn(DiaryEntry entryToReturn) {
             this.entryToReturn = entryToReturn;
+        }
+    }
+
+    private static class FailingLoadEntryDataAccess implements LoadEntryUserDataAccessInterface {
+        @Override
+        public DiaryEntry getByPath(String entryPath) {
+            throw new RuntimeException("boom");
         }
     }
 }

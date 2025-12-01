@@ -17,10 +17,6 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
 
         DiaryEntry entry = new DiaryEntry(inputData.getTitle(), inputData.getTextBody(), inputData.getDate());
 
-        if (entry == null) {
-            presenter.prepareFailView("Entry cannot be null.");
-            return;
-        }
         String title = entry.getTitle();
         if (title == null || title.length() == 0) {
             presenter.prepareFailView("Title cannot be empty.");
@@ -45,13 +41,6 @@ public class SaveEntryInteractor implements SaveEntryInputBoundary {
         if (length > DiaryEntry.MAX_TEXT_LENGTH) {
             String message = "Text must be at most " + DiaryEntry.MAX_TEXT_LENGTH + " characters.";
             presenter.prepareFailView(message);
-            return;
-        }
-
-        String storagePath = entry.getStoragePath();
-
-        if (storagePath == null || storagePath.length() == 0) {
-            presenter.prepareFailView("Could not determine storage path for entry.");
             return;
         }
 

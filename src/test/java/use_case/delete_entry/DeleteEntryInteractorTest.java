@@ -35,6 +35,19 @@ class DeleteEntryInteractorTest {
         assertFalse(dataAccess.deleteCalled);
     }
 
+    // Ensures DAO exceptions are propagated as a failure view.
+    @Test
+    void execute_whenDataAccessThrows_reportsFailure() {
+        RecordingDeleteEntryPresenter presenter = new RecordingDeleteEntryPresenter();
+        FailingDeleteEntryDataAccess dataAccess = new FailingDeleteEntryDataAccess();
+        DeleteEntryInteractor interactor = new DeleteEntryInteractor(presenter, dataAccess);
+
+        interactor.execute(new DeleteEntryInputData("entries/2.json"));
+
+        assertEquals("Failed to delete entry: boom", presenter.errorMessage);
+        assertNull(presenter.successData);
+    }
+
     private static final class RecordingDeleteEntryPresenter implements DeleteEntryOutputBoundary {
         private DeleteEntryOutputData successData;
         private String errorMessage;
@@ -59,6 +72,14 @@ class DeleteEntryInteractorTest {
             this.deleteCalled = true;
             this.lastDeletedPath = entryPath;
             return true;
+        }
+    }
+
+    private static final class FailingDeleteEntryDataAccess implements DeleteEntryUserDataAccessInterface {
+
+        @Override
+        public boolean deleteByPath(String entryPath) {
+            throw new RuntimeException("boom");
         }
     }
 }

@@ -50,6 +50,51 @@ class GetRecommendationsInteractorTest {
         assertFalse(dataAccess.fetchMoviesCalled);
     }
 
+    // Ensures overly long diary entries trigger the max-length validation branch.
+    @Test
+    void execute_withTooLongText_reportsMaxLengthFailure() {
+        RecordingRecommendationsPresenter presenter = new RecordingRecommendationsPresenter();
+        StubRecommendationsDataAccess dataAccess = new StubRecommendationsDataAccess();
+        GetRecommendationsInteractor interactor = new GetRecommendationsInteractor(dataAccess, presenter);
+
+        String tooLong = "a".repeat(DiaryEntry.MAX_TEXT_LENGTH + 1);
+        interactor.execute(new GetRecommendationsInputData(tooLong));
+
+        assertEquals("Diary entry is too long to extract recommendations.", presenter.errorMessage);
+        assertNull(presenter.successData);
+        assertFalse(presenter.switchedToMenu);
+        assertFalse(dataAccess.fetchKeywordsCalled);
+        assertFalse(dataAccess.fetchSongsCalled);
+        assertFalse(dataAccess.fetchMoviesCalled);
+    }
+
+    // Covers the exception handling path when one of the DAO calls throws.
+    @Test
+    void execute_whenDataAccessThrows_reportsFailure() {
+        RecordingRecommendationsPresenter presenter = new RecordingRecommendationsPresenter();
+        FailingRecommendationsDataAccess dataAccess = new FailingRecommendationsDataAccess();
+        GetRecommendationsInteractor interactor = new GetRecommendationsInteractor(dataAccess, presenter);
+
+        String validText = "a".repeat(DiaryEntry.MIN_TEXT_LENGTH);
+        interactor.execute(new GetRecommendationsInputData(validText));
+
+        assertTrue(presenter.errorMessage.startsWith("Failed to get recommendations: "));
+        assertNull(presenter.successData);
+        assertFalse(presenter.switchedToMenu);
+    }
+
+    // Verifies the explicit switchToRecommendationMenu delegating method.
+    @Test
+    void switchToRecommendationMenu_delegatesToPresenter() {
+        RecordingRecommendationsPresenter presenter = new RecordingRecommendationsPresenter();
+        StubRecommendationsDataAccess dataAccess = new StubRecommendationsDataAccess();
+        GetRecommendationsInteractor interactor = new GetRecommendationsInteractor(dataAccess, presenter);
+
+        interactor.switchToRecommendationMenu();
+
+        assertTrue(presenter.switchedToMenu);
+    }
+
     private static final class RecordingRecommendationsPresenter implements GetRecommendationsOutputBoundary {
         private GetRecommendationsOutputData successData;
         private String errorMessage;
@@ -99,6 +144,24 @@ class GetRecommendationsInteractorTest {
         public List<MovieRecommendation> fetchMovieRecommendations(List<String> keywords) {
             this.fetchMoviesCalled = true;
             return movieRecommendationsToReturn;
+        }
+    }
+
+    private static final class FailingRecommendationsDataAccess implements GetRecommendationsUserDataAccessInterface {
+
+        @Override
+        public List<String> fetchKeywords(String textBody) {
+            throw new RuntimeException("API down");
+        }
+
+        @Override
+        public List<SongRecommendation> fetchSongRecommendations(List<String> keywords) {
+            return List.of();
+        }
+
+        @Override
+        public List<MovieRecommendation> fetchMovieRecommendations(List<String> keywords) {
+            return List.of();
         }
     }
 }

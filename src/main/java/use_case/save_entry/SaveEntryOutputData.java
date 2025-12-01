@@ -27,8 +27,5 @@ public class SaveEntryOutputData {
         return date;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
 }
 

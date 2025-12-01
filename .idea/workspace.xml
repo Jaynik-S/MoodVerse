@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="" />
+    <list default="true" id="660ede37-a38c-4ad0-b51f-40948f2a8bc2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/data_access/DBNoteDataObjectTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,8 +55,11 @@
   "keyToString": {
     "Application.HomeMenuDemoMain.executor": "Run",
     "Application.MainNoteApplication.executor": "Run",
+    "JUnit.All in note-application.executor": "Coverage",
     "JUnit.CreateEntryInteractorTest.executor": "Run",
+    "JUnit.DBNoteDataObjectTest.executor": "Run",
     "JUnit.MainNoteApplicationTest.executor": "Run",
+    "JUnit.SaveEntryInteractorTest.executor": "Coverage",
     "JUnit.VerifyPasswordDataAccessObjectTest.executor": "Run",
     "JUnit.VerifyPasswordDataAccessObjectTest.testSavingNewPasswordCreatesEntryInEnv.executor": "Debug",
     "JUnit.VerifyPasswordInteractorTest.executor": "Run",
@@ -63,7 +69,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#40 on checkstyle-fix",
+    "git-widget-placeholder": "TestCoverage",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,7 +79,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.MainNoteApplication">
+  <component name="RunManager" selected="JUnit.DBNoteDataObjectTest">
     <configuration name="MainNoteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.MainNoteApplication" />
       <module name="note-application" />
@@ -95,6 +101,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DBNoteDataObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="note-application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="data_access.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="data_access" />
+      <option name="MAIN_CLASS_NAME" value="data_access.DBNoteDataObjectTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainNoteApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
@@ -110,42 +131,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VerifyPasswordDataAccessObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SaveEntryInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="note-application" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data_access.*" />
+          <option name="PATTERN" value="use_case.save_entry.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="data_access" />
-      <option name="MAIN_CLASS_NAME" value="data_access.VerifyPasswordDataAccessObjectTest" />
+      <option name="PACKAGE_NAME" value="use_case.save_entry" />
+      <option name="MAIN_CLASS_NAME" value="use_case.save_entry.SaveEntryInteractorTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="entity in note-application" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="note-application" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="entity.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="entity" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainNoteApplication" />
+        <item itemvalue="JUnit.DBNoteDataObjectTest" />
         <item itemvalue="JUnit.All in note-application" />
+        <item itemvalue="JUnit.SaveEntryInteractorTest" />
+        <item itemvalue="Application.MainNoteApplication" />
         <item itemvalue="JUnit.MainNoteApplicationTest" />
-        <item itemvalue="JUnit.entity in note-application" />
-        <item itemvalue="JUnit.VerifyPasswordDataAccessObjectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -194,5 +201,11 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MoodVerse$SaveEntryInteractorTest.ic" NAME="SaveEntryInteractorTest Coverage Results" MODIFIED="1764565119116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>use_case.save_entry.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/MoodVerse$All_in_note_application.ic" NAME="All in note-application Coverage Results" MODIFIED="1764565359023" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>
